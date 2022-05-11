@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Slider
+  - Button
+  - Sensor
+  - Switch
+  - Wires
+  - RotatingDevice
+  - SensorArea
   layers:
   - Default
   - TransparentFX
