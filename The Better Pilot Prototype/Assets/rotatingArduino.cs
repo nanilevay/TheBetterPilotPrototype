@@ -17,6 +17,8 @@ public class rotatingArduino : MonoBehaviour
 
     public RotateHandle rotator;
 
+    public int analogValue;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,7 +30,7 @@ public class rotatingArduino : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int analogValue = manager.analogRead(AnalogPin.A0);
+        analogValue = manager.analogRead(AnalogPin.A0);
 
         slider.value = (float)analogValue / 1000.0f;
 
