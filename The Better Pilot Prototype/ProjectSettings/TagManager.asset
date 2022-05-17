@@ -11,6 +11,7 @@ TagManager:
   - Wires
   - RotatingDevice
   - SensorArea
+  - RotatingPiece
   layers:
   - Default
   - TransparentFX

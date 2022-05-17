@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PuzzlePiece : MonoBehaviour
 {
     public bool active = true;
+    public string name = "";
 
     public void ToggleOn()
     {
@@ -28,6 +29,12 @@ public class PuzzlePiece : MonoBehaviour
 
         if (this.gameObject.tag == "Switch")
             this.GetComponent<Toggle>().interactable = true;
+
+        if (this.gameObject.tag == "RotatingDevice")
+        {
+            GameObject handle = GameObject.FindGameObjectWithTag("RotatingPiece");
+            handle.GetComponent<RotateHandle>().active = true;
+        }
 
         active = true;
     }
@@ -57,6 +64,12 @@ public class PuzzlePiece : MonoBehaviour
         if (this.gameObject.tag == "Switch")
             this.GetComponent<Toggle>().interactable = false;
 
-        active = false;
+        if (this.gameObject.tag == "RotatingDevice")
+        {
+            GameObject handle = GameObject.FindGameObjectWithTag("RotatingPiece");
+            handle.GetComponent<RotateHandle>().active = false;
+        }
+
+            active = false;
     }
 }
