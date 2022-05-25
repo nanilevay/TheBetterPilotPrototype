@@ -11,6 +11,12 @@ public class RotateHandle : MonoBehaviour, IDragHandler
     [SerializeField] private Canvas m_Canvas;
     public TextMeshProUGUI textDisplay;
 
+    public bool IsMoving = false;
+
+    public bool SendValue;
+
+    float currentRot;
+
 
     private Vector3? CalculateWorldToScreenPos(Vector3 worldPos)
     {
@@ -32,6 +38,7 @@ public class RotateHandle : MonoBehaviour, IDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
+
         if (active)
         {
             if (eventData.button != PointerEventData.InputButton.Left) return;
@@ -41,28 +48,51 @@ public class RotateHandle : MonoBehaviour, IDragHandler
             if (curScreenPos == null) return;
             //Mouse position offset
             Vector2 offset = eventData.position - (Vector2)curScreenPos.Value;
+           
             if (offset != Vector2.zero)
             {
                 transform.rotation = Quaternion.FromToRotation(Vector3.up, offset);
+               
+                IsMoving = true;
+
+                if (currentRot - 360 >= 180)
+                    SendValue = true;
+
+                else
+                    SendValue = false;
             }
         }
     }
 
-    public void Update()
-    {
-        if(active)
-            textDisplay.text = Mathf.Round(gameObject.transform.localEulerAngles.z).ToString() + "º";
 
-        else
+    public void Update()
         {
-            textDisplay.text = "Component OFF";
+
+         currentRot = gameObject.transform.localEulerAngles.z;
+
+        if (Input.GetMouseButtonUp(0))
+        {
+            IsMoving = false;
+
         }
-    }
+
+
+        if (active)
+                textDisplay.text = Mathf.Round(gameObject.transform.localEulerAngles.z).ToString() + "º";
+
+            else
+            {
+                textDisplay.text = "Component OFF";
+            }
+
+
+           // SendValue = Mathf.Round(gameObject.transform.localEulerAngles.z);
+        }
 
 
     public void RotateObject(float valueToRotate)
     {
-       // gameObject.transform.localRotation = Quaternion.Euler(0, 0, valueToRotate);
+        // gameObject.transform.localRotation = Quaternion.Euler(0, 0, valueToRotate);
 
         transform.rotation = Quaternion.Euler(0, 0, valueToRotate * 360);
     }

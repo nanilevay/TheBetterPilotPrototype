@@ -12,6 +12,7 @@ TagManager:
   - RotatingDevice
   - SensorArea
   - RotatingPiece
+  - UduinoManager
   layers:
   - Default
   - TransparentFX
