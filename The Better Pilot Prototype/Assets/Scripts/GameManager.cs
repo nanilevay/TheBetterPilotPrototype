@@ -25,7 +25,17 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI ResetNumberDisplay;
 
+    public bool SerialEven, SerialThree;
+
     float t = 0;
+
+    public Toggle[] togglers;
+
+    public bool PlaneOn = false;
+    
+    public bool checker = true;
+
+    public GameObject ScreenFader;
 
     void Awake()
     {
@@ -39,6 +49,26 @@ public class GameManager : MonoBehaviour
             srlNum = UnityEngine.Random.Range(100000, 999999);
 
         SerialNumberDisplay.text = srlNum.ToString();
+
+        ScreenFader.transform.Find("InitialScreen").gameObject.active = true;
+
+        if (srlNum.ToString().Length == 3)
+        {
+            SerialThree = true;
+        }
+        else
+        {
+            SerialThree = false;
+        }
+
+        if (srlNum % 2 == 0)
+        {
+            SerialEven = true;
+        }
+        else
+        {
+            SerialEven = false;
+       }
     }
 
     void Start()
@@ -52,22 +82,32 @@ public class GameManager : MonoBehaviour
 
         int srlNum = 1000;
 
-        SerialNumberDisplay.text = srlNum.ToString();
-
+        SerialNumberDisplay.text = srlNum.ToString();   
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        t += Time.deltaTime;
-
-        if (t >= 3)
+        if (togglers[0].GetComponent<Toggle>().isOn && togglers[1].GetComponent<Toggle>().isOn && checker)
         {
-            UpdateList();
+            PlaneOn = true;
+            checker = false;
+
+            ScreenFader.transform.Find("InitialScreen").gameObject.active = false;
         }
 
-        ResetNumberDisplay.text = ResetCounter.ToString();
+        if (PlaneOn)
+        {
+            t += Time.deltaTime;
+
+            if (t >= 3)
+            {
+                UpdateList();
+            }
+
+            ResetNumberDisplay.text = ResetCounter.ToString();
+        }
     }
 
     public void UpdateList()
@@ -103,5 +143,29 @@ public class GameManager : MonoBehaviour
             CodeDisplayer.i = 0;
         }
     }
+
+    //void Start()
+    //{
+    //    StartCoroutine(coroutineA());
+    //}
+
+    //IEnumerator coroutineA()
+    //{
+    //    // wait for 1 second
+    //    yield return new WaitForSeconds(1.0f);
+    //    Debug.Log("coroutineA() started: " + Time.time);
+
+    //    // wait for another 1 second and then create b
+    //    yield return new WaitForSeconds(1.0f);
+    //    Coroutine b = StartCoroutine(coroutineB());
+
+    //    yield return new WaitForSeconds(2.0f);
+    //    Debug.Log("coroutineA() finished " + Time.time);
+
+    //    // B() was expected to run for 10 seconds
+    //    // but was shut down here after 3.0f
+    //    StopCoroutine(b);
+    //    yield return null;
+    //}
 }
 

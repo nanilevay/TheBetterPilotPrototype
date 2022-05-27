@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Uduino;
 
-public class ProximityDetectorArduino : MonoBehaviour
+public class ProximityDetectorArduinoo : MonoBehaviour
 {
+    public Transform distancePlane;
     float distance = 0;
     public GameObject panel;
 
@@ -15,8 +16,8 @@ public class ProximityDetectorArduino : MonoBehaviour
 
     void Update()
     {
-        //Debug.Log(distance);
-        if (distance > 100)
+        Debug.Log(distance);
+        if (distance > 260)
             panel.SetActive(true);
         else
             panel.SetActive(false);

@@ -29,14 +29,14 @@ public class buttonArduino : MonoBehaviour
 
         if(buttonValue == 0)
         {
-            ButtonReleased();
+            ButtonClicked();
         }
 
 
         if (buttonValue == 1)
         {
-           // Debug.Log("oof");
-            ButtonClicked();
+            // Debug.Log("oof");
+            ButtonReleased();
 
         }
     }

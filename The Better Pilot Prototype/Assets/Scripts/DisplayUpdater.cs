@@ -35,17 +35,49 @@ public class DisplayUpdater : MonoBehaviour
         {
             string addingCode;
 
-            Debug.Log("in");
+            //Debug.Log("in");
             t = 0;
 
             addingCode = Texts[Random.Range(0, Texts.Count)];
 
-            textDisplay.text = addingCode;
+            if(!currentCodes.Contains(addingCode))
+             {
 
-            currentCodes.Add(addingCode);
+                textDisplay.text = addingCode;
+                currentCodes.Add(addingCode);
+                PuzzleActivator(addingCode);
 
-            i++;
+                i++;
+            }
+        }
 
+      
+    }
+
+    void PuzzleActivator(string checker)
+    {
+        switch (checker)
+        {
+            case "5790":
+                break;
+            case "6595":
+                break;
+            case "0088":
+                break;
+            case "6007":
+                break;
+            case "6430":
+                break;
+            case "9649":
+                break;
+            case "0238":
+                break;
+            case "0588":
+                break;
+            case "2197":
+                break;
+            case "2922":
+                break;
         }
     }
 }
