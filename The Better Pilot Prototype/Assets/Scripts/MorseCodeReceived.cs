@@ -13,6 +13,25 @@ public class MorseCodeReceived : MonoBehaviour
     [SerializeField]
     private string Sequence;
 
+    public Slider mainSlider;
+
+    public PuzzlePiece associatedPuzzle;
+
+    public bool switcher;
+
+
+    // green, black, blue, yellow, red
+    public Button[] buttons;
+
+    void Update()
+    {
+        if(associatedPuzzle.active && switcher)
+            WordGenerator();
+
+        if (!associatedPuzzle.active)
+            switcher = true;
+    }
+
     IEnumerator MorseDisplay()
     {
         while (true)
@@ -58,4 +77,42 @@ public class MorseCodeReceived : MonoBehaviour
     {
         StartCoroutine(MorseDisplay());
     }
+
+    void PuzzleConfirmation()
+    {
+        switch (Sequence)
+        {
+            case "":
+                break;
+        }
+    }
+
+    void WordGenerator()
+    {
+        int decider = UnityEngine.Random.Range(0, 7);
+
+        if (decider == 0)
+            Sequence = ".";
+        
+        if (decider == 1)
+            Sequence = "..";
+        
+        if (decider == 2)
+            Sequence = "-";
+        
+        if (decider == 3)
+            Sequence = ".-./";
+        
+        if (decider == 4)
+            Sequence = "";
+        
+        if (decider == 5)
+            Sequence = "";
+       
+        if (decider == 6)
+            Sequence = "";
+
+        switcher = false;
+    }
+
 }

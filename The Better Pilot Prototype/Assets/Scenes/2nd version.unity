@@ -2349,6 +2349,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Lighter: {fileID: 815627307}
   Sequence: .-.. ./..-
+  mainSlider: {fileID: 579901049}
+  buttons:
+  - {fileID: 1365312681}
+  - {fileID: 2009148640}
+  - {fileID: 1352934270}
+  - {fileID: 1713333774}
+  - {fileID: 2091073655}
 --- !u!114 &305950160
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -89,7 +89,6 @@ public class RotateHandle : MonoBehaviour, IDragHandler
            // SendValue = Mathf.Round(gameObject.transform.localEulerAngles.z);
         }
 
-
     public void RotateObject(float valueToRotate)
     {
         // gameObject.transform.localRotation = Quaternion.Euler(0, 0, valueToRotate);
