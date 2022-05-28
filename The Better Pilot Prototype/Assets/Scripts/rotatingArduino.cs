@@ -22,18 +22,25 @@ public class rotatingArduino : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        manager = UduinoManager.Instance;
+        //manager = UduinoManager.Instance;
 
-        manager.pinMode(AnalogPin.A0, PinMode.Input);
+        //manager.pinMode(AnalogPin.A0, PinMode.Input);
+
+       UduinoManager.Instance.OnDataReceived += DataReceived;
     }
 
     // Update is called once per frame
     void Update()
     {
-        analogValue = manager.analogRead(AnalogPin.A0);
+        //analogValue = manager.analogRead(AnalogPin.A0);
 
-        slider.value = (float)analogValue / 1000.0f;
+        //slider.value = (float)analogValue / 1000.0f;
 
-        rotator.RotateObject((float)analogValue / 1000.0f);
+        //rotator.RotateObject((float)analogValue / 1000.0f);
+    }
+
+    void DataReceived(string data, UduinoDevice board)
+    {
+        Debug.Log(data);
     }
 }

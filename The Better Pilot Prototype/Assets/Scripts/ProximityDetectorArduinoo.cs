@@ -16,7 +16,7 @@ public class ProximityDetectorArduinoo : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(distance);
+       // Debug.Log(distance);
         if (distance > 260)
             panel.SetActive(true);
         else

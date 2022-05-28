@@ -27,22 +27,22 @@ public class HueSlider : MonoBehaviour
     {
         handle.color = Color.HSVToRGB(mainSlider.value, 1, 1);
 
-        if (mainSlider.value * 100 == 100 || mainSlider.value * 100 == 0)
-            Debug.Log("red");
+        //if (mainSlider.value * 100 == 100 || mainSlider.value * 100 == 0)
+        //    Debug.Log("red");
 
-        if (mainSlider.value * 100 >= 73 && mainSlider.value * 100 <= 82)
-            Debug.Log("purple");
+        //if (mainSlider.value * 100 >= 73 && mainSlider.value * 100 <= 82)
+        //    Debug.Log("purple");
 
-        if (mainSlider.value * 100 >= 50 && mainSlider.value * 100 <= 60)
-            Debug.Log("light blue");
+        //if (mainSlider.value * 100 >= 50 && mainSlider.value * 100 <= 60)
+        //    Debug.Log("light blue");
 
-        if (mainSlider.value * 100 >= 14 && mainSlider.value * 100 <= 34)
-            Debug.Log("lime");
+        //if (mainSlider.value * 100 >= 14 && mainSlider.value * 100 <= 34)
+        //    Debug.Log("lime");
 
-        if (mainSlider.value * 100 >= 83 && mainSlider.value * 100 <= 98)
-            Debug.Log("pink");
+        //if (mainSlider.value * 100 >= 83 && mainSlider.value * 100 <= 98)
+        //    Debug.Log("pink");
 
-        Debug.Log(handle.color);
+     //   Debug.Log(handle.color);
     }
 
     public static float map(float value, float leftMin, float leftMax, float rightMin, float rightMax)

@@ -1473,12 +1473,16 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148263311}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1b94425c09a59704ba3a7eb9f27ee412, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1352934270}
+  oneCheck: 0
+  longPress: 0
+  num: 0
+  LongClick: {fileID: 0}
 --- !u!114 &148263315
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1942,7 +1946,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &251411110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1956,6 +1960,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 1352934270}
+  oneCheck: 0
+  longPress: 0
+  num: 0
+  LongClick: {fileID: 0}
 --- !u!4 &251411111
 Transform:
   m_ObjectHideFlags: 0
@@ -6537,7 +6545,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1169019389771402, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1169019389771402, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: m_TagString
@@ -6588,16 +6596,24 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: debugLevel
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: ManagerState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: pins.Array.size
-      value: 3
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: shouldReconnect
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: defaultArduinoBoardType
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: pins.Array.data[0].pinMode
@@ -6625,15 +6641,103 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: pins.Array.data[3].pinMode
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
-      propertyPath: pins.Array.data[3].prevPin
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[3].prevPin
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[4].pinMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[4].prevPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[5].pinMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[5].prevPin
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[6].pinMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[6].prevPin
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[7].pinMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[7].prevPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[8].pinMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[8].prevPin
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[9].pinMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[9].prevPin
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[10].pinMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[10].prevPin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[11].pinMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[11].prevPin
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[12].pinMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[12].prevPin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[13].pinMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[13].prevPin
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[14].pinMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[14].prevPin
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: pins.Array.data[2].sendValue
-      value: 204
+      value: 144
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: pins.Array.data[0].currentPin
@@ -6649,7 +6753,31 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: pins.Array.data[3].currentPin
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[4].currentPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[5].currentPin
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[6].currentPin
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[7].currentPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[8].currentPin
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[9].currentPin
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: pins.Array.data[0].arduinoName
@@ -6662,6 +6790,26 @@ PrefabInstance:
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: pins.Array.data[0].prevPinMode
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[10].currentPin
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[11].currentPin
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[12].currentPin
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[13].currentPin
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[14].currentPin
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: pins.Array.data[1].arduinoName
@@ -6697,7 +6845,139 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: pins.Array.data[3].prevPinMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[4].arduinoName
+      value: uduinoBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[4].isEditorPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[4].prevPinMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[5].arduinoName
+      value: uduinoBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[5].isEditorPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[5].prevPinMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[6].arduinoName
+      value: uduinoBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[6].isEditorPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[6].prevPinMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[7].arduinoName
+      value: uduinoBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[7].isEditorPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[7].prevPinMode
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[8].arduinoName
+      value: uduinoBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[8].isEditorPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[8].prevPinMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[9].arduinoName
+      value: uduinoBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[9].isEditorPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[9].prevPinMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[10].arduinoName
+      value: uduinoBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[10].isEditorPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[10].prevPinMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[11].arduinoName
+      value: uduinoBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[11].isEditorPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[11].prevPinMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[12].arduinoName
+      value: uduinoBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[12].isEditorPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[12].prevPinMode
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[13].arduinoName
+      value: uduinoBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[13].isEditorPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[13].prevPinMode
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[14].arduinoName
+      value: uduinoBoard
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[14].isEditorPin
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[14].prevPinMode
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: pins.Array.data[0].lastReadValue
@@ -6705,11 +6985,47 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: pins.Array.data[1].lastReadValue
-      value: 501
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: pins.Array.data[2].prevSendValue
-      value: 204
+      value: 144
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[3].lastReadValue
+      value: 348
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[4].lastReadValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[5].lastReadValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[6].lastReadValue
+      value: 1023
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[7].lastReadValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[8].lastReadValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[9].lastReadValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[10].lastReadValue
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
+      propertyPath: pins.Array.data[14].lastReadValue
+      value: 1023
       objectReference: {fileID: 0}
     - target: {fileID: 114023058375386772, guid: bb5e6aea88a650f4a8317e74940b0ea4, type: 3}
       propertyPath: presentExtentionsMap.keys.Array.size
@@ -7689,6 +8005,8 @@ GameObject:
   - component: {fileID: 1087786783}
   - component: {fileID: 1087786782}
   - component: {fileID: 1087786785}
+  - component: {fileID: 1087786786}
+  - component: {fileID: 1087786787}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Button
@@ -7813,6 +8131,54 @@ MonoBehaviour:
   active: 1
   solved: 1
   name: 
+--- !u!114 &1087786786
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087786780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b94425c09a59704ba3a7eb9f27ee412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1087786782}
+  oneCheck: 0
+  longPress: 0
+  num: 2
+  LongClick: {fileID: 1087786787}
+--- !u!114 &1087786787
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1087786780}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fdced99ce700549ac144de294ca47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerDown: 0
+  pointerDownTimer: 0
+  requiredHoldTime: 2
+  onLongClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1087786786}
+        m_TargetAssemblyTypeName: buttonArduino, Assembly-CSharp
+        m_MethodName: LongClickAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  fillImage: {fileID: 1087786783}
 --- !u!1 &1116916175
 GameObject:
   m_ObjectHideFlags: 0
@@ -8844,6 +9210,8 @@ GameObject:
   - component: {fileID: 1352934271}
   - component: {fileID: 1352934270}
   - component: {fileID: 1352934273}
+  - component: {fileID: 1352934275}
+  - component: {fileID: 1352934274}
   m_Layer: 5
   m_Name: Button
   m_TagString: Button
@@ -8968,6 +9336,54 @@ MonoBehaviour:
   active: 1
   solved: 1
   name: 
+--- !u!114 &1352934274
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352934268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fdced99ce700549ac144de294ca47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerDown: 0
+  pointerDownTimer: 0
+  requiredHoldTime: 0
+  onLongClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1352934275}
+        m_TargetAssemblyTypeName: buttonArduino, Assembly-CSharp
+        m_MethodName: LongClickAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  fillImage: {fileID: 1352934271}
+--- !u!114 &1352934275
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1352934268}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b94425c09a59704ba3a7eb9f27ee412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1352934270}
+  oneCheck: 0
+  longPress: 0
+  num: 8
+  LongClick: {fileID: 1352934274}
 --- !u!1 &1365312679
 GameObject:
   m_ObjectHideFlags: 0
@@ -8982,6 +9398,8 @@ GameObject:
   - component: {fileID: 1365312681}
   - component: {fileID: 1365312684}
   - component: {fileID: 1365312685}
+  - component: {fileID: 1365312687}
+  - component: {fileID: 1365312686}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Button
@@ -9135,6 +9553,54 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &1365312686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365312679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fdced99ce700549ac144de294ca47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerDown: 0
+  pointerDownTimer: 0
+  requiredHoldTime: 0
+  onLongClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1365312687}
+        m_TargetAssemblyTypeName: buttonArduino, Assembly-CSharp
+        m_MethodName: LongClickAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  fillImage: {fileID: 1365312682}
+--- !u!114 &1365312687
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365312679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b94425c09a59704ba3a7eb9f27ee412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1365312681}
+  oneCheck: 0
+  longPress: 0
+  num: 4
+  LongClick: {fileID: 1365312686}
 --- !u!1 &1386348622
 GameObject:
   m_ObjectHideFlags: 0
@@ -9524,6 +9990,8 @@ GameObject:
   - component: {fileID: 1484992424}
   - component: {fileID: 1484992423}
   - component: {fileID: 1484992426}
+  - component: {fileID: 1484992427}
+  - component: {fileID: 1484992428}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Button
@@ -9648,6 +10116,54 @@ MonoBehaviour:
   active: 1
   solved: 1
   name: 
+--- !u!114 &1484992427
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484992421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b94425c09a59704ba3a7eb9f27ee412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1484992423}
+  oneCheck: 0
+  longPress: 0
+  num: 3
+  LongClick: {fileID: 1484992428}
+--- !u!114 &1484992428
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1484992421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fdced99ce700549ac144de294ca47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerDown: 0
+  pointerDownTimer: 0
+  requiredHoldTime: 2
+  onLongClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1484992427}
+        m_TargetAssemblyTypeName: buttonArduino, Assembly-CSharp
+        m_MethodName: LongClickAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  fillImage: {fileID: 1484992424}
 --- !u!1 &1516720414
 GameObject:
   m_ObjectHideFlags: 0
@@ -10385,6 +10901,7 @@ GameObject:
   - component: {fileID: 1603273734}
   - component: {fileID: 1603273736}
   - component: {fileID: 1603273737}
+  - component: {fileID: 1603273738}
   m_Layer: 5
   m_Name: Box
   m_TagString: Untagged
@@ -10475,7 +10992,7 @@ MonoBehaviour:
   - {fileID: 372099605}
   textDisplay: {fileID: 920915420}
   UduinoManager: {fileID: 0}
-  PhysicalGame: 0
+  PhysicalGame: 1
   SerialNumberDisplay: {fileID: 1895450128}
   CodeDisplayer: {fileID: 1686905365}
   ResetCounter: 4
@@ -10502,7 +11019,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PuzzleList: []
+  associatedPuzzle: {fileID: 1603273738}
   ScreenColours: {fileID: 911217693}
+  switcher: 0
+--- !u!114 &1603273738
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1603273732}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0e8696a1cfe05ff4781e3523a16fdbfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  active: 1
+  solved: 0
+  name: 
 --- !u!1 &1659339110
 GameObject:
   m_ObjectHideFlags: 0
@@ -11125,6 +11659,8 @@ GameObject:
   - component: {fileID: 1713333775}
   - component: {fileID: 1713333774}
   - component: {fileID: 1713333777}
+  - component: {fileID: 1713333779}
+  - component: {fileID: 1713333778}
   m_Layer: 5
   m_Name: Button (1)
   m_TagString: Button
@@ -11249,6 +11785,54 @@ MonoBehaviour:
   active: 1
   solved: 1
   name: 
+--- !u!114 &1713333778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713333772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fdced99ce700549ac144de294ca47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerDown: 0
+  pointerDownTimer: 0
+  requiredHoldTime: 0
+  onLongClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1713333779}
+        m_TargetAssemblyTypeName: buttonArduino, Assembly-CSharp
+        m_MethodName: LongClickAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  fillImage: {fileID: 1713333775}
+--- !u!114 &1713333779
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1713333772}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b94425c09a59704ba3a7eb9f27ee412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 1713333774}
+  oneCheck: 0
+  longPress: 0
+  num: 6
+  LongClick: {fileID: 1713333778}
 --- !u!1 &1731975612
 GameObject:
   m_ObjectHideFlags: 0
@@ -12209,7 +12793,7 @@ MonoBehaviour:
   textDisplay: {fileID: 299955029}
   value: 90
   manualvalue: 0
-  periodLength: 10
+  periodLength: 2
   amount: 1
   maxVal: 180
   minVal: 0
@@ -12925,6 +13509,8 @@ GameObject:
   - component: {fileID: 2009148640}
   - component: {fileID: 2009148643}
   - component: {fileID: 2009148644}
+  - component: {fileID: 2009148646}
+  - component: {fileID: 2009148645}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Button
@@ -13078,6 +13664,54 @@ MonoBehaviour:
             m_StringArgument: 
             m_BoolArgument: 0
           m_CallState: 2
+--- !u!114 &2009148645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009148638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b94425c09a59704ba3a7eb9f27ee412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 2009148640}
+  oneCheck: 0
+  longPress: 0
+  num: 5
+  LongClick: {fileID: 2009148646}
+--- !u!114 &2009148646
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2009148638}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fdced99ce700549ac144de294ca47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerDown: 0
+  pointerDownTimer: 0
+  requiredHoldTime: 0
+  onLongClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2009148638}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  fillImage: {fileID: 2009148641}
 --- !u!1 &2022015335
 GameObject:
   m_ObjectHideFlags: 0
@@ -13846,6 +14480,8 @@ GameObject:
   - component: {fileID: 2091073656}
   - component: {fileID: 2091073655}
   - component: {fileID: 2091073658}
+  - component: {fileID: 2091073660}
+  - component: {fileID: 2091073659}
   m_Layer: 5
   m_Name: Button (2)
   m_TagString: Button
@@ -13970,6 +14606,54 @@ MonoBehaviour:
   active: 1
   solved: 1
   name: 
+--- !u!114 &2091073659
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091073653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a8fdced99ce700549ac144de294ca47e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pointerDown: 0
+  pointerDownTimer: 0
+  requiredHoldTime: 0
+  onLongClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2091073660}
+        m_TargetAssemblyTypeName: buttonArduino, Assembly-CSharp
+        m_MethodName: LongClickAction
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  fillImage: {fileID: 2091073656}
+--- !u!114 &2091073660
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091073653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b94425c09a59704ba3a7eb9f27ee412, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  button: {fileID: 2091073655}
+  oneCheck: 0
+  longPress: 0
+  num: 7
+  LongClick: {fileID: 2091073659}
 --- !u!1 &2118713847
 GameObject:
   m_ObjectHideFlags: 0

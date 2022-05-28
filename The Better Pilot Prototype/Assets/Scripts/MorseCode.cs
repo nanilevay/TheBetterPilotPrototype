@@ -25,24 +25,33 @@ public class MorseCode : MonoBehaviour
 
     void LongClick()
     {
-        DecodingText += "-";
+        if (buttons[0].GetComponent<buttonArduino>().oneCheck)
+        {
+            DecodingText += "-";
+            buttons[0].GetComponent<buttonArduino>().oneCheck = false;
+        }
     }
 
     void ShortClick()
     {
-        DecodingText += ".";
+        if (buttons[1].GetComponent<buttonArduino>().oneCheck)
+        {
+            DecodingText += ".";
+            buttons[1].GetComponent<buttonArduino>().oneCheck = false;
+        }
     }
 
 
     void Confirm()
     {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (buttons[0].GetComponent<LongClickButton>().pointerDown && buttons[1].GetComponent<LongClickButton>().pointerDown)
         {
             Translate();
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (buttons[0].GetComponent<buttonArduino>().longPress && buttons[1].GetComponent<buttonArduino>().longPress)
         {
+            DecodingText = "";
             textArea.text = "";
         }
     }
@@ -124,6 +133,10 @@ public class MorseCode : MonoBehaviour
         if (DecodingText.Equals("-."))
         {
             tempText = "N";
+        }
+        if (DecodingText.Equals("..."))
+        {
+            tempText = "S";
         }
         if (DecodingText.Equals("---"))
         {
