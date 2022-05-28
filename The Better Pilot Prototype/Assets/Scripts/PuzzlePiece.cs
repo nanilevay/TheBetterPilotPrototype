@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PuzzlePiece : MonoBehaviour
 {
     public bool active = true;
+    public bool solved = false;
     public string name = "";
 
     public void ToggleOn()

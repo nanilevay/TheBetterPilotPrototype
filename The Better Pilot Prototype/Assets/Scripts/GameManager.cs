@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject ScreenFader;
 
+    public DisplayUpdater CodeReceiver;
+
     void Awake()
     {
         int ThreeOrSix = UnityEngine.Random.Range(0, 2); 
@@ -108,6 +110,17 @@ public class GameManager : MonoBehaviour
 
             ResetNumberDisplay.text = ResetCounter.ToString();
         }
+
+
+        //if(CodeReceiver.CurrentCode == "")
+        //    PuzzlesToToggle.AssociatedPuzzle[0].ToggleOn();
+
+        //foreach (PuzzlePiece piece in PuzzlesToToggle.AssociatedPuzzle)
+        //{
+        //    if (piece.solved)
+        //        piece.ToggleOff();
+        //}
+
     }
 
     public void UpdateList()

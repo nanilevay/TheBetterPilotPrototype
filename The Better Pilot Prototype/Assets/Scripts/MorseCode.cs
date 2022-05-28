@@ -55,7 +55,13 @@ public class MorseCode : MonoBehaviour
 
     public void CheckAnswer()
     {
-        if (textArea.text.Contains("PIZZA"))
+        if (textArea.text.Contains("SOS"))
+            Debug.Log("yes");
+
+        if (textArea.text.Contains("HELP"))
+            Debug.Log("yes");
+
+        if (textArea.text.Contains("SERIAL NO"))
             Debug.Log("yes");
     }
 

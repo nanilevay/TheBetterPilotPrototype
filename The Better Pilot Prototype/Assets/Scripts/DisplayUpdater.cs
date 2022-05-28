@@ -21,6 +21,8 @@ public class DisplayUpdater : MonoBehaviour
 
     public bool Updated = false;
 
+    public string CurrentCode;
+
     void Awake()
     {
         currentCodes = new List<string>(maxNumber);
