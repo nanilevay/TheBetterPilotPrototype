@@ -27,5 +27,7 @@ public class ProximityDetectorArduinoo : MonoBehaviour
     void DataReceived(string data, UduinoDevice baord)
     {
         bool ok = float.TryParse(data, out distance);
+
+      //  Debug.Log(data);
     }
 }

@@ -13,8 +13,16 @@ public class PuzzlePiece : MonoBehaviour
     {
         if(this.gameObject.tag == "Slider")
             this.GetComponent<Slider>().interactable = true;
+
+
         if (this.gameObject.tag == "Button")
             this.GetComponent<Button>().interactable = true;
+
+
+        if (this.gameObject.tag == "Display")
+        {
+            this.gameObject.transform.Find("Screen").transform.Find("Screen Text").gameObject.active = true;
+        }
 
 
         if (this.gameObject.tag == "Sensor")
@@ -46,9 +54,14 @@ public class PuzzlePiece : MonoBehaviour
     {
         if (this.gameObject.tag == "Slider")
             this.GetComponent<Slider>().interactable = false;
+
         if(this.gameObject.tag == "Button")
             this.GetComponent<Button>().interactable = false;
 
+        if (this.gameObject.tag == "Display")
+        {
+            this.gameObject.transform.Find("Screen").transform.Find("Screen Text").gameObject.active = false;
+        }
 
         if (this.gameObject.tag == "Sensor")
         {

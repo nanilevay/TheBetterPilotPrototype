@@ -13,6 +13,8 @@ TagManager:
   - SensorArea
   - RotatingPiece
   - UduinoManager
+  - Display
+  - Screen
   layers:
   - Default
   - TransparentFX

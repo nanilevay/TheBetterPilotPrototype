@@ -16,16 +16,24 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 	[SerializeField]
 	public Image fillImage;
 
+	public PuzzlePiece puzzle;
+
 	public void OnPointerDown(PointerEventData eventData)
 	{
-		pointerDown = true;
-		Debug.Log("OnPointerDown");
+		if (puzzle.active)
+		{
+			pointerDown = true;
+			Debug.Log("OnPointerDown");
+		}
 	}
 
 	public void OnPointerUp(PointerEventData eventData)
 	{
-		Reset();
-		Debug.Log("OnPointerUp");
+		if (puzzle.active)
+		{
+			Reset();
+			Debug.Log("OnPointerUp");
+		}
 	}
 
 	private void Update()

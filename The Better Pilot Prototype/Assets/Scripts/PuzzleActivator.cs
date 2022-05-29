@@ -34,7 +34,6 @@ public class PuzzleActivator : MonoBehaviour
     }
 
 
-
     public void ToggleOff()
     {
         foreach (PuzzlePiece Piece in AssociatedPuzzle)
