@@ -17,6 +17,10 @@ public class FrequencySlider : MonoBehaviour
 
     public Slider mainSlider;
 
+    public PuzzlePiece AssociatedPuzzle;
+
+    public ProximityDetector Detector;
+
     void Awake()
     {
         PitchGenerator();
@@ -35,6 +39,11 @@ public class FrequencySlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Detector.ProximityDetected)
+            ProximityCheck = true;
+        else
+            ProximityCheck = false;
+
         SliderValue = map(mainSlider.value, 0f,1f,0f,3f);
 
         audioToMatch.pitch = SliderValue;
@@ -44,8 +53,8 @@ public class FrequencySlider : MonoBehaviour
         if (!ProximityCheck)
             audioToMatch.Stop();
 
-        if (ProximityCheck && Mathf.Round(SliderValue * 10.0f) * 0.1f == Mathf.Round(startingPitch * 10.0f) * 0.1f)
-            Debug.Log("victory");
+        if (ProximityCheck && Mathf.Round(SliderValue * 10.0f) * 0.1f == Mathf.Round(startingPitch * 10.0f) * 0.1f && Detector.ProximityDetected)
+            AssociatedPuzzle.solved = true;
 
        // Debug.Log(Mathf.Round(SliderValue * 10.0f) * 0.1f);
     }

@@ -39,6 +39,13 @@ public class GameManager : MonoBehaviour
 
     public DisplayUpdater CodeReceiver;
 
+    public bool ButtonOn = false;
+
+    public StopWatch stopwatch;
+
+    public Timer timer;
+
+
     void Awake()
     {
         int ThreeOrSix = UnityEngine.Random.Range(0, 2); 
@@ -91,15 +98,16 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (togglers[0].GetComponent<Toggle>().isOn && togglers[1].GetComponent<Toggle>().isOn && checker)
+        if (togglers[0].GetComponent<Toggle>().isOn && togglers[1].GetComponent<Toggle>().isOn && ButtonOn && checker)
         {
+            stopwatch.StartStopWatch();
             PlaneOn = true;
             checker = false;
 
             ScreenFader.transform.Find("InitialScreen").gameObject.active = false;
         }
 
-        if (PlaneOn)
+        if (PlaneOn && stopwatch.stopWatchActive)
         {
             t += Time.deltaTime;
 
@@ -154,7 +162,18 @@ public class GameManager : MonoBehaviour
             ResetCounter--;
 
             CodeDisplayer.i = 0;
+
+            timer.StopTimer();
+
+            timer.Start();
+
+
         }
+    }
+
+    public void TurnOnPlane()
+    {
+        ButtonOn = true;
     }
 
     //void Start()

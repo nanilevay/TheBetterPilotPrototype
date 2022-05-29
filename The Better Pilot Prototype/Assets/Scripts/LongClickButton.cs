@@ -1,9 +1,10 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using System.Collections;
 using UnityEngine.UI;
 
-public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
 	public bool pointerDown;
 	public float pointerDownTimer;
@@ -18,12 +19,40 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
 	public PuzzlePiece puzzle;
 
+	public int tap;
+
+	public bool DoubleTap = false;
+
+	public bool hold = false;
+
+	public void OnPointerClick(PointerEventData eventData)
+	{
+		tap = eventData.clickCount;
+
+		if (tap == 2)
+		{
+			
+			DoubleTap = true;
+		}
+
+		else
+        {
+			DoubleTap = false;
+		}
+
+	}
+
 	public void OnPointerDown(PointerEventData eventData)
 	{
 		if (puzzle.active)
 		{
 			pointerDown = true;
-			Debug.Log("OnPointerDown");
+			//Debug.Log("OnPointerDown");
+
+			if (Input.GetKey(KeyCode.LeftControl))
+			{
+				hold = true;
+			}
 		}
 	}
 
@@ -32,7 +61,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 		if (puzzle.active)
 		{
 			Reset();
-			Debug.Log("OnPointerUp");
+			//Debug.Log("OnPointerUp");
 		}
 	}
 
@@ -49,6 +78,11 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 				Reset();
 			}
 			fillImage.fillAmount = pointerDownTimer / requiredHoldTime;
+		}
+
+		if (Input.GetKeyUp(KeyCode.LeftControl) && hold)
+		{
+			hold = false;
 		}
 	}
 

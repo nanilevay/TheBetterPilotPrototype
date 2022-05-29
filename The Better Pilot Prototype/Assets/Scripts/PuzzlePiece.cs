@@ -9,6 +9,8 @@ public class PuzzlePiece : MonoBehaviour
     public bool solved = false;
     public string name = "";
 
+    public bool start = false;
+
     public void ToggleOn()
     {
         if(this.gameObject.tag == "Slider")

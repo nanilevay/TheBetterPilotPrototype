@@ -23,6 +23,8 @@ public class DisplayUpdater : MonoBehaviour
 
     public string CurrentCode;
 
+    public Timer timer;
+
     void Awake()
     {
         currentCodes = new List<string>(maxNumber);
@@ -33,7 +35,7 @@ public class DisplayUpdater : MonoBehaviour
     {
         t += Time.deltaTime;
 
-        if (t >= 3 && i < currentCodes.Capacity)
+        if (t >= 20 && i < currentCodes.Capacity)
         {
             string addingCode;
 
@@ -42,7 +44,7 @@ public class DisplayUpdater : MonoBehaviour
 
             addingCode = Texts[Random.Range(0, Texts.Count)];
 
-            if(!currentCodes.Contains(addingCode))
+            if(!currentCodes.Contains(addingCode) && !(currentCodes.Contains("5790")))
              {
 
                 textDisplay.text = addingCode;
@@ -53,7 +55,18 @@ public class DisplayUpdater : MonoBehaviour
             }
         }
 
-      
+        if(i >= currentCodes.Capacity)
+        {
+            string addingCode;
+
+            addingCode = "5790";
+
+                textDisplay.text = addingCode;
+                currentCodes.Add(addingCode);
+                PuzzleActivator(addingCode);
+                timer.StartTimer();
+
+        }  
     }
 
     void PuzzleActivator(string checker)

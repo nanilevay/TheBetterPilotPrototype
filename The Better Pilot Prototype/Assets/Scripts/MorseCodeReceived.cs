@@ -19,17 +19,36 @@ public class MorseCodeReceived : MonoBehaviour
 
     public bool switcher;
 
+    public Coroutine coroutine;
 
-    // green, black, blue, yellow, red
-    public Button[] buttons;
+
+    /// puzzles
+    public Button YellowButton;
+
+    public Button RedButton;
+
+    public Button BlueButton;
+
+    public Slider SliderComponent;
+
+    public Button BlackButton;
+
+    public Button GreenButton;
 
     void Update()
     {
         if(associatedPuzzle.active && switcher)
             WordGenerator();
 
-        if (!associatedPuzzle.active)
+        if (!associatedPuzzle.active && !switcher)
+        {
             switcher = true;
+            Lighter.GetComponent<Image>().color = Color.black;
+            StopCoroutine(coroutine);
+        }
+
+        if(!associatedPuzzle.solved)
+            PuzzleConfirmation();
     }
 
     IEnumerator MorseDisplay()
@@ -75,15 +94,104 @@ public class MorseCodeReceived : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(MorseDisplay());
+       // StartCoroutine(MorseDisplay());
     }
 
     void PuzzleConfirmation()
     {
         switch (Sequence)
         {
-            case "":
-                break;
+            case "0":
+                {
+                    if (YellowButton.GetComponent<LongClickButton>().hold)
+                    {
+                        associatedPuzzle.solved = true;
+                        Debug.Log("oof");
+                        YellowButton.GetComponent<LongClickButton>().hold = false;
+                    }
+                    break;
+                }
+
+            case "1":
+                {
+                    if (RedButton.GetComponent<LongClickButton>().DoubleTap)
+                    {
+                        associatedPuzzle.solved = true;
+                        Debug.Log("oof");
+                        RedButton.GetComponent<LongClickButton>().DoubleTap = false;
+                    }
+                    break;
+                }
+
+            case ".-- .... . .-. . / .. ...":
+                {
+                    if (Mathf.RoundToInt(mainSlider.value * 100) >= 80)
+                    {
+                        associatedPuzzle.solved = true;
+                        Debug.Log("oof");
+                    }
+                    break;
+                }
+
+            case ".-- .... . .-. . ...":
+                {
+                    if (BlackButton.GetComponent<LongClickButton>().tap == 1 && YellowButton.GetComponent<LongClickButton>().tap == 1)
+                    {
+                        associatedPuzzle.solved = true;
+                        Debug.Log("oof");
+                        BlackButton.GetComponent<LongClickButton>().tap = 0;
+                        YellowButton.GetComponent<LongClickButton>().tap = 0;
+                    }
+                    break;
+                }
+
+            case ".-.. .. -.- . ...":
+                {
+                    if (Mathf.RoundToInt(mainSlider.value * 100) <= 20)
+                    {
+                        associatedPuzzle.solved = true;
+                        Debug.Log("oof");
+                    }
+                    break;
+                }
+
+            case "-.-- --- ..- / .- .-. .":
+                {
+                    if (BlueButton.GetComponent<LongClickButton>().hold && YellowButton.GetComponent<LongClickButton>().tap == 1 && GreenButton.GetComponent<LongClickButton>().tap == 1)
+                    {
+                        associatedPuzzle.solved = true;
+                        Debug.Log("oof");
+                        BlueButton.GetComponent<LongClickButton>().hold = false;
+                        YellowButton.GetComponent<LongClickButton>().tap = 0;
+                        GreenButton.GetComponent<LongClickButton>().tap = 0;
+
+                    }
+                    break;
+                }
+
+            case "-.-- --- ..- .-. .":
+                {
+                    if (RedButton.GetComponent<LongClickButton>().DoubleTap)
+                    {
+                        associatedPuzzle.solved = true;
+                        Debug.Log("oof");
+                        RedButton.GetComponent<LongClickButton>().DoubleTap = false;
+                    }
+                    break;
+                }
+
+
+            case "-.-- --- ..- .-.":
+                {
+                    if (BlueButton.GetComponent<LongClickButton>().hold && GreenButton.GetComponent<LongClickButton>().hold)
+                    {
+                        associatedPuzzle.solved = true;
+                        Debug.Log("oof");
+                        BlueButton.GetComponent<LongClickButton>().hold = false;
+                        GreenButton.GetComponent<LongClickButton>().hold = false;
+                    }
+                    break;
+                }
         }
     }
 
@@ -91,28 +199,31 @@ public class MorseCodeReceived : MonoBehaviour
     {
         int decider = UnityEngine.Random.Range(0, 7);
 
+        // where's
         if (decider == 0)
-            Sequence = ".";
+            Sequence = ".-- .... . .-. ./...";
         
         if (decider == 1)
-            Sequence = "..";
+            Sequence = ".-- .... . .-. . / .. ...";
         
         if (decider == 2)
-            Sequence = "-";
+            Sequence = ".-- .... . .-. . ...";
         
         if (decider == 3)
-            Sequence = ".-./";
+            Sequence = ".-.. .. -.- . ...";
         
         if (decider == 4)
-            Sequence = "";
+            Sequence = "-.-- --- ..- / .- .-. .";
         
         if (decider == 5)
-            Sequence = "";
+            Sequence = "-.-- --- ..- .-. .";
        
         if (decider == 6)
-            Sequence = "";
+            Sequence = "-.-- --- ..- .-.";
 
         switcher = false;
+
+        coroutine = StartCoroutine(MorseDisplay());
     }
 
 }

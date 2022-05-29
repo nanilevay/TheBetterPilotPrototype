@@ -12,6 +12,8 @@ public class ProximityDetector : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public bool active = true;
 
+    public bool ProximityDetected = false;
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         OnSensor();
@@ -22,36 +24,62 @@ public class ProximityDetector : MonoBehaviour, IPointerEnterHandler, IPointerEx
         OffSensor();
     }
 
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.LeftControl) && Detecting == "Detected")
+        {
+            ProximityDetected = true;
+            Detecting = "Detected";
+        }
+
+        if (Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            Detecting = "Not Detected";
+            ProximityDetected = false;
+        }
+    }
+
     public void OnSensor()
     {
         if (active)
         {    
-           Detecting = "Detected";   
+           Detecting = "Detected";
+            ProximityDetected = true;
         }
 
         else
         {
             Detecting = "Sensor OFF";
+            ProximityDetected = false;
         }
 
         textDisplay.text = Detecting;
+
+     
+
+
     }
 
 
     public void OffSensor()
     {
-        if (active)
+        if (active && !Input.GetKey(KeyCode.LeftControl))
         {
-            Detecting = "Not Detected";
+                Detecting = "Not Detected";
+                ProximityDetected = false;
+
+                textDisplay.text = Detecting;
         }
 
 
-        else
+        else if(!active)
         {
             Detecting = "Sensor OFF";
-           
+
+            textDisplay.text = Detecting;
+
         }
 
-        textDisplay.text = Detecting;
+        
     }
 }
