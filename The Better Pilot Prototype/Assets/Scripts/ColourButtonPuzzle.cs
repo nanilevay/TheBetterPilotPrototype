@@ -43,76 +43,103 @@ public class ColourButtonPuzzle : MonoBehaviour
 
     void GreenClick()
     {
-        if (!PressingGreen && !PressingBlack)
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
         {
-            PressingGreen = true;
-        }
+            if (!PressingGreen && !PressingBlack)
+            {
+                PressingGreen = true;
+            }
 
-        if(PressingBlack)
-            code += "g";
+            if (PressingBlack)
+                code += "g";
+        }
     }
 
     void BlackClick()
     {
-        if (!PressingBlack && !PressingGreen)
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
         {
-            PressingBlack = true;
-        }
+            if (!PressingBlack && !PressingGreen)
+            {
+                PressingBlack = true;
+            }
 
-        if(PressingGreen)
-            code += "z";
+            if (PressingGreen)
+                code += "z";
+        }
     }
 
     public void GreenRelease()
-    { 
-        PressingGreen = false;
+    {
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
+        {
+            PressingGreen = false;
+        }
     }
 
     public void BlackRelease()
     {
-        PressingBlack = false;
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
+        {
+            PressingBlack = false;
+        }
     }
 
     void YellowClick()
     {
-        code += "y";
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
+        {
+            code += "y";
+        }
     }
 
     void BlueClick()
     {
-        code += "b";
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
+        {
+            code += "b";
+        }
     }
 
     void RedClick()
     {
-        code += "r";
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
+        {
+            code += "r";
+        }
     }
 
     void Erase()
     {
-        code = "";
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
+        {
+            code = "";
+        }
     }
 
     void Update()
     {
-        if (Input.GetKeyDown("space"))
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
         {
-            GreenRelease();
-            BlackRelease();
-            Erase();
-        }
+            if (Input.GetKeyDown("space"))
+            {
+                GreenRelease();
+                BlackRelease();
+                Erase();
+            }
 
-        if (PressingGreen)
-        {
-            BlackRelease();
-        }
+            if (PressingGreen)
+            {
+                BlackRelease();
+            }
 
-        if (PressingBlack)
-        {
-            GreenRelease();
-        }
+            if (PressingBlack)
+            {
+                GreenRelease();
+            }
 
-        CheckAnswer();
+            CheckAnswer();
+        }
     }
 
     public void CheckAnswer()

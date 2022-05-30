@@ -29,33 +29,36 @@ public class HueSlider : MonoBehaviour
     // Invoked when the value of the slider changes.
     public void ValueChangeCheck()
     {
-        if (!PuzzleToSolve.solved)
+        if (Manager.CodeDisplayer.currentCodes.Contains("6007"))
         {
-            handle.color = Color.HSVToRGB(mainSlider.value, 1, 1);
-
-            if (mainSlider.value * 100 >= 73 && mainSlider.value * 100 <= 82 && Manager.SerialThree && !Manager.SerialEven)
+            if (!PuzzleToSolve.solved)
             {
-                PuzzleToSolve.solved = true;
-                StartCoroutine(Success());
-            }
+                handle.color = Color.HSVToRGB(mainSlider.value, 1, 1);
 
-            if (mainSlider.value * 100 >= 50 && mainSlider.value * 100 <= 60 && Manager.SerialThree && Manager.SerialEven)
-            {
-                PuzzleToSolve.solved = true;
-                StartCoroutine(Success());
-            }
+                if (mainSlider.value * 100 >= 73 && mainSlider.value * 100 <= 82 && Manager.SerialThree && !Manager.SerialEven)
+                {
+                    PuzzleToSolve.solved = true;
+                    StartCoroutine(Success());
+                }
 
-            if (mainSlider.value * 100 >= 14 && mainSlider.value * 100 <= 34 && !Manager.SerialThree && !Manager.SerialEven)
-            {
-                PuzzleToSolve.solved = true;
-                StartCoroutine(Success());
-            }
+                if (mainSlider.value * 100 >= 50 && mainSlider.value * 100 <= 60 && Manager.SerialThree && Manager.SerialEven)
+                {
+                    PuzzleToSolve.solved = true;
+                    StartCoroutine(Success());
+                }
+
+                if (mainSlider.value * 100 >= 14 && mainSlider.value * 100 <= 34 && !Manager.SerialThree && !Manager.SerialEven)
+                {
+                    PuzzleToSolve.solved = true;
+                    StartCoroutine(Success());
+                }
 
 
-            if (mainSlider.value * 100 >= 83 && mainSlider.value * 100 <= 98 && !Manager.SerialThree && Manager.SerialEven)
-            {
-                PuzzleToSolve.solved = true;
-                StartCoroutine(Success());
+                if (mainSlider.value * 100 >= 83 && mainSlider.value * 100 <= 98 && !Manager.SerialThree && Manager.SerialEven)
+                {
+                    PuzzleToSolve.solved = true;
+                    StartCoroutine(Success());
+                }
             }
         }
     }

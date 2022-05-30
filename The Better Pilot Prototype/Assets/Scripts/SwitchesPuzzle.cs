@@ -23,6 +23,8 @@ public class SwitchesPuzzle : MonoBehaviour
 
     public Image Led;
 
+    public GameManager Manager;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,10 +34,13 @@ public class SwitchesPuzzle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(!associatedPuzzle.solved && Once)
+        if (Manager.CodeDisplayer.currentCodes.Contains("0238"))
         {
-            StartCoroutine(Checker());
-            Once = false;
+            if (!associatedPuzzle.solved && Once)
+            {
+                StartCoroutine(Checker());
+                Once = false;
+            }
         }
     }
 
@@ -80,6 +85,7 @@ public class SwitchesPuzzle : MonoBehaviour
                 yield break;
             }
         }
+
         Once = true;
         yield break;
     }

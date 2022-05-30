@@ -15,6 +15,10 @@ public class MorseCode : MonoBehaviour
 
     bool BothPressed;
 
+    public GameManager Manager;
+
+    public PuzzlePiece AssociatedPuzzle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,19 +29,25 @@ public class MorseCode : MonoBehaviour
 
     void LongClick()
     {
-        if (buttons[0].GetComponent<buttonArduino>().oneCheck)
+        if (Manager.CodeDisplayer.currentCodes.Contains("2197"))
         {
-            DecodingText += "-";
-            buttons[0].GetComponent<buttonArduino>().oneCheck = false;
+            if (buttons[0].GetComponent<buttonArduino>().oneCheck)
+            {
+                DecodingText += "-";
+                buttons[0].GetComponent<buttonArduino>().oneCheck = false;
+            }
         }
     }
 
     void ShortClick()
     {
-        if (buttons[1].GetComponent<buttonArduino>().oneCheck)
+        if (Manager.CodeDisplayer.currentCodes.Contains("2197"))
         {
-            DecodingText += ".";
-            buttons[1].GetComponent<buttonArduino>().oneCheck = false;
+            if (buttons[1].GetComponent<buttonArduino>().oneCheck)
+            {
+                DecodingText += ".";
+                buttons[1].GetComponent<buttonArduino>().oneCheck = false;
+            }
         }
     }
 
@@ -58,20 +68,29 @@ public class MorseCode : MonoBehaviour
 
     void Update()
     {
-        Confirm();
-        CheckAnswer();
+        if (Manager.CodeDisplayer.currentCodes.Contains("2197"))
+        {
+            Confirm();
+            CheckAnswer();
+        }
     }
 
     public void CheckAnswer()
     {
-        if (textArea.text.Contains("SOS"))
-            Debug.Log("yes");
+        if (Manager.SerialEven && Manager.SerialThree && textArea.text.Contains("SOS"))
+        {
+            AssociatedPuzzle.solved = true;
+        }
+            
+        if (!Manager.SerialEven && Manager.SerialThree && textArea.text.Contains("HELP"))
+        {
+            AssociatedPuzzle.solved = true;
+        }
 
-        if (textArea.text.Contains("HELP"))
-            Debug.Log("yes");
-
-        if (textArea.text.Contains("SERIAL NO"))
-            Debug.Log("yes");
+        if (!Manager.SerialThree && textArea.text.Contains(Manager.SerialNumberDisplay.text))
+        {
+            AssociatedPuzzle.solved = true;
+        }
     }
 
     public void Translate()

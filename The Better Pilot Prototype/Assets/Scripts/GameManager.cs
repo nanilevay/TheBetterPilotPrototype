@@ -155,7 +155,7 @@ public class GameManager : MonoBehaviour
 
     public void ResetList()
     {
-        if (ResetCounter > 0)
+        if (ResetCounter > 0 && CodeDisplayer.currentCodes.Contains("5790"))
         {
             CodeDisplayer.currentCodes.Clear();
 
@@ -166,8 +166,6 @@ public class GameManager : MonoBehaviour
             timer.StopTimer();
 
             timer.Start();
-
-
         }
     }
 

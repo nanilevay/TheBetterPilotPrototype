@@ -25,70 +25,81 @@ public class FrequencySlider : MonoBehaviour
 
     public AudioSource SuccessSound;
 
+    public GameManager Manager;
+
     void Awake()
     {
-        PitchGenerator();
+       // PitchGenerator();
     }
 
     // Start is called before the first frame update
     void Start()
     {
         //Fetch the AudioSource from the GameObject
-        audioSource = GetComponent<AudioSource>();
+       // audioSource = GetComponent<AudioSource>();
 
         //Initialize the pitch
-        audioSource.pitch = startingPitch;
+       // audioSource.pitch = startingPitch;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (AssociatedPuzzle.active && switcher)
+        if (Manager.CodeDisplayer.currentCodes.Contains("0088"))
         {
-            audioSource.pitch = startingPitch;
-            audioSource.Play();
-            PitchGenerator();
-        }
-
-        if (!AssociatedPuzzle.active && !switcher)
-        {
-            switcher = true;
-        }
-
-        if (AssociatedPuzzle.active && !switcher)
-        {
-            if (Detector.ProximityDetected)
-                ProximityCheck = true;
-            else
-                ProximityCheck = false;
-
-            SliderValue = map(mainSlider.value, 0f, 1f, 0f, 3f);
-
-            audioToMatch.pitch = SliderValue;
-
-            if (ProximityCheck && !audioToMatch.isPlaying && !AssociatedPuzzle.solved)
-                audioToMatch.Play();
-
-            if (!ProximityCheck)
-                audioToMatch.Stop();
-
-            if (ProximityCheck && Mathf.Round(SliderValue * 10.0f) * 0.1f == Mathf.Round(startingPitch * 10.0f) * 0.1f && Detector.ProximityDetected)
+            if (AssociatedPuzzle.active && switcher)
             {
-                StartCoroutine(Stop());
-               
+                PitchGenerator();
+                audioSource.pitch = startingPitch;
+                audioSource.Play();
+            }
+
+            if (!AssociatedPuzzle.active && !switcher)
+            {
+                switcher = true;
+            }
+
+            if (AssociatedPuzzle.active && !switcher)
+            {
+                if (Detector.ProximityDetected)
+                    ProximityCheck = true;
+                else
+                    ProximityCheck = false;
+
+                SliderValue = map(mainSlider.value, 0f, 1f, 0f, 3f);
+
+                audioToMatch.pitch = SliderValue;
+
+                if (ProximityCheck && !audioToMatch.isPlaying && !AssociatedPuzzle.solved)
+                    audioToMatch.Play();
+
+                if (!ProximityCheck)
+                    audioToMatch.Stop();
+
+                if (ProximityCheck && Mathf.Round(SliderValue * 10.0f) * 0.1f == Mathf.Round(startingPitch * 10.0f) * 0.1f && Detector.ProximityDetected)
+                {
+                    StartCoroutine(Stop());
+
+                }
+            }
+
+            else if (!AssociatedPuzzle.active)
+            {
+                audioSource.Stop();
+                audioToMatch.Stop();
             }
         }
 
-        else if (!AssociatedPuzzle.active)
+        else
         {
+            switcher = true;
             audioSource.Stop();
-            audioToMatch.Stop();
         }
-       // Debug.Log(Mathf.Round(SliderValue * 10.0f) * 0.1f);
     }
 
     IEnumerator Stop()
     {
+        switcher = true;
         SuccessSound.Play();
         yield return new WaitForSeconds(2);
         audioSource.Stop();

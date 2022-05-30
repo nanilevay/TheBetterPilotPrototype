@@ -48,6 +48,8 @@ public class PuzzleEnabler : MonoBehaviour
 
     public ServoRotation Servo;
 
+    public GameManager Manager;
+
 
     // Start is called before the first frame update
     void Start()
@@ -58,17 +60,22 @@ public class PuzzleEnabler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (associatedPuzzle.active && switcher)
-            ConditionGenerator();
+        if (Manager.CodeDisplayer.currentCodes.Contains("6430"))
+        {
+            associatedPuzzle.active = true;
 
-        if (!associatedPuzzle.active)
-            switcher = true;
+            if (associatedPuzzle.active && switcher && !associatedPuzzle.solved)
+                ConditionGenerator();
 
-        if(associatedPuzzle.solved)
-            StartCoroutine(FinishPuzzle());
+            if (!associatedPuzzle.active)
+                switcher = true;
 
-        if (!associatedPuzzle.solved)
-            PuzzleConfirmation();
+            if (associatedPuzzle.solved)
+                StartCoroutine(FinishPuzzle());
+
+            if (!associatedPuzzle.solved)
+                PuzzleConfirmation();
+        }
     }
 
 
@@ -209,6 +216,8 @@ public class PuzzleEnabler : MonoBehaviour
 
         BlueOption1 = false;
         BlueOption2 = false;
+
+        switcher = true;
 
         SuccessSound.Stop();
         yield break;

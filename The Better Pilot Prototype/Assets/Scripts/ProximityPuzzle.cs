@@ -28,16 +28,19 @@ public class ProximityPuzzle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Sensor.ProximityDetected && Once && !AssociatedPuzzle.solved)
+        if (Manager.CodeDisplayer.currentCodes.Contains("2922"))
         {
-            Once = false;
-            coroutine = StartCoroutine(FinishPuzzle());
-        }
+            if (Sensor.ProximityDetected && Once && !AssociatedPuzzle.solved)
+            {
+                Once = false;
+                coroutine = StartCoroutine(FinishPuzzle());
+            }
 
-        if(AssociatedPuzzle.solved)
-        {
-            Led.color = Color.green;
-            Once = true;
+            if (AssociatedPuzzle.solved)
+            {
+                Led.color = Color.green;
+                Once = true;
+            }
         }
     }
 

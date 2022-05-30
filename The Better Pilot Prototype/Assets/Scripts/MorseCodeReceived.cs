@@ -35,20 +35,31 @@ public class MorseCodeReceived : MonoBehaviour
 
     public Button GreenButton;
 
+    public GameManager Manager;
+
     void Update()
     {
-        if(associatedPuzzle.active && switcher)
-            WordGenerator();
-
-        if (!associatedPuzzle.active && !switcher)
+        if (Manager.CodeDisplayer.currentCodes.Contains("6595"))
         {
-            switcher = true;
-            Lighter.GetComponent<Image>().color = Color.black;
-            StopCoroutine(coroutine);
+            if (associatedPuzzle.active && !associatedPuzzle.solved && switcher)
+                WordGenerator();
+
+            if (!associatedPuzzle.active && !switcher)
+            {
+                switcher = true;
+                Lighter.GetComponent<Image>().color = Color.black;
+                StopCoroutine(coroutine);
+            }
+
+            if (!associatedPuzzle.solved)
+                PuzzleConfirmation();
         }
 
-        if(!associatedPuzzle.solved)
-            PuzzleConfirmation();
+        else
+        {
+            Lighter.GetComponent<Image>().color = Color.black;
+            switcher = true;
+        }
     }
 
     IEnumerator MorseDisplay()
@@ -108,6 +119,7 @@ public class MorseCodeReceived : MonoBehaviour
                         associatedPuzzle.solved = true;
                         Debug.Log("oof");
                         YellowButton.GetComponent<LongClickButton>().hold = false;
+                        switcher = true;
                     }
                     break;
                 }
@@ -119,6 +131,7 @@ public class MorseCodeReceived : MonoBehaviour
                         associatedPuzzle.solved = true;
                         Debug.Log("oof");
                         RedButton.GetComponent<LongClickButton>().DoubleTap = false;
+                        switcher = true;
                     }
                     break;
                 }
@@ -129,6 +142,7 @@ public class MorseCodeReceived : MonoBehaviour
                     {
                         associatedPuzzle.solved = true;
                         Debug.Log("oof");
+                        switcher = true;
                     }
                     break;
                 }
@@ -141,6 +155,7 @@ public class MorseCodeReceived : MonoBehaviour
                         Debug.Log("oof");
                         BlackButton.GetComponent<LongClickButton>().tap = 0;
                         YellowButton.GetComponent<LongClickButton>().tap = 0;
+                        switcher = true;
                     }
                     break;
                 }
@@ -151,6 +166,7 @@ public class MorseCodeReceived : MonoBehaviour
                     {
                         associatedPuzzle.solved = true;
                         Debug.Log("oof");
+                        switcher = true;
                     }
                     break;
                 }
@@ -164,6 +180,7 @@ public class MorseCodeReceived : MonoBehaviour
                         BlueButton.GetComponent<LongClickButton>().hold = false;
                         YellowButton.GetComponent<LongClickButton>().tap = 0;
                         GreenButton.GetComponent<LongClickButton>().tap = 0;
+                        switcher = true;
 
                     }
                     break;
@@ -176,6 +193,7 @@ public class MorseCodeReceived : MonoBehaviour
                         associatedPuzzle.solved = true;
                         Debug.Log("oof");
                         RedButton.GetComponent<LongClickButton>().DoubleTap = false;
+                        switcher = true;
                     }
                     break;
                 }
@@ -189,6 +207,7 @@ public class MorseCodeReceived : MonoBehaviour
                         Debug.Log("oof");
                         BlueButton.GetComponent<LongClickButton>().hold = false;
                         GreenButton.GetComponent<LongClickButton>().hold = false;
+                        switcher = true;
                     }
                     break;
                 }
