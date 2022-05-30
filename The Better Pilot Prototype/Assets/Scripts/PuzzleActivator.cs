@@ -11,6 +11,12 @@ public class PuzzleActivator : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+
+    }
+
+    public void TakeAction()
+    {
         if (this.GetComponent<Toggle>().isOn)
         {
             ToggleOn();
@@ -20,7 +26,6 @@ public class PuzzleActivator : MonoBehaviour
         {
             ToggleOff();
         }
-
     }
 
     public void ToggleOn()

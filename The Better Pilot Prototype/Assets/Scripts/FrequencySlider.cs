@@ -21,6 +21,10 @@ public class FrequencySlider : MonoBehaviour
 
     public ProximityDetector Detector;
 
+    public bool switcher = true;
+
+    public AudioSource SuccessSound;
+
     void Awake()
     {
         PitchGenerator();
@@ -39,33 +43,72 @@ public class FrequencySlider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Detector.ProximityDetected)
-            ProximityCheck = true;
-        else
-            ProximityCheck = false;
+        if (AssociatedPuzzle.active && switcher)
+        {
+            audioSource.pitch = startingPitch;
+            audioSource.Play();
+            PitchGenerator();
+        }
 
-        SliderValue = map(mainSlider.value, 0f,1f,0f,3f);
+        if (!AssociatedPuzzle.active && !switcher)
+        {
+            switcher = true;
+        }
 
-        audioToMatch.pitch = SliderValue;
+        if (AssociatedPuzzle.active && !switcher)
+        {
+            if (Detector.ProximityDetected)
+                ProximityCheck = true;
+            else
+                ProximityCheck = false;
 
-        if (ProximityCheck && !audioToMatch.isPlaying)
-            audioToMatch.Play();
-        if (!ProximityCheck)
+            SliderValue = map(mainSlider.value, 0f, 1f, 0f, 3f);
+
+            audioToMatch.pitch = SliderValue;
+
+            if (ProximityCheck && !audioToMatch.isPlaying && !AssociatedPuzzle.solved)
+                audioToMatch.Play();
+
+            if (!ProximityCheck)
+                audioToMatch.Stop();
+
+            if (ProximityCheck && Mathf.Round(SliderValue * 10.0f) * 0.1f == Mathf.Round(startingPitch * 10.0f) * 0.1f && Detector.ProximityDetected)
+            {
+                StartCoroutine(Stop());
+               
+            }
+        }
+
+        else if (!AssociatedPuzzle.active)
+        {
+            audioSource.Stop();
             audioToMatch.Stop();
-
-        if (ProximityCheck && Mathf.Round(SliderValue * 10.0f) * 0.1f == Mathf.Round(startingPitch * 10.0f) * 0.1f && Detector.ProximityDetected)
-            AssociatedPuzzle.solved = true;
-
+        }
        // Debug.Log(Mathf.Round(SliderValue * 10.0f) * 0.1f);
+    }
+
+    IEnumerator Stop()
+    {
+        SuccessSound.Play();
+        yield return new WaitForSeconds(2);
+        audioSource.Stop();
+        audioToMatch.Stop();
+        AssociatedPuzzle.solved = true;
+        SuccessSound.Stop();
+        yield break;
     }
 
     void PitchGenerator()
     {
+        AssociatedPuzzle.solved = false;
+
         float pitch = UnityEngine.Random.Range(0f, 3f);
 
         startingPitch = pitch;
 
         //Debug.Log(startingPitch.ToString());
+
+        switcher = false;
     }
 
     //void OnSliderWasChanged()

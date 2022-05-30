@@ -11,6 +11,25 @@ public class PuzzlePiece : MonoBehaviour
 
     public bool start = false;
 
+    //public AudioSource SuccessSound;
+
+
+    void Update()
+    {
+        //if(solved)
+        //{
+        //    StartCoroutine(Success());
+        //}
+    }
+
+    //IEnumerator Success()
+    //{
+    //    SuccessSound.Play();
+    //    yield return new WaitForSeconds(2);
+    //    SuccessSound.Stop();
+    //    yield break;
+    //}
+
     public void ToggleOn()
     {
         if(this.gameObject.tag == "Slider")

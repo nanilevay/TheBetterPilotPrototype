@@ -17,6 +17,10 @@ public class ColourButtonPuzzle : MonoBehaviour
 
     public string code;
 
+    public GameManager Manager;
+
+    public PuzzlePiece PuzzleToSolve;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,26 +40,37 @@ public class ColourButtonPuzzle : MonoBehaviour
         buttons[4].GetComponent<Button>().onClick.AddListener(RedClick);
     }
 
+
     void GreenClick()
     {
-        PressingGreen = true;
+        if (!PressingGreen && !PressingBlack)
+        {
+            PressingGreen = true;
+        }
+
+        if(PressingBlack)
+            code += "g";
     }
 
     void BlackClick()
     {
-        PressingBlack = true;
+        if (!PressingBlack && !PressingGreen)
+        {
+            PressingBlack = true;
+        }
+
+        if(PressingGreen)
+            code += "z";
     }
 
     public void GreenRelease()
-    {
+    { 
         PressingGreen = false;
-        Erase();
     }
 
     public void BlackRelease()
     {
         PressingBlack = false;
-        Erase();
     }
 
     void YellowClick()
@@ -80,13 +95,39 @@ public class ColourButtonPuzzle : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown("space"))
+        {
+            GreenRelease();
+            BlackRelease();
+            Erase();
+        }
+
+        if (PressingGreen)
+        {
+            BlackRelease();
+        }
+
+        if (PressingBlack)
+        {
+            GreenRelease();
+        }
+
         CheckAnswer();
     }
 
     public void CheckAnswer()
     {
-        if (code == "ybr" && PressingGreen)
-            Debug.Log("yes");
+        if (code == "ybbrbybz" && PressingGreen && !Manager.SerialEven && Manager.SerialThree)
+            PuzzleToSolve.solved = true;
+
+        if (code == "brgyggrg" && PressingBlack && Manager.SerialEven && Manager.SerialThree)
+            PuzzleToSolve.solved = true;
+
+        if (code == "byryrbbb" && PressingBlack && !Manager.SerialEven && !Manager.SerialThree)
+            PuzzleToSolve.solved = true;
+
+        if (code == "ryybrrby" && PressingGreen && Manager.SerialEven && !Manager.SerialThree)
+            PuzzleToSolve.solved = true;
     }
 
 }

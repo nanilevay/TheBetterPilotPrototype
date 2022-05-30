@@ -6,13 +6,17 @@ using UnityEngine.UI;
 using TMPro;
 
 public class HueSlider : MonoBehaviour
-{
-  
-   
+{ 
     public TextMeshProUGUI textDisplay;
     public float SliderValue;
 
     public Slider mainSlider;
+
+    public GameManager Manager;
+
+    public PuzzlePiece PuzzleToSolve;
+
+    public AudioSource SuccessSound;
 
     // Drag & drop handle
     public Image handle;
@@ -25,24 +29,43 @@ public class HueSlider : MonoBehaviour
     // Invoked when the value of the slider changes.
     public void ValueChangeCheck()
     {
-        handle.color = Color.HSVToRGB(mainSlider.value, 1, 1);
+        if (!PuzzleToSolve.solved)
+        {
+            handle.color = Color.HSVToRGB(mainSlider.value, 1, 1);
 
-        //if (mainSlider.value * 100 == 100 || mainSlider.value * 100 == 0)
-        //    Debug.Log("red");
+            if (mainSlider.value * 100 >= 73 && mainSlider.value * 100 <= 82 && Manager.SerialThree && !Manager.SerialEven)
+            {
+                PuzzleToSolve.solved = true;
+                StartCoroutine(Success());
+            }
 
-        //if (mainSlider.value * 100 >= 73 && mainSlider.value * 100 <= 82)
-        //    Debug.Log("purple");
+            if (mainSlider.value * 100 >= 50 && mainSlider.value * 100 <= 60 && Manager.SerialThree && Manager.SerialEven)
+            {
+                PuzzleToSolve.solved = true;
+                StartCoroutine(Success());
+            }
 
-        //if (mainSlider.value * 100 >= 50 && mainSlider.value * 100 <= 60)
-        //    Debug.Log("light blue");
+            if (mainSlider.value * 100 >= 14 && mainSlider.value * 100 <= 34 && !Manager.SerialThree && !Manager.SerialEven)
+            {
+                PuzzleToSolve.solved = true;
+                StartCoroutine(Success());
+            }
 
-        //if (mainSlider.value * 100 >= 14 && mainSlider.value * 100 <= 34)
-        //    Debug.Log("lime");
 
-        //if (mainSlider.value * 100 >= 83 && mainSlider.value * 100 <= 98)
-        //    Debug.Log("pink");
+            if (mainSlider.value * 100 >= 83 && mainSlider.value * 100 <= 98 && !Manager.SerialThree && Manager.SerialEven)
+            {
+                PuzzleToSolve.solved = true;
+                StartCoroutine(Success());
+            }
+        }
+    }
 
-     //   Debug.Log(handle.color);
+    IEnumerator Success()
+    {
+        SuccessSound.Play();
+        yield return new WaitForSeconds(2);
+        SuccessSound.Stop();
+        yield break;
     }
 
     public static float map(float value, float leftMin, float leftMax, float rightMin, float rightMax)

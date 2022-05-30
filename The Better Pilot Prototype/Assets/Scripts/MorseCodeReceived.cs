@@ -197,6 +197,8 @@ public class MorseCodeReceived : MonoBehaviour
 
     void WordGenerator()
     {
+        associatedPuzzle.solved = false;
+
         int decider = UnityEngine.Random.Range(0, 7);
 
         // where's
