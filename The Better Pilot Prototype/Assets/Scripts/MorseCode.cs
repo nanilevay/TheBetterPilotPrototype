@@ -49,6 +49,12 @@ public class MorseCode : MonoBehaviour
                 buttons[1].GetComponent<buttonArduino>().oneCheck = false;
             }
         }
+
+        else
+        {
+            AssociatedPuzzle.solved = false;
+            textArea.text = "";
+        }
     }
 
 
@@ -80,16 +86,19 @@ public class MorseCode : MonoBehaviour
         if (Manager.SerialEven && Manager.SerialThree && textArea.text.Contains("SOS"))
         {
             AssociatedPuzzle.solved = true;
+            Manager.CodeDisplayer.currentCodes.Remove("2197");
         }
             
         if (!Manager.SerialEven && Manager.SerialThree && textArea.text.Contains("HELP"))
         {
             AssociatedPuzzle.solved = true;
+            Manager.CodeDisplayer.currentCodes.Remove("2197");
         }
 
         if (!Manager.SerialThree && textArea.text.Contains(Manager.SerialNumberDisplay.text))
         {
             AssociatedPuzzle.solved = true;
+            Manager.CodeDisplayer.currentCodes.Remove("2197");
         }
     }
 

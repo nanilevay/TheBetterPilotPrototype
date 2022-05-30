@@ -51,7 +51,7 @@ public class DisplayUpdater : MonoBehaviour
                 currentCodes.Add(addingCode);
                 PuzzleActivator(addingCode);
 
-                i++;
+               // i++;
             }
         }
 
@@ -66,7 +66,13 @@ public class DisplayUpdater : MonoBehaviour
                 PuzzleActivator(addingCode);
                 timer.StartTimer();
 
-        }  
+        }
+
+        //if (i >= maxNumber)
+        //{
+         i = currentCodes.Count;
+
+        //}
     }
 
     void PuzzleActivator(string checker)

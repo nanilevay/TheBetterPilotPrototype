@@ -92,6 +92,7 @@ public class FrequencySlider : MonoBehaviour
 
         else
         {
+            AssociatedPuzzle.solved = false;
             switcher = true;
             audioSource.Stop();
         }
@@ -99,6 +100,7 @@ public class FrequencySlider : MonoBehaviour
 
     IEnumerator Stop()
     {
+        Manager.CodeDisplayer.currentCodes.Remove("0088");
         switcher = true;
         SuccessSound.Play();
         yield return new WaitForSeconds(2);

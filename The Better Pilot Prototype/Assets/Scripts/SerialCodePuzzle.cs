@@ -37,6 +37,11 @@ public class SerialCodePuzzle : MonoBehaviour
             Once = false;
         }
 
+        else
+        {
+            AssociatedPuzzle.solved = false;
+        }
+
         if(!AssociatedPuzzle.solved)
         {
             Checker();
@@ -51,6 +56,7 @@ public class SerialCodePuzzle : MonoBehaviour
             AssociatedPuzzle.solved = true;
             BlackButton.GetComponent<LongClickButton>().hold = false;
             Once = true;
+            Manager.CodeDisplayer.currentCodes.Remove("0588");
         }
 
         if (Manager.SerialEven && Manager.SerialThree && GreenButton.GetComponent<LongClickButton>().tap == 1 && YellowButton.GetComponent<LongClickButton>().tap == 1)
@@ -59,6 +65,7 @@ public class SerialCodePuzzle : MonoBehaviour
             YellowButton.GetComponent<LongClickButton>().tap = 0;
             AssociatedPuzzle.solved = true;
             Once = true;
+            Manager.CodeDisplayer.currentCodes.Remove("0588");
         }
 
         if (!Manager.SerialEven && !Manager.SerialThree && BlueButton.GetComponent<LongClickButton>().tap == 1)
@@ -66,6 +73,7 @@ public class SerialCodePuzzle : MonoBehaviour
             BlueButton.GetComponent<LongClickButton>().tap = 0;
             AssociatedPuzzle.solved = true;
             Once = true;
+            Manager.CodeDisplayer.currentCodes.Remove("0588");
         }
 
         if (Manager.SerialEven && !Manager.SerialThree && BlackButton.GetComponent<LongClickButton>().tap == 1 && YellowButton.GetComponent<LongClickButton>().tap == 1)
@@ -74,6 +82,7 @@ public class SerialCodePuzzle : MonoBehaviour
             YellowButton.GetComponent<LongClickButton>().hold = false;
             AssociatedPuzzle.solved = true;
             Once = true;
+            Manager.CodeDisplayer.currentCodes.Remove("0588");
         }
     }
 }

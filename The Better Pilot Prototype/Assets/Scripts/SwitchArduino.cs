@@ -16,21 +16,24 @@ public class SwitchArduino : MonoBehaviour
 
     EventSystem eventSystem = EventSystem.current;
 
+    public int num;
+
     // Start is called before the first frame update
     void Start()
     {
-        UduinoManager.Instance.pinMode(7, PinMode.Input_pullup);
+        UduinoManager.Instance.pinMode(num, PinMode.Input_pullup);
     }
 
     // Update is called once per frame
     void Update()
     {
-        int buttonValue = UduinoManager.Instance.digitalRead(7);
+        int buttonValue = UduinoManager.Instance.digitalRead(num);
 
         if (buttonValue == 0)
         {
             //Debug.Log("switch off");
             ButtonReleased();
+
         }
 
 
@@ -47,7 +50,7 @@ public class SwitchArduino : MonoBehaviour
     {
         //button.onClick.Invoke();
 
-        ExecuteEvents.Execute(toggler.gameObject, new BaseEventData(eventSystem), ExecuteEvents.submitHandler);
+        toggler.isOn = true;
 
         //  button.Select();
 
@@ -58,6 +61,7 @@ public class SwitchArduino : MonoBehaviour
 
     public void ButtonReleased()
     {
+        toggler.isOn = false;
 
     }
 }

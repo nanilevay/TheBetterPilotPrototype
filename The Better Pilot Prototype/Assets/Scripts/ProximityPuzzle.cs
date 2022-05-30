@@ -42,6 +42,13 @@ public class ProximityPuzzle : MonoBehaviour
                 Once = true;
             }
         }
+
+        else
+        {
+            Once = true;
+            AssociatedPuzzle.solved = false;
+
+        }
     }
 
 
@@ -68,6 +75,7 @@ public class ProximityPuzzle : MonoBehaviour
 
             if(Sensor.ProximityDetected)
             {
+                Manager.CodeDisplayer.currentCodes.Remove("2922");
                 AssociatedPuzzle.solved = true;
                 Once = true;
                 Led.color = Color.green;

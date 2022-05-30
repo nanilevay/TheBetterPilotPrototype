@@ -140,21 +140,39 @@ public class ColourButtonPuzzle : MonoBehaviour
 
             CheckAnswer();
         }
+
+        else
+        {
+            PuzzleToSolve.solved = false;
+        }
     }
 
     public void CheckAnswer()
     {
         if (code == "ybbrbybz" && PressingGreen && !Manager.SerialEven && Manager.SerialThree)
+        {
             PuzzleToSolve.solved = true;
+            Manager.CodeDisplayer.currentCodes.Remove("9649");
+        }
 
         if (code == "brgyggrg" && PressingBlack && Manager.SerialEven && Manager.SerialThree)
+        {
             PuzzleToSolve.solved = true;
+            Manager.CodeDisplayer.currentCodes.Remove("9649");
+        }
 
         if (code == "byryrbbb" && PressingBlack && !Manager.SerialEven && !Manager.SerialThree)
+        {
             PuzzleToSolve.solved = true;
+            Manager.CodeDisplayer.currentCodes.Remove("9649");
+        }
 
         if (code == "ryybrrby" && PressingGreen && Manager.SerialEven && !Manager.SerialThree)
+        {
             PuzzleToSolve.solved = true;
+            Manager.CodeDisplayer.currentCodes.Remove("9649");
+        }
     }
+
 
 }

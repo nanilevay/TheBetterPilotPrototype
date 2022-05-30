@@ -84,6 +84,7 @@ public class GameManager : MonoBehaviour
     {
         UduinoManager = GameObject.FindWithTag("UduinoManager");
 
+
         if (PhysicalGame)
             UduinoManager.active = true;
         else

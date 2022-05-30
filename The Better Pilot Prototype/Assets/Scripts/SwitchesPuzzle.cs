@@ -42,6 +42,11 @@ public class SwitchesPuzzle : MonoBehaviour
                 Once = false;
             }
         }
+
+        else
+        {
+            associatedPuzzle.solved = false;
+        }
     }
 
     public IEnumerator Checker()
@@ -59,6 +64,7 @@ public class SwitchesPuzzle : MonoBehaviour
             if (SwitchOne.isOn && SwitchTwo.isOn)
             {
                 associatedPuzzle.solved = true;
+                Manager.CodeDisplayer.currentCodes.Remove("0238");
                 Once = true;
                 Led.color = Color.green;
                 Servo.increasing = false;
@@ -78,6 +84,7 @@ public class SwitchesPuzzle : MonoBehaviour
 
             if (!SwitchOne.isOn && !SwitchTwo.isOn)
             {
+                Manager.CodeDisplayer.currentCodes.Remove("0238");
                 associatedPuzzle.solved = true;
                 Once = true;
                 Led.color = Color.green;

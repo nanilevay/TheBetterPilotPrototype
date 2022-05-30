@@ -57,6 +57,7 @@ public class MorseCodeReceived : MonoBehaviour
 
         else
         {
+            associatedPuzzle.solved = false; 
             Lighter.GetComponent<Image>().color = Color.black;
             switcher = true;
         }
@@ -112,47 +113,38 @@ public class MorseCodeReceived : MonoBehaviour
     {
         switch (Sequence)
         {
-            case "0":
+            // where's (shown as where s)
+            case ".-- .... . .-. . / ...":
                 {
                     if (YellowButton.GetComponent<LongClickButton>().hold)
                     {
                         associatedPuzzle.solved = true;
-                        Debug.Log("oof");
+                        Manager.CodeDisplayer.currentCodes.Remove("6595");
                         YellowButton.GetComponent<LongClickButton>().hold = false;
                         switcher = true;
                     }
                     break;
                 }
 
-            case "1":
-                {
-                    if (RedButton.GetComponent<LongClickButton>().DoubleTap)
-                    {
-                        associatedPuzzle.solved = true;
-                        Debug.Log("oof");
-                        RedButton.GetComponent<LongClickButton>().DoubleTap = false;
-                        switcher = true;
-                    }
-                    break;
-                }
-
+            // where is
             case ".-- .... . .-. . / .. ...":
                 {
                     if (Mathf.RoundToInt(mainSlider.value * 100) >= 80)
                     {
                         associatedPuzzle.solved = true;
-                        Debug.Log("oof");
+                        Manager.CodeDisplayer.currentCodes.Remove("6595");
                         switcher = true;
                     }
                     break;
                 }
 
+            // wheres
             case ".-- .... . .-. . ...":
                 {
                     if (BlackButton.GetComponent<LongClickButton>().tap == 1 && YellowButton.GetComponent<LongClickButton>().tap == 1)
                     {
                         associatedPuzzle.solved = true;
-                        Debug.Log("oof");
+                        Manager.CodeDisplayer.currentCodes.Remove("6595");
                         BlackButton.GetComponent<LongClickButton>().tap = 0;
                         YellowButton.GetComponent<LongClickButton>().tap = 0;
                         switcher = true;
@@ -160,23 +152,25 @@ public class MorseCodeReceived : MonoBehaviour
                     break;
                 }
 
+            // likes
             case ".-.. .. -.- . ...":
                 {
                     if (Mathf.RoundToInt(mainSlider.value * 100) <= 20)
                     {
                         associatedPuzzle.solved = true;
-                        Debug.Log("oof");
+                        Manager.CodeDisplayer.currentCodes.Remove("6595");
                         switcher = true;
                     }
                     break;
                 }
 
+            // you are
             case "-.-- --- ..- / .- .-. .":
                 {
                     if (BlueButton.GetComponent<LongClickButton>().hold && YellowButton.GetComponent<LongClickButton>().tap == 1 && GreenButton.GetComponent<LongClickButton>().tap == 1)
                     {
                         associatedPuzzle.solved = true;
-                        Debug.Log("oof");
+                        Manager.CodeDisplayer.currentCodes.Remove("6595");
                         BlueButton.GetComponent<LongClickButton>().hold = false;
                         YellowButton.GetComponent<LongClickButton>().tap = 0;
                         GreenButton.GetComponent<LongClickButton>().tap = 0;
@@ -186,12 +180,13 @@ public class MorseCodeReceived : MonoBehaviour
                     break;
                 }
 
+            // youre
             case "-.-- --- ..- .-. .":
                 {
                     if (RedButton.GetComponent<LongClickButton>().DoubleTap)
                     {
                         associatedPuzzle.solved = true;
-                        Debug.Log("oof");
+                        Manager.CodeDisplayer.currentCodes.Remove("6595");
                         RedButton.GetComponent<LongClickButton>().DoubleTap = false;
                         switcher = true;
                     }
@@ -199,12 +194,13 @@ public class MorseCodeReceived : MonoBehaviour
                 }
 
 
+            // your
             case "-.-- --- ..- .-.":
                 {
                     if (BlueButton.GetComponent<LongClickButton>().hold && GreenButton.GetComponent<LongClickButton>().hold)
                     {
                         associatedPuzzle.solved = true;
-                        Debug.Log("oof");
+                        Manager.CodeDisplayer.currentCodes.Remove("6595");
                         BlueButton.GetComponent<LongClickButton>().hold = false;
                         GreenButton.GetComponent<LongClickButton>().hold = false;
                         switcher = true;

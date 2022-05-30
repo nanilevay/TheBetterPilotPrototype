@@ -22,9 +22,11 @@ public class ProximityDetectorArduinoo : MonoBehaviour
         else
             panel.SetActive(false);
 
+        Debug.Log(distance);
+
     }
 
-    void DataReceived(string data, UduinoDevice baord)
+    void DataReceived(string data, UduinoDevice board)
     {
         bool ok = float.TryParse(data, out distance);
 

@@ -93,7 +93,8 @@ public class RotateHandle : MonoBehaviour, IDragHandler
     {
         // gameObject.transform.localRotation = Quaternion.Euler(0, 0, valueToRotate);
 
-        transform.rotation = Quaternion.Euler(0, 0, valueToRotate * 360);
+        transform.rotation = Quaternion.Euler(0, 0, valueToRotate * 360 * 2);
+        Debug.Log(valueToRotate);
     }
 
 }

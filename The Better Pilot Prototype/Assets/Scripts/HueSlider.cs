@@ -61,10 +61,16 @@ public class HueSlider : MonoBehaviour
                 }
             }
         }
+
+        else
+        {
+            PuzzleToSolve.solved = false;
+        }
     }
 
     IEnumerator Success()
     {
+        Manager.CodeDisplayer.currentCodes.Remove("6007");
         SuccessSound.Play();
         yield return new WaitForSeconds(2);
         SuccessSound.Stop();

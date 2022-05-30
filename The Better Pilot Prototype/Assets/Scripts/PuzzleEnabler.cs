@@ -76,6 +76,11 @@ public class PuzzleEnabler : MonoBehaviour
             if (!associatedPuzzle.solved)
                 PuzzleConfirmation();
         }
+
+        else
+        {
+            associatedPuzzle.solved = false;
+        }
     }
 
 
@@ -89,16 +94,23 @@ public class PuzzleEnabler : MonoBehaviour
                 GreenButton.GetComponent<LongClickButton>().hold = false;
 
                 associatedPuzzle.solved = true;
-                Debug.Log("oof");
+                
             }
         }
 
         if (YellowOption2)
         {
-            //if () toggles mirrored
-            //{
-            //    // work on this one
-            //}
+            if (Mathf.Round(Servo.value) >= 90 && SwitchOne.isOn && SwitchTwo.isOn)
+            {
+                associatedPuzzle.solved = true;
+
+            }
+
+            if (Mathf.Round(Servo.value) < 90 && !SwitchOne.isOn && !SwitchTwo.isOn)
+            {
+                associatedPuzzle.solved = true;
+
+            }
         }
 
         if (YellowOption3)
@@ -106,7 +118,7 @@ public class PuzzleEnabler : MonoBehaviour
             if (Mathf.Round(Servo.value) == 45) 
             {
                 associatedPuzzle.solved = true;
-                Debug.Log("oof");
+              
             }
         }
 
@@ -115,13 +127,13 @@ public class PuzzleEnabler : MonoBehaviour
             if (Mathf.Round(Servo.value) >= 90 && SwitchOne.isOn && SwitchTwo.isOn)
             {
                 associatedPuzzle.solved = true;
-                Debug.Log("oof");
+          
             }
 
             if (Mathf.Round(Servo.value) < 90 && !SwitchOne.isOn && !SwitchTwo.isOn)
             {
                 associatedPuzzle.solved = true;
-                Debug.Log("oof");
+            
             }
         }
 
@@ -130,6 +142,7 @@ public class PuzzleEnabler : MonoBehaviour
             if (Mathf.RoundToInt(mainSlider.value * 100) >= 45 && Mathf.RoundToInt(mainSlider.value * 100) <= 55)
             {
                 associatedPuzzle.solved = true;
+           
             }
         }
 
@@ -138,7 +151,7 @@ public class PuzzleEnabler : MonoBehaviour
             if (Mathf.Round(Servo.value) == 45)
             {
                 associatedPuzzle.solved = true;
-                Debug.Log("oof");
+               
             }
         }
 
@@ -150,7 +163,7 @@ public class PuzzleEnabler : MonoBehaviour
                 Morse2.GetComponent<LongClickButton>().hold = false;
 
                 associatedPuzzle.solved = true;
-                Debug.Log("oof");
+             
             }
         }
 
@@ -163,7 +176,7 @@ public class PuzzleEnabler : MonoBehaviour
                 BlackButton.GetComponent<LongClickButton>().hold = false;
 
                 associatedPuzzle.solved = true;
-                Debug.Log("oof");
+             
             }
         }
 
@@ -172,13 +185,13 @@ public class PuzzleEnabler : MonoBehaviour
             if (Mathf.Round(Servo.value) >= 90 && SwitchOne.isOn && SwitchTwo.isOn)
             {
                 associatedPuzzle.solved = true;
-                Debug.Log("oof");
+               
             }
 
             if (Mathf.Round(Servo.value) < 90 && !SwitchOne.isOn && !SwitchTwo.isOn)
             {
                 associatedPuzzle.solved = true;
-                Debug.Log("oof");
+           
             }
         }
 
@@ -191,18 +204,24 @@ public class PuzzleEnabler : MonoBehaviour
                 BlueButton.GetComponent<LongClickButton>().hold = false;
 
                 associatedPuzzle.solved = true;
-                Debug.Log("oof");
+      
             }
         }
     }
 
     IEnumerator FinishPuzzle()
     {
+        Manager.CodeDisplayer.currentCodes.Remove("6430");
         SuccessSound.Play();
 
         ScreenColours.transform.Find("Yellow").gameObject.active = false;
         ScreenColours.transform.Find("Blue").gameObject.active = false;
         ScreenColours.transform.Find("Red").gameObject.active = false;
+
+        foreach(PuzzleActivator elem in PuzzleList)
+        {
+            elem.ToggleOn();
+        }
 
         RedOption1 = false;
         RedOption2 = false;
