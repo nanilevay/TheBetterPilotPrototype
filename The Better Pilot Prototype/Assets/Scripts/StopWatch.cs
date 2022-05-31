@@ -12,6 +12,10 @@ public class StopWatch : MonoBehaviour
     public float currentTime;
     public TextMeshProUGUI currentTimeText;
 
+    public GameObject GameOver;
+
+    public TextMeshProUGUI FinalScore;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +33,11 @@ public class StopWatch : MonoBehaviour
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
     
         currentTimeText.text = time.ToString(@"mm\:ss");
+
+        if(GameOver.activeSelf)
+        {
+            FinalScore.text = time.ToString(@"mm\:ss");
+        }
 
     }
 

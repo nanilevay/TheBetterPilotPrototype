@@ -45,9 +45,13 @@ public class GameManager : MonoBehaviour
 
     public Timer timer;
 
+    public bool Restart = true;
+
 
     void Awake()
     {
+        Restart = true;
+
         int ThreeOrSix = UnityEngine.Random.Range(0, 2); 
 
         int srlNum;
@@ -80,6 +84,30 @@ public class GameManager : MonoBehaviour
        }
     }
 
+    public void RestartGame()
+    {
+        if(Restart)
+        {
+            togglers[0].GetComponent<Toggle>().isOn = false;
+            togglers[1].GetComponent<Toggle>().isOn = false;
+            stopwatch.StopStopWatch();
+            Restart = false;
+            checker = true;
+            ButtonOn = false;
+            Awake();
+            Start();
+            CodeDisplayer.i = 0;
+            CodeDisplayer.currentCodes.Clear();
+        }
+
+        Application.LoadLevel(Application.loadedLevel);
+    }
+
+    public void QuitApp()
+    {
+        Application.Quit();
+    }
+
     void Start()
     {
         UduinoManager = GameObject.FindWithTag("UduinoManager");
@@ -104,6 +132,7 @@ public class GameManager : MonoBehaviour
             stopwatch.StartStopWatch();
             PlaneOn = true;
             checker = false;
+            ButtonOn = false;
 
             ScreenFader.transform.Find("InitialScreen").gameObject.active = false;
         }

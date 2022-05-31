@@ -153,24 +153,28 @@ public class ColourButtonPuzzle : MonoBehaviour
         {
             PuzzleToSolve.solved = true;
             Manager.CodeDisplayer.currentCodes.Remove("9649");
+            code = "";
         }
 
         if (code == "brgyggrg" && PressingBlack && Manager.SerialEven && Manager.SerialThree)
         {
             PuzzleToSolve.solved = true;
             Manager.CodeDisplayer.currentCodes.Remove("9649");
+            code = "";
         }
 
         if (code == "byryrbbb" && PressingBlack && !Manager.SerialEven && !Manager.SerialThree)
         {
             PuzzleToSolve.solved = true;
             Manager.CodeDisplayer.currentCodes.Remove("9649");
+            code = "";
         }
 
         if (code == "ryybrrby" && PressingGreen && Manager.SerialEven && !Manager.SerialThree)
         {
             PuzzleToSolve.solved = true;
             Manager.CodeDisplayer.currentCodes.Remove("9649");
+            code = "";
         }
     }
 

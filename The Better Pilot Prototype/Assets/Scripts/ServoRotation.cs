@@ -27,9 +27,17 @@ public class ServoRotation : MonoBehaviour
 
     public bool valid;
 
+    public GameObject GameOver;
+
 
     void Update()
     {
+        if(value == 0 || value == 180)
+        {
+            GameOver.SetActive(true);
+        }
+
+
         if (!rotator.IsMoving)
         {
             if (increasing)

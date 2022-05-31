@@ -15,6 +15,8 @@ public class Timer : MonoBehaviour
 
     public StopWatch stopWatch;
 
+    public GameObject GameOver;
+
     // Start is called before the first frame update
     public void Start()
     {
@@ -35,12 +37,20 @@ public class Timer : MonoBehaviour
                 stopWatch.StopStopWatch();
                 StopTimer();
             }
+
+            if (Mathf.Round(currentTime) == 0)
+            {
+                GameOver.SetActive(true);         
+            }
+
+
         }
 
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
 
        // Debug.Log(time.Minutes.ToString() + ":" + time.Seconds.ToString());
         currentTimeText.text = time.ToString(@"mm\:ss");
+        
 
     }
 

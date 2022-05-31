@@ -70,6 +70,40 @@ public class MorseCode : MonoBehaviour
             DecodingText = "";
             textArea.text = "";
         }
+
+        if(buttons[1].GetComponent<LongClickButton>().tap == 1)
+        {
+            DecodingText += ".";
+            buttons[1].GetComponent<LongClickButton>().tap = 0;
+        }
+
+        if (buttons[0].GetComponent<LongClickButton>().tap == 1)
+        {
+            DecodingText += "-";
+            buttons[0].GetComponent<LongClickButton>().tap = 0;
+        }
+
+
+        if (buttons[0].GetComponent<LongClickButton>().DoubleTap && buttons[1].GetComponent<LongClickButton>().DoubleTap)
+        {
+            Translate();
+
+            buttons[0].GetComponent<LongClickButton>().DoubleTap = false;
+
+
+            buttons[1].GetComponent<LongClickButton>().DoubleTap = false;
+        }
+
+        if (buttons[0].GetComponent<LongClickButton>().hold && buttons[1].GetComponent<LongClickButton>().hold)
+        {
+            DecodingText = "";
+            textArea.text = "";
+        }
+    }
+
+    public void ButtonConfirm()
+    {
+        Translate();
     }
 
     void Update()
@@ -87,18 +121,24 @@ public class MorseCode : MonoBehaviour
         {
             AssociatedPuzzle.solved = true;
             Manager.CodeDisplayer.currentCodes.Remove("2197");
+            DecodingText = "";
+            textArea.text = "";
         }
             
         if (!Manager.SerialEven && Manager.SerialThree && textArea.text.Contains("HELP"))
         {
             AssociatedPuzzle.solved = true;
             Manager.CodeDisplayer.currentCodes.Remove("2197");
+            DecodingText = "";
+            textArea.text = "";
         }
 
         if (!Manager.SerialThree && textArea.text.Contains(Manager.SerialNumberDisplay.text))
         {
             AssociatedPuzzle.solved = true;
             Manager.CodeDisplayer.currentCodes.Remove("2197");
+            DecodingText = "";
+            textArea.text = "";
         }
     }
 
