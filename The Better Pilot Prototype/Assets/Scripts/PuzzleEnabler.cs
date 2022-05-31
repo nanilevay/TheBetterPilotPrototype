@@ -80,6 +80,7 @@ public class PuzzleEnabler : MonoBehaviour
         else
         {
             associatedPuzzle.solved = false;
+            StartCoroutine(FinishPuzzle());
         }
     }
 
@@ -94,7 +95,11 @@ public class PuzzleEnabler : MonoBehaviour
                 GreenButton.GetComponent<LongClickButton>().hold = false;
 
                 associatedPuzzle.solved = true;
-                
+
+                PuzzleList[5].ToggleOn();
+
+                StartCoroutine(FinishPuzzle());
+
             }
         }
 
@@ -104,11 +109,20 @@ public class PuzzleEnabler : MonoBehaviour
             {
                 associatedPuzzle.solved = true;
 
+                PuzzleList[6].ToggleOn();
+                PuzzleList[2].ToggleOn();
+
+                StartCoroutine(FinishPuzzle());
+
             }
 
             if (Mathf.Round(Servo.value) < 90 && !SwitchOne.isOn && !SwitchTwo.isOn)
             {
                 associatedPuzzle.solved = true;
+                PuzzleList[6].ToggleOn();
+                PuzzleList[2].ToggleOn();
+
+                StartCoroutine(FinishPuzzle());
 
             }
         }
@@ -118,7 +132,9 @@ public class PuzzleEnabler : MonoBehaviour
             if (Mathf.Round(Servo.value) == 45) 
             {
                 associatedPuzzle.solved = true;
-              
+                PuzzleList[6].ToggleOn();
+
+                StartCoroutine(FinishPuzzle());
             }
         }
 
@@ -127,13 +143,19 @@ public class PuzzleEnabler : MonoBehaviour
             if (Mathf.Round(Servo.value) >= 90 && SwitchOne.isOn && SwitchTwo.isOn)
             {
                 associatedPuzzle.solved = true;
-          
+                PuzzleList[2].ToggleOn();
+
+                StartCoroutine(FinishPuzzle());
+
             }
 
             if (Mathf.Round(Servo.value) < 90 && !SwitchOne.isOn && !SwitchTwo.isOn)
             {
                 associatedPuzzle.solved = true;
-            
+                PuzzleList[2].ToggleOn();
+
+                StartCoroutine(FinishPuzzle());
+
             }
         }
 
@@ -142,7 +164,11 @@ public class PuzzleEnabler : MonoBehaviour
             if (Mathf.RoundToInt(mainSlider.value * 100) >= 45 && Mathf.RoundToInt(mainSlider.value * 100) <= 55)
             {
                 associatedPuzzle.solved = true;
-           
+
+                PuzzleList[2].ToggleOn();
+
+                StartCoroutine(FinishPuzzle());
+
             }
         }
 
@@ -151,7 +177,11 @@ public class PuzzleEnabler : MonoBehaviour
             if (Mathf.Round(Servo.value) == 45)
             {
                 associatedPuzzle.solved = true;
-               
+
+                PuzzleList[0].ToggleOn();
+                PuzzleList[1].ToggleOn();
+
+                StartCoroutine(FinishPuzzle());
             }
         }
 
@@ -159,11 +189,13 @@ public class PuzzleEnabler : MonoBehaviour
         {
             if (Morse1.GetComponent<LongClickButton>().hold && Morse2.GetComponent<LongClickButton>().hold)
             {
-                Morse1.GetComponent<LongClickButton>().hold = false;
-                Morse2.GetComponent<LongClickButton>().hold = false;
-
+                
                 associatedPuzzle.solved = true;
-             
+
+                PuzzleList[0].ToggleOn();
+
+                StartCoroutine(FinishPuzzle());
+
             }
         }
 
@@ -171,12 +203,16 @@ public class PuzzleEnabler : MonoBehaviour
         {
            
 
-            if (BlackButton.GetComponent<LongClickButton>().hold && Mathf.Round(Servo.value) == 60)
+            if (BlueButton.GetComponent<LongClickButton>().hold && Mathf.Round(Servo.value) == 60)
             {
-                BlackButton.GetComponent<LongClickButton>().hold = false;
+                BlueButton.GetComponent<LongClickButton>().hold = false;
 
                 associatedPuzzle.solved = true;
-             
+
+                PuzzleList[1].ToggleOn();
+
+                StartCoroutine(FinishPuzzle());
+
             }
         }
 
@@ -185,13 +221,20 @@ public class PuzzleEnabler : MonoBehaviour
             if (Mathf.Round(Servo.value) >= 90 && SwitchOne.isOn && SwitchTwo.isOn)
             {
                 associatedPuzzle.solved = true;
-               
+
+                PuzzleList[3].ToggleOn();
+
+                StartCoroutine(FinishPuzzle());
             }
 
             if (Mathf.Round(Servo.value) < 90 && !SwitchOne.isOn && !SwitchTwo.isOn)
             {
                 associatedPuzzle.solved = true;
-           
+
+                PuzzleList[3].ToggleOn();
+
+                StartCoroutine(FinishPuzzle());
+
             }
         }
 
@@ -204,7 +247,10 @@ public class PuzzleEnabler : MonoBehaviour
                 BlueButton.GetComponent<LongClickButton>().hold = false;
 
                 associatedPuzzle.solved = true;
-      
+
+                PuzzleList[4].ToggleOn();
+
+                StartCoroutine(FinishPuzzle());
             }
         }
     }

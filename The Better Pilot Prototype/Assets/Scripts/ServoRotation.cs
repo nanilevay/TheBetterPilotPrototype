@@ -53,25 +53,39 @@ public class ServoRotation : MonoBehaviour
 
         else
         {
-            if (rotator.SendValue)
+
+            if(Mathf.Round(value) >= 90 && toggles[0].isOn && toggles[1].isOn)
             {
-                manualvalue += 1;
+                manualvalue = value -= amount * Time.deltaTime * periodLength * 5;
             }
 
-            if (value >= 90 && manualvalue >= 90 && toggles[0].isOn && !toggles[1].isOn)
+
+            if (Mathf.Round(value) < 90 && !toggles[0].isOn && !toggles[1].isOn)
             {
-                valid = true;
+                manualvalue = value += amount * Time.deltaTime * periodLength * 5;
             }
 
-            if (value < 90 && manualvalue < 90 && toggles[1].isOn && !toggles[0].isOn)
-            {
-                valid = true;
-            }
+            RotateObject(value);
 
-            if (valid)
-            {
-                RotateObject(manualvalue);
-            }
+            //if (rotator.SendValue)
+            //{
+            //    manualvalue += 1;
+            //}
+
+            //if (value >= 90 && manualvalue >= 90 && toggles[0].isOn && !toggles[1].isOn)
+            //{
+            //    valid = true;
+            //}
+
+            //if (value < 90 && manualvalue < 90 && toggles[1].isOn && !toggles[0].isOn)
+            //{
+            //    valid = true;
+            //}
+
+            //if (valid)
+            //{
+            //    RotateObject(manualvalue);
+            //}
         }
 
         
