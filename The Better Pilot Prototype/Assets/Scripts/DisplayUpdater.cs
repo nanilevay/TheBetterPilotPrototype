@@ -25,6 +25,8 @@ public class DisplayUpdater : MonoBehaviour
 
     public Timer timer;
 
+    public CodeController codeController;
+
     void Awake()
     {
         currentCodes = new List<string>(maxNumber);
@@ -50,6 +52,7 @@ public class DisplayUpdater : MonoBehaviour
                 textDisplay.text = addingCode;
                 currentCodes.Add(addingCode);
                 PuzzleActivator(addingCode);
+                codeController.CodeUpdate(addingCode);
 
                // i++;
             }

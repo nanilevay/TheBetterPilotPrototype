@@ -13,8 +13,6 @@ public class GameManager : MonoBehaviour
 
     public TextMeshProUGUI textDisplay;
 
-    public GameObject UduinoManager;
-
     public bool PhysicalGame = false;
 
     public TextMeshProUGUI SerialNumberDisplay;
@@ -47,6 +45,10 @@ public class GameManager : MonoBehaviour
 
     public bool Restart = true;
 
+    public CodeController codeController;
+
+    public int SrlNum;
+
 
     void Awake()
     {
@@ -61,7 +63,9 @@ public class GameManager : MonoBehaviour
         else
             srlNum = UnityEngine.Random.Range(100000, 999999);
 
-        SerialNumberDisplay.text = srlNum.ToString();
+        SrlNum = srlNum;
+
+        SerialNumberDisplay.text = SrlNum.ToString();
 
         ScreenFader.transform.Find("InitialScreen").gameObject.active = true;
 
@@ -100,7 +104,7 @@ public class GameManager : MonoBehaviour
             CodeDisplayer.currentCodes.Clear();
         }
 
-        Application.LoadLevel(Application.loadedLevel);
+        Application.LoadLevel(1);
     }
 
     public void QuitApp()
@@ -108,19 +112,15 @@ public class GameManager : MonoBehaviour
         Application.Quit();
     }
 
+    public void MainMenu()
+    {
+        Application.LoadLevel(0);
+    }
+
     void Start()
     {
-        UduinoManager = GameObject.FindWithTag("UduinoManager");
 
-
-        if (PhysicalGame)
-            UduinoManager.active = true;
-        else
-            UduinoManager.active = false;
-
-        int srlNum = 1000;
-
-        SerialNumberDisplay.text = srlNum.ToString();   
+        SerialNumberDisplay.text = SrlNum.ToString();
 
     }
 
@@ -169,7 +169,7 @@ public class GameManager : MonoBehaviour
 
         foreach(string code in CodeDisplayer.currentCodes)
         {
-            tempText += "\n" + CodeDisplayer.currentCodes[i];
+            tempText += " " + CodeDisplayer.currentCodes[i];
 
             i++; 
         }
@@ -196,7 +196,10 @@ public class GameManager : MonoBehaviour
             timer.StopTimer();
 
             timer.Start();
-        }
+
+            codeController.ResetCodes();
+
+}
     }
 
     public void TurnOnPlane()

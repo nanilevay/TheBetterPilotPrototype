@@ -21,6 +21,8 @@ public class SerialCodePuzzle : MonoBehaviour
 
     public bool Once = true;
 
+    public CodeController codeController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -53,6 +55,7 @@ public class SerialCodePuzzle : MonoBehaviour
     {
         if(!Manager.SerialEven && Manager.SerialThree && BlackButton.GetComponent<LongClickButton>().hold)
         {
+            codeController.RemoveCodes("0588");
             AssociatedPuzzle.solved = true;
             BlackButton.GetComponent<LongClickButton>().hold = false;
             Once = true;
@@ -61,6 +64,7 @@ public class SerialCodePuzzle : MonoBehaviour
 
         if (Manager.SerialEven && Manager.SerialThree && GreenButton.GetComponent<LongClickButton>().tap == 1 && YellowButton.GetComponent<LongClickButton>().tap == 1)
         {
+            codeController.RemoveCodes("0588");
             GreenButton.GetComponent<LongClickButton>().tap = 0;
             YellowButton.GetComponent<LongClickButton>().tap = 0;
             AssociatedPuzzle.solved = true;
@@ -70,6 +74,7 @@ public class SerialCodePuzzle : MonoBehaviour
 
         if (!Manager.SerialEven && !Manager.SerialThree && BlueButton.GetComponent<LongClickButton>().tap == 1)
         {
+            codeController.RemoveCodes("0588");
             BlueButton.GetComponent<LongClickButton>().tap = 0;
             AssociatedPuzzle.solved = true;
             Once = true;
@@ -78,6 +83,7 @@ public class SerialCodePuzzle : MonoBehaviour
 
         if (Manager.SerialEven && !Manager.SerialThree && BlackButton.GetComponent<LongClickButton>().tap == 1 && YellowButton.GetComponent<LongClickButton>().tap == 1)
         {
+            codeController.RemoveCodes("0588");
             BlackButton.GetComponent<LongClickButton>().hold = false;
             YellowButton.GetComponent<LongClickButton>().hold = false;
             AssociatedPuzzle.solved = true;

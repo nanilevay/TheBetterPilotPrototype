@@ -19,6 +19,8 @@ public class ProximityPuzzle : MonoBehaviour
 
     public bool Once = true;
 
+    public CodeController codeController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -75,6 +77,7 @@ public class ProximityPuzzle : MonoBehaviour
 
             if(Sensor.ProximityDetected)
             {
+                codeController.RemoveCodes("2922");
                 Manager.CodeDisplayer.currentCodes.Remove("2922");
                 AssociatedPuzzle.solved = true;
                 Once = true;

@@ -19,6 +19,8 @@ public class MorseCode : MonoBehaviour
 
     public PuzzlePiece AssociatedPuzzle;
 
+    public CodeController codeController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -119,6 +121,7 @@ public class MorseCode : MonoBehaviour
     {
         if (Manager.SerialEven && Manager.SerialThree && textArea.text.Contains("SOS"))
         {
+            codeController.RemoveCodes("2197");
             AssociatedPuzzle.solved = true;
             Manager.CodeDisplayer.currentCodes.Remove("2197");
             DecodingText = "";
@@ -127,6 +130,7 @@ public class MorseCode : MonoBehaviour
             
         if (!Manager.SerialEven && Manager.SerialThree && textArea.text.Contains("HELP"))
         {
+            codeController.RemoveCodes("2197");
             AssociatedPuzzle.solved = true;
             Manager.CodeDisplayer.currentCodes.Remove("2197");
             DecodingText = "";
@@ -135,6 +139,7 @@ public class MorseCode : MonoBehaviour
 
         if (!Manager.SerialThree && textArea.text.Contains(Manager.SerialNumberDisplay.text))
         {
+            codeController.RemoveCodes("2197");
             AssociatedPuzzle.solved = true;
             Manager.CodeDisplayer.currentCodes.Remove("2197");
             DecodingText = "";

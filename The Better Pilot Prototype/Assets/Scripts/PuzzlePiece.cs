@@ -13,7 +13,6 @@ public class PuzzlePiece : MonoBehaviour
 
     //public AudioSource SuccessSound;
 
-
     void Update()
     {
         //if(solved)
@@ -42,7 +41,7 @@ public class PuzzlePiece : MonoBehaviour
 
         if (this.gameObject.tag == "Display")
         {
-            this.gameObject.transform.Find("Screen").transform.Find("Screen Text").gameObject.active = true;
+            //this.gameObject.transform.Find("Screen").transform.Find("Screen Text").gameObject.active = true;
         }
 
 
@@ -69,8 +68,6 @@ public class PuzzlePiece : MonoBehaviour
         active = true;
     }
 
-
-
     public void ToggleOff()
     {
         if (this.gameObject.tag == "Slider")
@@ -94,7 +91,6 @@ public class PuzzlePiece : MonoBehaviour
                 sensor.GetComponent<ProximityDetector>().active = false;
             }
         }
-
 
         if (this.gameObject.tag == "Switch")
             this.GetComponent<Toggle>().interactable = false;

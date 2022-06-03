@@ -21,6 +21,8 @@ public class ColourButtonPuzzle : MonoBehaviour
 
     public PuzzlePiece PuzzleToSolve;
 
+    public CodeController codeController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -151,6 +153,7 @@ public class ColourButtonPuzzle : MonoBehaviour
     {
         if (code == "ybbrbybz" && PressingGreen && !Manager.SerialEven && Manager.SerialThree)
         {
+            codeController.RemoveCodes("9649");
             PuzzleToSolve.solved = true;
             Manager.CodeDisplayer.currentCodes.Remove("9649");
             code = "";
@@ -158,6 +161,7 @@ public class ColourButtonPuzzle : MonoBehaviour
 
         if (code == "brgyggrg" && PressingBlack && Manager.SerialEven && Manager.SerialThree)
         {
+            codeController.RemoveCodes("9649");
             PuzzleToSolve.solved = true;
             Manager.CodeDisplayer.currentCodes.Remove("9649");
             code = "";
@@ -165,6 +169,7 @@ public class ColourButtonPuzzle : MonoBehaviour
 
         if (code == "byryrbbb" && PressingBlack && !Manager.SerialEven && !Manager.SerialThree)
         {
+            codeController.RemoveCodes("9649");
             PuzzleToSolve.solved = true;
             Manager.CodeDisplayer.currentCodes.Remove("9649");
             code = "";
@@ -172,6 +177,7 @@ public class ColourButtonPuzzle : MonoBehaviour
 
         if (code == "ryybrrby" && PressingGreen && Manager.SerialEven && !Manager.SerialThree)
         {
+            codeController.RemoveCodes("9649");
             PuzzleToSolve.solved = true;
             Manager.CodeDisplayer.currentCodes.Remove("9649");
             code = "";

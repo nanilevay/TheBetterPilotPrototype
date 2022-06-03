@@ -37,6 +37,8 @@ public class MorseCodeReceived : MonoBehaviour
 
     public GameManager Manager;
 
+    public CodeController codeController;
+
     void Update()
     {
         if (Manager.CodeDisplayer.currentCodes.Contains("6595"))
@@ -118,6 +120,7 @@ public class MorseCodeReceived : MonoBehaviour
                 {
                     if (YellowButton.GetComponent<LongClickButton>().hold)
                     {
+                        codeController.RemoveCodes("6595");
                         associatedPuzzle.solved = true;
                         Manager.CodeDisplayer.currentCodes.Remove("6595");
                         YellowButton.GetComponent<LongClickButton>().hold = false;
@@ -131,6 +134,7 @@ public class MorseCodeReceived : MonoBehaviour
                 {
                     if (Mathf.RoundToInt(mainSlider.value * 100) >= 80)
                     {
+                        codeController.RemoveCodes("6595");
                         associatedPuzzle.solved = true;
                         Manager.CodeDisplayer.currentCodes.Remove("6595");
                         switcher = true;
@@ -143,6 +147,7 @@ public class MorseCodeReceived : MonoBehaviour
                 {
                     if (BlackButton.GetComponent<LongClickButton>().tap == 1 && YellowButton.GetComponent<LongClickButton>().tap == 1)
                     {
+                        codeController.RemoveCodes("6595");
                         associatedPuzzle.solved = true;
                         Manager.CodeDisplayer.currentCodes.Remove("6595");
                         BlackButton.GetComponent<LongClickButton>().tap = 0;
@@ -157,6 +162,7 @@ public class MorseCodeReceived : MonoBehaviour
                 {
                     if (Mathf.RoundToInt(mainSlider.value * 100) <= 20)
                     {
+                        codeController.RemoveCodes("6595");
                         associatedPuzzle.solved = true;
                         Manager.CodeDisplayer.currentCodes.Remove("6595");
                         switcher = true;
@@ -167,8 +173,10 @@ public class MorseCodeReceived : MonoBehaviour
             // you are
             case "-.-- --- ..- / .- .-. .":
                 {
+
                     if (BlueButton.GetComponent<LongClickButton>().hold && YellowButton.GetComponent<LongClickButton>().tap == 1 && GreenButton.GetComponent<LongClickButton>().tap == 1)
                     {
+                        codeController.RemoveCodes("6595");
                         associatedPuzzle.solved = true;
                         Manager.CodeDisplayer.currentCodes.Remove("6595");
                         BlueButton.GetComponent<LongClickButton>().hold = false;
@@ -185,6 +193,7 @@ public class MorseCodeReceived : MonoBehaviour
                 {
                     if (RedButton.GetComponent<LongClickButton>().DoubleTap)
                     {
+                        codeController.RemoveCodes("6595");
                         associatedPuzzle.solved = true;
                         Manager.CodeDisplayer.currentCodes.Remove("6595");
                         RedButton.GetComponent<LongClickButton>().DoubleTap = false;
@@ -199,6 +208,7 @@ public class MorseCodeReceived : MonoBehaviour
                 {
                     if (BlueButton.GetComponent<LongClickButton>().hold && GreenButton.GetComponent<LongClickButton>().hold)
                     {
+                        codeController.RemoveCodes("6595");
                         associatedPuzzle.solved = true;
                         Manager.CodeDisplayer.currentCodes.Remove("6595");
                         BlueButton.GetComponent<LongClickButton>().hold = false;

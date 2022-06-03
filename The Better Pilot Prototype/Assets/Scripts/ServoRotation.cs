@@ -29,6 +29,10 @@ public class ServoRotation : MonoBehaviour
 
     public GameObject GameOver;
 
+    public bool ManualUp;
+
+    public StopWatch Watch;
+
 
     void Update()
     {
@@ -51,10 +55,18 @@ public class ServoRotation : MonoBehaviour
             }
 
             if (value <= 0)
+            {
                 increasing = true;
+                GameOver.SetActive(true);
+                Watch.StopStopWatch();
+            }
 
             if (value >= 180)
+            {
                 increasing = false;
+                GameOver.SetActive(true);
+                Watch.StopStopWatch(); 
+            }
 
             RotateObject(value);
         }
@@ -64,11 +76,38 @@ public class ServoRotation : MonoBehaviour
 
             if(Mathf.Round(value) >= 90 && toggles[0].isOn && toggles[1].isOn)
             {
+                ManualUp = true;
                 manualvalue = value -= amount * Time.deltaTime * periodLength * 5;
             }
 
 
             if (Mathf.Round(value) < 90 && !toggles[0].isOn && !toggles[1].isOn)
+            {
+                manualvalue = value += amount * Time.deltaTime * periodLength * 5;
+                ManualUp = false;
+            }
+
+
+            if (Mathf.Round(value) >= 90 && !toggles[0].isOn && !toggles[1].isOn)
+            {
+                manualvalue = value += amount * Time.deltaTime * periodLength * 5;
+                ManualUp = false;
+            }
+
+
+            if (Mathf.Round(value) < 90 && toggles[0].isOn && toggles[1].isOn)
+            {
+                ManualUp = true;
+                manualvalue = value -= amount * Time.deltaTime * periodLength * 5;
+            }
+
+
+            if (ManualUp)
+            {
+                manualvalue = value -= amount * Time.deltaTime * periodLength * 5;
+            }
+
+            if (!ManualUp)
             {
                 manualvalue = value += amount * Time.deltaTime * periodLength * 5;
             }

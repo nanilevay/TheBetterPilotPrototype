@@ -18,6 +18,8 @@ public class HueSlider : MonoBehaviour
 
     public AudioSource SuccessSound;
 
+    public CodeController codeController;
+
     // Drag & drop handle
     public Image handle;
 
@@ -39,6 +41,7 @@ public class HueSlider : MonoBehaviour
                 {
                     PuzzleToSolve.solved = true;
                     StartCoroutine(Success());
+
                 }
 
                 if (mainSlider.value * 100 >= 50 && mainSlider.value * 100 <= 60 && Manager.SerialThree && Manager.SerialEven)
@@ -70,6 +73,7 @@ public class HueSlider : MonoBehaviour
 
     IEnumerator Success()
     {
+        codeController.RemoveCodes("6007");
         Manager.CodeDisplayer.currentCodes.Remove("6007");
         SuccessSound.Play();
         yield return new WaitForSeconds(2);

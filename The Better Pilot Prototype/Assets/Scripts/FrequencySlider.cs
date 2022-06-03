@@ -27,6 +27,8 @@ public class FrequencySlider : MonoBehaviour
 
     public GameManager Manager;
 
+    public CodeController codeController;
+
     void Awake()
     {
        // PitchGenerator();
@@ -100,6 +102,7 @@ public class FrequencySlider : MonoBehaviour
 
     IEnumerator Stop()
     {
+        codeController.RemoveCodes("0088");
         Manager.CodeDisplayer.currentCodes.Remove("0088");
         switcher = true;
         SuccessSound.Play();

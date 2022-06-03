@@ -50,6 +50,7 @@ public class PuzzleEnabler : MonoBehaviour
 
     public GameManager Manager;
 
+    public CodeController codeController;
 
     // Start is called before the first frame update
     void Start()
@@ -257,6 +258,7 @@ public class PuzzleEnabler : MonoBehaviour
 
     IEnumerator FinishPuzzle()
     {
+        codeController.RemoveCodes("6430");
         Manager.CodeDisplayer.currentCodes.Remove("6430");
         SuccessSound.Play();
 

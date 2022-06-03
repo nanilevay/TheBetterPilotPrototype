@@ -25,6 +25,8 @@ public class SwitchesPuzzle : MonoBehaviour
 
     public GameManager Manager;
 
+    public CodeController codeController;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +65,7 @@ public class SwitchesPuzzle : MonoBehaviour
 
             if (SwitchOne.isOn && SwitchTwo.isOn)
             {
+                codeController.RemoveCodes("0238");
                 associatedPuzzle.solved = true;
                 Manager.CodeDisplayer.currentCodes.Remove("0238");
                 Once = true;
@@ -84,6 +87,7 @@ public class SwitchesPuzzle : MonoBehaviour
 
             if (!SwitchOne.isOn && !SwitchTwo.isOn)
             {
+                codeController.RemoveCodes("0238");
                 Manager.CodeDisplayer.currentCodes.Remove("0238");
                 associatedPuzzle.solved = true;
                 Once = true;
