@@ -62,6 +62,7 @@ public class CodeController : MonoBehaviour
             {
                    Code.text = addingCode;
                    break;
+
             }
         }
 

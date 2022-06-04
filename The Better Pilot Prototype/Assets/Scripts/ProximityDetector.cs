@@ -15,14 +15,31 @@ public class ProximityDetector : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public bool ProximityDetected = false;
 
+    public AudioSource AudioToPlay;
+
+    public bool Once = true;
+
+    public GameObject SoundWaves;
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         OnSensor();
+
+        if (Once)
+        {
+            StartCoroutine(ToggleOnAudio());
+            SoundWaves.SetActive(true);
+            Once = false;
+
+        }
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         OffSensor();
+        SoundWaves.SetActive(false);
+        AudioToPlay.Stop();
+        Once = true;
     }
 
     void Update()
@@ -31,6 +48,7 @@ public class ProximityDetector : MonoBehaviour, IPointerEnterHandler, IPointerEx
         {
             ProximityDetected = true;
             Detecting = "Detected";
+
         }
 
         if (Input.GetKeyUp(KeyCode.LeftControl))
@@ -38,6 +56,12 @@ public class ProximityDetector : MonoBehaviour, IPointerEnterHandler, IPointerEx
             Detecting = "Not Detected";
             ProximityDetected = false;
         }
+    }
+
+    IEnumerator ToggleOnAudio()
+    {
+        AudioToPlay.Play();
+        yield break;
     }
 
     public void OnSensor()
@@ -76,7 +100,6 @@ public class ProximityDetector : MonoBehaviour, IPointerEnterHandler, IPointerEx
         else if(!active)
         {
             Detecting = "Sensor OFF";
-
             textDisplay.text = Detecting;
 
         }

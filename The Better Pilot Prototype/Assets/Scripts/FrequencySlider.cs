@@ -31,7 +31,9 @@ public class FrequencySlider : MonoBehaviour
 
     void Awake()
     {
-       // PitchGenerator();
+        // PitchGenerator();
+
+        audioSource.Stop();
     }
 
     // Start is called before the first frame update

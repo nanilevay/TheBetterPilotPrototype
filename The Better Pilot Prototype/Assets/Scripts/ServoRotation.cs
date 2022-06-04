@@ -33,7 +33,9 @@ public class ServoRotation : MonoBehaviour
 
     public StopWatch Watch;
 
+    public AudioSource WarningSound;
 
+    public bool once = true;
     void Update()
     {
         if(value == 0 || value == 180)
@@ -59,13 +61,27 @@ public class ServoRotation : MonoBehaviour
                 increasing = true;
                 GameOver.SetActive(true);
                 Watch.StopStopWatch();
+                WarningSound.Stop();
             }
 
             if (value >= 180)
             {
                 increasing = false;
                 GameOver.SetActive(true);
-                Watch.StopStopWatch(); 
+                Watch.StopStopWatch();
+                WarningSound.Stop();
+            }
+
+            if((value >= 170 || value <= 10) && once)
+            {
+                once = false;
+                StartCoroutine(WarningSoundToggle());
+            }
+
+            if(value < 170 && value > 10)
+            {
+                WarningSound.Stop();
+                once = true;
             }
 
             RotateObject(value);
@@ -139,6 +155,14 @@ public class ServoRotation : MonoBehaviour
 
         textDisplay.text = Mathf.Round(value).ToString();
 
+    }
+
+    IEnumerator WarningSoundToggle()
+    {
+        WarningSound.Play();
+        once = false;
+
+        yield break;
     }
     public void RotateObject(float valueToRotate)
     {
