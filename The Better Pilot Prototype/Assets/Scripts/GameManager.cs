@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
 
     public DisplayUpdater CodeDisplayer;
 
-    public int ResetCounter = 1;
+    public int ResetCounter = GamePrefs.ResetCounter;
 
     public TextMeshProUGUI ResetNumberDisplay;
 
@@ -49,9 +49,15 @@ public class GameManager : MonoBehaviour
 
     public int SrlNum;
 
+    public SettingsControl Settings;
+
+    public GameObject SettingsObj;
+
 
     void Awake()
     {
+        ResetCounter = GamePrefs.ResetCounter;
+
         Restart = true;
 
         int ThreeOrSix = UnityEngine.Random.Range(0, 2); 
@@ -102,9 +108,10 @@ public class GameManager : MonoBehaviour
             Start();
             CodeDisplayer.i = 0;
             CodeDisplayer.currentCodes.Clear();
+            Settings.UpdateSettings();
         }
 
-        Application.LoadLevel(1);
+        Application.LoadLevel(2);
     }
 
     public void QuitApp()
@@ -121,7 +128,7 @@ public class GameManager : MonoBehaviour
     {
 
         SerialNumberDisplay.text = SrlNum.ToString();
-
+        SettingsObj.SetActive(false);
     }
 
     // Update is called once per frame

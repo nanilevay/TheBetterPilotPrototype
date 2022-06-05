@@ -25,6 +25,15 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
 	public bool hold = false;
 
+    public Image HoldImg;
+
+    public Color ImgColor;
+
+    void Start()
+    {
+        ImgColor = HoldImg.color;
+    }
+
 	public void OnPointerClick(PointerEventData eventData)
 	{
 		tap = eventData.clickCount;
@@ -67,7 +76,18 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
 	private void Update()
 	{
-		if (pointerDown)
+
+        if (hold)
+        {
+            HoldImg.color = Color.cyan;
+        }
+
+        else
+        {
+            HoldImg.color = ImgColor;
+        }
+
+        if (pointerDown)
 		{
 			pointerDownTimer += Time.deltaTime;
 			if (pointerDownTimer >= requiredHoldTime)

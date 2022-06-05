@@ -17,6 +17,15 @@ public class RotateHandle : MonoBehaviour, IDragHandler
 
     float currentRot;
 
+    public bool Once = true;
+
+    public AudioSource AudioToPlay;
+
+    IEnumerator PlaySound()
+    {
+        AudioToPlay.Play();
+        yield break;
+    }
 
     private Vector3? CalculateWorldToScreenPos(Vector3 worldPos)
     {
@@ -38,7 +47,6 @@ public class RotateHandle : MonoBehaviour, IDragHandler
 
     public void OnDrag(PointerEventData eventData)
     {
-
         if (active)
         {
             if (eventData.button != PointerEventData.InputButton.Left) return;
@@ -62,31 +70,43 @@ public class RotateHandle : MonoBehaviour, IDragHandler
                     SendValue = false;
             }
         }
+
+        
     }
 
 
     public void Update()
         {
 
-         currentRot = gameObject.transform.localEulerAngles.z;
-
-        if (Input.GetMouseButtonUp(0))
+        if (IsMoving && !AudioToPlay.isPlaying)
         {
-            IsMoving = false;
-
+            StartCoroutine(PlaySound());
         }
 
+        if(!IsMoving)
+        {
+            AudioToPlay.Stop();
+        }
 
-        if (active)
-                textDisplay.text = Mathf.Round(gameObject.transform.localEulerAngles.z).ToString() + "º";
+        currentRot = gameObject.transform.localEulerAngles.z;
 
-            else
+            if (Input.GetMouseButtonUp(0))
             {
-                textDisplay.text = "Component OFF";
+                IsMoving = false;
+
             }
 
 
-           // SendValue = Mathf.Round(gameObject.transform.localEulerAngles.z);
+            if (active)
+                    textDisplay.text = Mathf.Round(gameObject.transform.localEulerAngles.z).ToString() + "º";
+
+                else
+                {
+                    textDisplay.text = "Component OFF";
+                }
+
+
+               // SendValue = Mathf.Round(gameObject.transform.localEulerAngles.z);
         }
 
     public void RotateObject(float valueToRotate)

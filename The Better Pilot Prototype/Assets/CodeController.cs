@@ -14,6 +14,8 @@ public class CodeController : MonoBehaviour
 
     public int Counter = 0;
 
+    public AudioSource RemoveCodeSound;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -84,6 +86,7 @@ public class CodeController : MonoBehaviour
             if (Code.text.Contains(removingCode))
             {
                 Code.text = "    ";
+                RemoveCodeSound.Play();
                 break;
             }
             

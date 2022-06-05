@@ -13,7 +13,7 @@ public class ServoRotation : MonoBehaviour
 
     public float value;
     public float manualvalue;
-    public int periodLength; //Seconds
+    public int periodLength = GamePrefs.ServoSpeed; //Seconds
     public float amount; //Amount to add
 
     public float maxVal;
@@ -36,124 +36,131 @@ public class ServoRotation : MonoBehaviour
     public AudioSource WarningSound;
 
     public bool once = true;
-    void Update()
+
+    void Start()
     {
-        if(value == 0 || value == 180)
+        periodLength = GamePrefs.ServoSpeed;
+    }
+    void Update()
+    {   if (GamePrefs.ServoOn)
         {
-            GameOver.SetActive(true);
-        }
-
-
-        if (!rotator.IsMoving)
-        {
-            if (increasing)
+            if (value == 0 || value == 180)
             {
-                value += amount * Time.deltaTime * periodLength;
+                GameOver.SetActive(true);
+            }
+
+
+            if (!rotator.IsMoving)
+            {
+                if (increasing)
+                {
+                    value += amount * Time.deltaTime * periodLength;
+                }
+
+                else
+                {
+                    value -= amount * Time.deltaTime * periodLength;
+                }
+
+                if (value <= 0)
+                {
+                    increasing = true;
+                    GameOver.SetActive(true);
+                    Watch.StopStopWatch();
+                    WarningSound.Stop();
+                }
+
+                if (value >= 180)
+                {
+                    increasing = false;
+                    GameOver.SetActive(true);
+                    Watch.StopStopWatch();
+                    WarningSound.Stop();
+                }
+
+                if ((value >= 170 || value <= 10) && once)
+                {
+                    once = false;
+                    StartCoroutine(WarningSoundToggle());
+                }
+
+                if (value < 170 && value > 10)
+                {
+                    WarningSound.Stop();
+                    once = true;
+                }
+
+                RotateObject(value);
             }
 
             else
             {
-                value -= amount * Time.deltaTime * periodLength;
+
+                if (Mathf.Round(value) >= 90 && toggles[0].isOn && toggles[1].isOn)
+                {
+                    ManualUp = true;
+                    manualvalue = value -= amount * Time.deltaTime * periodLength * 5;
+                }
+
+
+                if (Mathf.Round(value) < 90 && !toggles[0].isOn && !toggles[1].isOn)
+                {
+                    manualvalue = value += amount * Time.deltaTime * periodLength * 5;
+                    ManualUp = false;
+                }
+
+
+                if (Mathf.Round(value) >= 90 && !toggles[0].isOn && !toggles[1].isOn)
+                {
+                    manualvalue = value += amount * Time.deltaTime * periodLength * 5;
+                    ManualUp = false;
+                }
+
+
+                if (Mathf.Round(value) < 90 && toggles[0].isOn && toggles[1].isOn)
+                {
+                    ManualUp = true;
+                    manualvalue = value -= amount * Time.deltaTime * periodLength * 5;
+                }
+
+
+                if (ManualUp)
+                {
+                    manualvalue = value -= amount * Time.deltaTime * periodLength * 5;
+                }
+
+                if (!ManualUp)
+                {
+                    manualvalue = value += amount * Time.deltaTime * periodLength * 5;
+                }
+
+                RotateObject(value);
+
+                //if (rotator.SendValue)
+                //{
+                //    manualvalue += 1;
+                //}
+
+                //if (value >= 90 && manualvalue >= 90 && toggles[0].isOn && !toggles[1].isOn)
+                //{
+                //    valid = true;
+                //}
+
+                //if (value < 90 && manualvalue < 90 && toggles[1].isOn && !toggles[0].isOn)
+                //{
+                //    valid = true;
+                //}
+
+                //if (valid)
+                //{
+                //    RotateObject(manualvalue);
+                //}
             }
 
-            if (value <= 0)
-            {
-                increasing = true;
-                GameOver.SetActive(true);
-                Watch.StopStopWatch();
-                WarningSound.Stop();
-            }
 
-            if (value >= 180)
-            {
-                increasing = false;
-                GameOver.SetActive(true);
-                Watch.StopStopWatch();
-                WarningSound.Stop();
-            }
 
-            if((value >= 170 || value <= 10) && once)
-            {
-                once = false;
-                StartCoroutine(WarningSoundToggle());
-            }
-
-            if(value < 170 && value > 10)
-            {
-                WarningSound.Stop();
-                once = true;
-            }
-
-            RotateObject(value);
+            textDisplay.text = Mathf.Round(value).ToString();
         }
-
-        else
-        {
-
-            if(Mathf.Round(value) >= 90 && toggles[0].isOn && toggles[1].isOn)
-            {
-                ManualUp = true;
-                manualvalue = value -= amount * Time.deltaTime * periodLength * 5;
-            }
-
-
-            if (Mathf.Round(value) < 90 && !toggles[0].isOn && !toggles[1].isOn)
-            {
-                manualvalue = value += amount * Time.deltaTime * periodLength * 5;
-                ManualUp = false;
-            }
-
-
-            if (Mathf.Round(value) >= 90 && !toggles[0].isOn && !toggles[1].isOn)
-            {
-                manualvalue = value += amount * Time.deltaTime * periodLength * 5;
-                ManualUp = false;
-            }
-
-
-            if (Mathf.Round(value) < 90 && toggles[0].isOn && toggles[1].isOn)
-            {
-                ManualUp = true;
-                manualvalue = value -= amount * Time.deltaTime * periodLength * 5;
-            }
-
-
-            if (ManualUp)
-            {
-                manualvalue = value -= amount * Time.deltaTime * periodLength * 5;
-            }
-
-            if (!ManualUp)
-            {
-                manualvalue = value += amount * Time.deltaTime * periodLength * 5;
-            }
-
-            RotateObject(value);
-
-            //if (rotator.SendValue)
-            //{
-            //    manualvalue += 1;
-            //}
-
-            //if (value >= 90 && manualvalue >= 90 && toggles[0].isOn && !toggles[1].isOn)
-            //{
-            //    valid = true;
-            //}
-
-            //if (value < 90 && manualvalue < 90 && toggles[1].isOn && !toggles[0].isOn)
-            //{
-            //    valid = true;
-            //}
-
-            //if (valid)
-            //{
-            //    RotateObject(manualvalue);
-            //}
-        }
-
-        
-
-        textDisplay.text = Mathf.Round(value).ToString();
 
     }
 

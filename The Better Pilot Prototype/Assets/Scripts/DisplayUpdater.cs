@@ -27,8 +27,14 @@ public class DisplayUpdater : MonoBehaviour
 
     public CodeController codeController;
 
+    public AudioSource CodeSound;
+
+    public int TimeBeforeNextCode = GamePrefs.NewCodeSpeed;
+
     void Awake()
     {
+        TimeBeforeNextCode = GamePrefs.NewCodeSpeed;
+
         currentCodes = new List<string>(maxNumber);
 
         i = 0;
@@ -37,7 +43,7 @@ public class DisplayUpdater : MonoBehaviour
     {
         t += Time.deltaTime;
 
-        if (t >= 20 && i < currentCodes.Capacity)
+        if (t >= TimeBeforeNextCode && i < currentCodes.Capacity)
         {
             string addingCode;
 
@@ -53,6 +59,7 @@ public class DisplayUpdater : MonoBehaviour
                 currentCodes.Add(addingCode);
                 PuzzleActivator(addingCode);
                 codeController.CodeUpdate(addingCode);
+                CodeSound.Play();
 
                // i++;
             }
