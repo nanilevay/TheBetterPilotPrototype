@@ -7,6 +7,8 @@ public static class GamePrefs
     public static bool ServoOn = true;
     public static bool SoundOn = true;
 
+    public static bool GameStart = true;
+
     public static int ResetCounter = 4;
     public static int ServoSpeed = 2;
     public static int NewCodeSpeed = 20;

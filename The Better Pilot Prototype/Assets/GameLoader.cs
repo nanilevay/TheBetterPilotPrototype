@@ -22,9 +22,17 @@ public class GameLoader : MonoBehaviour
     public GameObject Settings;
 
     public GameObject Instructions;
-    void Awake()
+    void Start()
     {
         StartCoroutine(FadeIn());
+    }
+
+    void Update()
+    {
+        if(!GamePrefs.GameStart)
+        {
+            FadeObj.SetActive(false);
+        }
     }
 
     IEnumerator FadeIn()
@@ -32,6 +40,7 @@ public class GameLoader : MonoBehaviour
         anim.SetBool("start", true);
         yield return new WaitForSeconds(1);
         FadeObj.SetActive(false);
+        GamePrefs.GameStart = false;
 
         yield break;
     }

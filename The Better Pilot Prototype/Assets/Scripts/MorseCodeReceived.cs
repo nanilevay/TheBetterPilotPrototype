@@ -39,6 +39,8 @@ public class MorseCodeReceived : MonoBehaviour
 
     public CodeController codeController;
 
+    public TextMeshProUGUI TextOfMorse;
+
     void Update()
     {
         if (Manager.CodeDisplayer.currentCodes.Contains("6595"))
@@ -249,6 +251,8 @@ public class MorseCodeReceived : MonoBehaviour
             Sequence = "-.-- --- ..- .-.";
 
         switcher = false;
+
+        TextOfMorse.text = Sequence;
 
         coroutine = StartCoroutine(MorseDisplay());
     }

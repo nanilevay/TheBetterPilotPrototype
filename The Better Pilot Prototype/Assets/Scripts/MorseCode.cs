@@ -21,6 +21,8 @@ public class MorseCode : MonoBehaviour
 
     public CodeController codeController;
 
+    public TextMeshProUGUI DisplayText;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -108,6 +110,12 @@ public class MorseCode : MonoBehaviour
         Translate();
     }
 
+    public void EraseWithButton()
+    {
+        DecodingText = "";
+        textArea.text = "";
+    }
+
     void Update()
     {
         if (Manager.CodeDisplayer.currentCodes.Contains("2197"))
@@ -115,6 +123,8 @@ public class MorseCode : MonoBehaviour
             Confirm();
             CheckAnswer();
         }
+
+        DisplayText.text = DecodingText;
     }
 
     public void CheckAnswer()

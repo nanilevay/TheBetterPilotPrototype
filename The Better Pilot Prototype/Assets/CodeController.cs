@@ -49,7 +49,6 @@ public class CodeController : MonoBehaviour
         {
             
             Code.text = "    ";
-            break;
             
         }
 

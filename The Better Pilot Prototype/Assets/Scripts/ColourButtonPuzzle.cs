@@ -23,6 +23,8 @@ public class ColourButtonPuzzle : MonoBehaviour
 
     public CodeController codeController;
 
+    public TextMeshProUGUI TextToUpdate;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -111,16 +113,18 @@ public class ColourButtonPuzzle : MonoBehaviour
         }
     }
 
-    void Erase()
+    public void Erase()
     {
-        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
-        {
-            code = "";
-        }
+        GreenRelease();
+        BlackRelease();
+        code = "";
+        
     }
 
     void Update()
     {
+        TextToUpdate.text = code;
+
         if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
         {
             if (Input.GetKeyDown("space"))
