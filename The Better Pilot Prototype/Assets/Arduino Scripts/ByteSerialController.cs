@@ -84,7 +84,7 @@ public class ByteSerialController : MonoBehaviour
     [HideIf("connected")]
     void Connect()
     {
-        serialThread = new SerialThreadBinaryDelimited("/dev/"+macPortPrefix+"."+portName,
+        serialThread = new SerialThreadBinaryDelimited(portName,
                                                        baudRate,
                                                        reconnectionDelay,
                                                        maxUnreadMessages,
