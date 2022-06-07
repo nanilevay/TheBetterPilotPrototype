@@ -37,6 +37,15 @@ public class ServoRotation : MonoBehaviour
 
     public bool once = true;
 
+    public void ToggleOnOff()
+    {
+        if (GamePrefs.ServoOn)
+            GamePrefs.ServoOn = false;
+
+        else
+            GamePrefs.ServoOn = true;
+    }
+
     void Start()
     {
         periodLength = GamePrefs.ServoSpeed;

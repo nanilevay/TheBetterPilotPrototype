@@ -19,7 +19,7 @@ using System.Collections;
 public class SensorListener : MonoBehaviour
 {
     public bool logArrivingMessages = true;
-    public int a0, a1;
+    public int d1, d2, d3, d4, d5, d6, d7;
 
 
     // Invoked when a line of data is received from the serial device.
@@ -28,10 +28,10 @@ public class SensorListener : MonoBehaviour
         string log = "Message arrived: " + msg;
         string[] dataArray = msg.Split(' ');
         
-        a0 = int.Parse(dataArray[0]);
-        a1 = int.Parse(dataArray[1]);
+        d1 = int.Parse(dataArray[0]);
+        d2 = int.Parse(dataArray[1]);
 
-        if(logArrivingMessages)
+        if (logArrivingMessages)
             Debug.Log(log);
     }
 

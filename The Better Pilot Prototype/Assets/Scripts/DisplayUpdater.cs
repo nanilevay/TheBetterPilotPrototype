@@ -29,6 +29,43 @@ public class DisplayUpdater : MonoBehaviour
 
     public AudioSource CodeSound;
 
+    public TMP_InputField CodeInput;
+
+    public List<PuzzlePiece> PuzzlesInGame;
+    public void CodeAdder()
+    {
+        if(CodeInput.text.Length == 4)
+        {
+            textDisplay.text = CodeInput.text;
+            currentCodes.Add(CodeInput.text);
+            PuzzleActivator(CodeInput.text);
+            codeController.CodeUpdate(CodeInput.text);
+            CodeSound.Play();
+
+        }
+    }
+
+
+    public void CodeRemover()
+    {
+        if (CodeInput.text.Length == 4)
+        {
+
+            foreach (PuzzlePiece puzzle in PuzzlesInGame)
+            {
+                if (puzzle.name == CodeInput.text)
+                {
+                    puzzle.active = false;
+                    puzzle.solved = false;
+                    currentCodes.Remove(CodeInput.text);
+                    codeController.RemoveCodes(CodeInput.text);
+                    CodeSound.Play();
+                }
+            }
+
+        }
+    }
+
     public int TimeBeforeNextCode = GamePrefs.NewCodeSpeed;
 
     void Awake()

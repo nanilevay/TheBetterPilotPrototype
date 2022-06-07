@@ -53,7 +53,6 @@ public class GameManager : MonoBehaviour
 
     public GameObject SettingsObj;
 
-
     void Awake()
     {
         ResetCounter = GamePrefs.ResetCounter;
@@ -126,7 +125,6 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-
         SerialNumberDisplay.text = SrlNum.ToString();
         SettingsObj.SetActive(false);
     }
@@ -140,6 +138,8 @@ public class GameManager : MonoBehaviour
             PlaneOn = true;
             checker = false;
             ButtonOn = false;
+
+            GamePrefs.ServoOn = true;
 
             ScreenFader.transform.Find("InitialScreen").gameObject.active = false;
         }
