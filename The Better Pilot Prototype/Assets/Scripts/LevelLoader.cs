@@ -12,6 +12,11 @@ public class LevelLoader : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            LoadLevel(2);
+        }
+
         t += Time.deltaTime;
 
         if (t >= 10 )

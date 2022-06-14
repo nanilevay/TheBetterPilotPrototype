@@ -1,5 +1,9 @@
 unsigned long elapsedTime = 0, lastSend = 0, sendTime = 0;
 
+#include <Encoder.h>
+
+Encoder myEnc(6, 7);
+
 void setup()
 {
   Serial.begin(115200);
@@ -16,9 +20,11 @@ void loop()
   {
     lastSend = millis();
     
-    Serial.print(analogRead(A1));
+    Serial.print(digitalRead(8));
     Serial.print(" ");
-    Serial.println(analogRead(A3));
+    Serial.println(digitalRead(6));
+
+    
   }
   delay(20);
 }

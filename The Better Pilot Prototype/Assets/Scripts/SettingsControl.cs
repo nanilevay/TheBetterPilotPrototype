@@ -49,6 +49,23 @@ public class SettingsControl : MonoBehaviour
 
     }
 
+    public void ToggleOnOff()
+    {
+        if (ServoOnOff.isOn)
+        {
+            ServoOnOff.isOn = false;
+            GamePrefs.ServoOn = false;
+        }
+
+        else
+        {
+            GamePrefs.ServoOn = true;
+            ServoOnOff.isOn = true;
+        }
+
+        Debug.Log(ServoOnOff.isOn);
+    }
+
 
     void Start()
     {

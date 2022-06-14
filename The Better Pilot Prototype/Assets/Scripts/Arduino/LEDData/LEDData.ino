@@ -47,7 +47,7 @@ void loop()
       byte g = bufferLED[index+1];
       byte b = bufferLED[index+2];
       
-      CRGB color = CRGB(r, g, b, w);
+      CRGB color = CRGB(r, g, b);
       leds[i] = color;
     }
 

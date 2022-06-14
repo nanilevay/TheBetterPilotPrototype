@@ -24,6 +24,12 @@ public class SliderArduino : MonoBehaviour
     {
         //int analogValue = manager.analogRead(AnalogPin.A1);
 
-        slider.value = (float)Sensor.d1 / 100.0f;
+        slider.value = map(((float)Sensor.a1), 0, 1023, 0, 1);
+    }
+
+
+    public static float map(float value, float leftMin, float leftMax, float rightMin, float rightMax)
+    {
+        return rightMin + (value - leftMin) * (rightMax - rightMin) / (leftMax - leftMin);
     }
 }

@@ -27,6 +27,7 @@ public class LoadingTips : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         t += Time.deltaTime;
 
         if (t >= 3)

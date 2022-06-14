@@ -9,6 +9,14 @@
 using UnityEngine;
 using System.Collections;
 
+using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using System.Collections;
+using UnityEngine.UI;
+
+
+
 
 
 /**
@@ -19,8 +27,11 @@ using System.Collections;
 public class SensorListener : MonoBehaviour
 {
     public bool logArrivingMessages = true;
-    public int d1, d2, d3, d4, d5, d6, d7;
+    public int a0, a1;
 
+    public LongClickButton button;
+
+    EventSystem eventSystem = EventSystem.current;
 
     // Invoked when a line of data is received from the serial device.
     void OnMessageArrived(string msg)
@@ -28,8 +39,8 @@ public class SensorListener : MonoBehaviour
         string log = "Message arrived: " + msg;
         string[] dataArray = msg.Split(' ');
         
-        d1 = int.Parse(dataArray[0]);
-        d2 = int.Parse(dataArray[1]);
+        a0 = int.Parse(dataArray[0]);
+        a1 = int.Parse(dataArray[1]);
 
         if (logArrivingMessages)
             Debug.Log(log);
@@ -44,5 +55,15 @@ public class SensorListener : MonoBehaviour
             Debug.Log("Connection established");
         else
             Debug.Log("Connection attempt failed or disconnection detected");
+    }
+
+    void Update()
+    {
+        if (a1 == 0)
+        {
+            button.pointerDown = true;
+
+            ExecuteEvents.Execute(button.gameObject, new BaseEventData(eventSystem), ExecuteEvents.submitHandler);
+        }
     }
 }

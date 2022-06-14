@@ -13,6 +13,8 @@ public class SensorSender : MonoBehaviour
 
     public List<Color> colorList = new List<Color>();
 
+    public List<LEDs> LEDList;
+
     void Awake()
     {
         instance = this;
@@ -35,9 +37,15 @@ public class SensorSender : MonoBehaviour
         for(int i = 0; i < 10; i++)
         {
             Color c = colorList[i];
-            byte r = (byte)Mathf.Round(c.r * 255);
-            byte g = (byte)Mathf.Round(c.g * 255);
-            byte b = (byte)Mathf.Round(c.b * 255);
+            //byte r = (byte)Mathf.Round(c.r * 255);
+            //byte g = (byte)Mathf.Round(c.g * 255);
+            //byte b = (byte)Mathf.Round(c.b * 255);
+
+            byte r = (byte)Mathf.Round(LEDList[i].LedMaterial.color.r * 255);
+            byte g = (byte)Mathf.Round(LEDList[i].LedMaterial.color.g * 255);
+            byte b = (byte)Mathf.Round(LEDList[i].LedMaterial.color.b * 255);
+
+            colorList[i] = LEDList[i].LedMaterial.color;
 
             byteArray[index++] = r;
             byteArray[index++] = g;
@@ -50,5 +58,6 @@ public class SensorSender : MonoBehaviour
         {
             serialController.SendSerialMessage(byteArray);
         }
+              
     }
 }
