@@ -27,7 +27,7 @@ using UnityEngine.UI;
 public class SensorListener : MonoBehaviour
 {
     public bool logArrivingMessages = true;
-    public int a0, a1;
+    public int /*a0, a1, */ a2, a3;
 
     public LongClickButton button;
 
@@ -39,8 +39,10 @@ public class SensorListener : MonoBehaviour
         string log = "Message arrived: " + msg;
         string[] dataArray = msg.Split(' ');
         
-        a0 = int.Parse(dataArray[0]);
-        a1 = int.Parse(dataArray[1]);
+       // a0 = int.Parse(dataArray[0]);
+       // a1 = int.Parse(dataArray[1]);
+        a2 = int.Parse(dataArray[0]);
+        a3 = int.Parse(dataArray[1]);
 
         if (logArrivingMessages)
             Debug.Log(log);
@@ -59,11 +61,11 @@ public class SensorListener : MonoBehaviour
 
     void Update()
     {
-        if (a1 == 0)
-        {
-            button.pointerDown = true;
+        //if (a1 == 0)
+        //{
+        //    button.pointerDown = true;
 
-            ExecuteEvents.Execute(button.gameObject, new BaseEventData(eventSystem), ExecuteEvents.submitHandler);
-        }
+        //    ExecuteEvents.Execute(button.gameObject, new BaseEventData(eventSystem), ExecuteEvents.submitHandler);
+        //}
     }
 }

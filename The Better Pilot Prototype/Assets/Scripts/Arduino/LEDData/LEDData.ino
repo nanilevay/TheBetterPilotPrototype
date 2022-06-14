@@ -1,8 +1,15 @@
 #include <FastLED.h>
+#include <Servo.h>
 
 #define LED_PIN     6
 #define NUM_LEDS    10
 #define BRIGHTNESS  200
+
+// Servo Stuff
+
+Servo myservo;  // create servo object to control a servo
+
+
 
 
 CRGB leds[NUM_LEDS];
@@ -11,8 +18,13 @@ CRGB leds[NUM_LEDS];
 char bufferLCD[32];
 byte bufferLED[NUM_LEDS*3];
 
+
+byte servo;
+
 void setup()
 {
+   myservo.attach(9);
+   
   delay(3000); // sanity delay
   
   Serial.begin(115200);
@@ -31,7 +43,11 @@ void loop()
   {
 
     //Para ser 1 byte (que vai controlar o servo)
-    //byte servo = Serial.read();
+    //byte servo = Serial.read();   
+
+    servo = Serial.read();   
+      
+    myservo.write(servo);  
 
     //Para ler 32 bytes (16x2) para o LCD
     //Serial.readBytes(bufferLCD, 32);

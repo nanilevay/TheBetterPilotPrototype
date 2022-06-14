@@ -21,6 +21,13 @@ public class RotateHandle : MonoBehaviour, IDragHandler
 
     public AudioSource AudioToPlay;
 
+    public SensorListener SensorValues;
+
+
+    void Start()
+    {
+        transform.rotation = Quaternion.Euler(0, 0, SensorValues.a2);
+    }
     IEnumerator PlaySound()
     {
         AudioToPlay.Play();
@@ -76,38 +83,39 @@ public class RotateHandle : MonoBehaviour, IDragHandler
 
 
     public void Update()
-        {
+    {
+        // transform.rotation = Quaternion.Euler(0, 0, SensorValues.a2 * 4);
 
         if (IsMoving && !AudioToPlay.isPlaying)
         {
             StartCoroutine(PlaySound());
         }
 
-        if(!IsMoving)
+        if (!IsMoving)
         {
             AudioToPlay.Stop();
         }
 
         currentRot = gameObject.transform.localEulerAngles.z;
 
-            if (Input.GetMouseButtonUp(0))
-            {
-                IsMoving = false;
+        if (Input.GetMouseButtonUp(0))
+        {
+            IsMoving = false;
 
-            }
-
-
-            if (active)
-                    textDisplay.text = Mathf.Round(gameObject.transform.localEulerAngles.z).ToString() + "º";
-
-                else
-                {
-                    textDisplay.text = "Component OFF";
-                }
-
-
-               // SendValue = Mathf.Round(gameObject.transform.localEulerAngles.z);
         }
+
+
+        if (active)
+            textDisplay.text = Mathf.Round(gameObject.transform.localEulerAngles.z).ToString() + "º";
+
+        else
+        {
+            textDisplay.text = "Component OFF";
+        }
+
+
+        // SendValue = Mathf.Round(gameObject.transform.localEulerAngles.z);
+    }
 
     public void RotateObject(float valueToRotate)
     {
@@ -116,5 +124,15 @@ public class RotateHandle : MonoBehaviour, IDragHandler
         transform.rotation = Quaternion.Euler(0, 0, valueToRotate * 360 * 2);
         Debug.Log(valueToRotate);
     }
+
+
+    public void PhysicalRotator()
+    {
+        // gameObject.transform.localRotation = Quaternion.Euler(0, 0, valueToRotate);
+
+        transform.rotation = Quaternion.Euler(0, 0, SensorValues.a2); // * 2);
+    }
+
+    
 
 }

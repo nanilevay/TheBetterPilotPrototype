@@ -21,6 +21,14 @@ public class ProximityPuzzle : MonoBehaviour
 
     public CodeController codeController;
 
+    public SensorListener SensorValue;
+
+    public int rnd;
+
+    public TextMeshProUGUI DebugText;
+
+    public AudioSource AudioToPlay;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,12 +38,27 @@ public class ProximityPuzzle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        DebugText.text = SensorValue.a3.ToString();
+
         if (Manager.CodeDisplayer.currentCodes.Contains("2922"))
         {
+
+            if (SensorValue.a3 <= rnd + 2 && SensorValue.a3 >= rnd - 2)
+            {
+                StartCoroutine(SoundPlayer());
+            }
+
+            else
+            {
+                StartCoroutine(SoundStopper());
+            }
+
+
             if (Sensor.ProximityDetected && Once && !AssociatedPuzzle.solved)
             {
                 Once = false;
-                coroutine = StartCoroutine(FinishPuzzle());
+                StartCoroutine(DistanceMaker());
+                // coroutine = StartCoroutine(FinishPuzzle());
             }
 
             if (AssociatedPuzzle.solved)
@@ -51,6 +74,52 @@ public class ProximityPuzzle : MonoBehaviour
             AssociatedPuzzle.solved = false;
 
         }
+
+
+
+        if (SensorValue.a3 >= rnd + 2 || SensorValue.a3 <= rnd - 2)
+        {
+            StartCoroutine(SoundStopper());
+        }
+
+
+        //if(SensorValue.a3 == rnd)
+        //{
+        //    Once = true;
+        //    AssociatedPuzzle.solved = false;
+        //}
+    }
+
+    IEnumerator DistanceMaker()
+    {
+        rnd = UnityEngine.Random.Range(0,15);
+
+        Debug.Log(rnd);
+
+        StartCoroutine(FinishPuzzle());
+
+        yield break;
+
+    }
+
+
+    IEnumerator SoundPlayer()
+    {
+        if(!AudioToPlay.isPlaying)
+            AudioToPlay.Play();
+
+        yield break;
+
+    }
+
+
+    IEnumerator SoundStopper()
+    {
+        if (AudioToPlay.isPlaying)
+            AudioToPlay.Stop();
+
+        yield break;
+
     }
 
 
@@ -69,19 +138,20 @@ public class ProximityPuzzle : MonoBehaviour
             Led.color = Color.blue;
             yield return new WaitForSeconds(1f);
             Led.color = Color.black;
-            yield return new WaitForSeconds(1f);
-            Led.color = Color.blue;
-            yield return new WaitForSeconds(1f);
-            Led.color = Color.black;
-            yield return new WaitForSeconds(1f);
+            //yield return new WaitForSeconds(1f);
+            //Led.color = Color.blue;
+            //yield return new WaitForSeconds(1f);
+            //Led.color = Color.black;
+            //yield return new WaitForSeconds(1f);
 
-            if(Sensor.ProximityDetected)
+            if (SensorValue.a3 <= rnd + 2 && SensorValue.a3 >= rnd - 2)
             {
                 codeController.RemoveCodes("2922");
                 Manager.CodeDisplayer.currentCodes.Remove("2922");
                 AssociatedPuzzle.solved = true;
                 Once = true;
                 Led.color = Color.green;
+                StartCoroutine(SoundStopper());
                 yield break;
             }
         }
@@ -91,4 +161,42 @@ public class ProximityPuzzle : MonoBehaviour
         yield break;
        
     }
+
+    //IEnumerator FinishPuzzle()
+    //{
+    //    while (Sensor.ProximityDetected)
+    //    {
+    //        Led.color = Color.blue;
+    //        yield return new WaitForSeconds(1f);
+    //        Led.color = Color.black;
+    //        yield return new WaitForSeconds(1f);
+    //        Led.color = Color.blue;
+    //        yield return new WaitForSeconds(1f);
+    //        Led.color = Color.black;
+    //        yield return new WaitForSeconds(1f);
+    //        Led.color = Color.blue;
+    //        yield return new WaitForSeconds(1f);
+    //        Led.color = Color.black;
+    //        yield return new WaitForSeconds(1f);
+    //        Led.color = Color.blue;
+    //        yield return new WaitForSeconds(1f);
+    //        Led.color = Color.black;
+    //        yield return new WaitForSeconds(1f);
+
+    //        if (Sensor.ProximityDetected)
+    //        {
+    //            codeController.RemoveCodes("2922");
+    //            Manager.CodeDisplayer.currentCodes.Remove("2922");
+    //            AssociatedPuzzle.solved = true;
+    //            Once = true;
+    //            Led.color = Color.green;
+    //            yield break;
+    //        }
+    //    }
+
+    //    Led.color = Color.green;
+    //    Once = true;
+    //    yield break;
+
+    //}
 }

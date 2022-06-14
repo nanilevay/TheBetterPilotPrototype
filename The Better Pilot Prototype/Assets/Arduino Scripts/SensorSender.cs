@@ -11,7 +11,11 @@ public class SensorSender : MonoBehaviour
     public bool sendData = false;
     public byte[] byteArray;
 
+    public byte[] ServoNum;
+        
     public List<Color> colorList = new List<Color>();
+
+    public ServoRotation ServoObject;
 
     public List<LEDs> LEDList;
 
@@ -27,12 +31,16 @@ public class SensorSender : MonoBehaviour
 
         byteArray = new byte[10*3]; // 10 LEDs, 3 bytes por LED (R, G, B)
 
+        ServoNum = new byte[1];
+
     }
 
     
 
     void FixedUpdate()
     {
+        ServoNum[0] = (byte)ServoObject.value;
+
         int index = 0;
         for(int i = 0; i < 10; i++)
         {
@@ -56,6 +64,7 @@ public class SensorSender : MonoBehaviour
 
         if(sendData)
         {
+            serialController.SendSerialMessage(ServoNum);
             serialController.SendSerialMessage(byteArray);
         }
               
