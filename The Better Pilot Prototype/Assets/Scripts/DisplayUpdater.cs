@@ -78,6 +78,8 @@ public class DisplayUpdater : MonoBehaviour
     }
     void Update()
     {
+        TimeBeforeNextCode = GamePrefs.NewCodeSpeed;
+
         t += Time.deltaTime;
 
         if (t >= TimeBeforeNextCode && i < currentCodes.Capacity)

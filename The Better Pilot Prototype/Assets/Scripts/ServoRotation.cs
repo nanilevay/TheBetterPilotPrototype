@@ -51,7 +51,10 @@ public class ServoRotation : MonoBehaviour
         periodLength = GamePrefs.ServoSpeed;
     }
     void Update()
-    {   if (GamePrefs.ServoOn)
+    {
+        periodLength = GamePrefs.ServoSpeed;
+
+        if (GamePrefs.ServoOn)
         {
             if (value == 0 || value == 180)
             {

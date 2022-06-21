@@ -132,6 +132,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        ResetCounter = GamePrefs.ResetCounter;
         if (togglers[0].GetComponent<Toggle>().isOn && togglers[1].GetComponent<Toggle>().isOn && ButtonOn && checker)
         {
             stopwatch.StartStopWatch();

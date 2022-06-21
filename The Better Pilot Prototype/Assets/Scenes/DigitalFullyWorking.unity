@@ -649,6 +649,7 @@ MonoBehaviour:
   sendData: 1
   byteArray: 
   ServoNum: 
+  ScreenText: 
   colorList: []
   ServoObject: {fileID: 1874895588}
   LEDList:
@@ -662,6 +663,11 @@ MonoBehaviour:
   - {fileID: 1162784754}
   - {fileID: 1918742997}
   - {fileID: 1215927233}
+  Display: {fileID: 1686905367}
+  ExtraCode: {fileID: 1686905365}
+  Manager: {fileID: 1603273736}
+  GameOver: {fileID: 917405604}
+  Watch: {fileID: 1859257644}
 --- !u!114 &12907670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2500,7 +2506,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: display
+  m_text: '####'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cffac3abb8c72834d93b67d817e7c9f5, type: 2}
   m_sharedMaterial: {fileID: -7068561907765298864, guid: cffac3abb8c72834d93b67d817e7c9f5, type: 2}
@@ -4979,7 +4985,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: display
+  m_text: '####'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cffac3abb8c72834d93b67d817e7c9f5, type: 2}
   m_sharedMaterial: {fileID: -7068561907765298864, guid: cffac3abb8c72834d93b67d817e7c9f5, type: 2}
@@ -20253,7 +20259,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: display
+  m_text: '####'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cffac3abb8c72834d93b67d817e7c9f5, type: 2}
   m_sharedMaterial: {fileID: -7068561907765298864, guid: cffac3abb8c72834d93b67d817e7c9f5, type: 2}
@@ -29701,6 +29707,10 @@ MonoBehaviour:
   - {fileID: 1147528632}
   Counter: 0
   RemoveCodeSound: {fileID: 2112372451}
+  One: help
+  Two: help
+  Three: help
+  Four: help
 --- !u!1 &1689139981
 GameObject:
   m_ObjectHideFlags: 0
@@ -33722,7 +33732,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: display
+  m_text: '####'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: cffac3abb8c72834d93b67d817e7c9f5, type: 2}
   m_sharedMaterial: {fileID: -7068561907765298864, guid: cffac3abb8c72834d93b67d817e7c9f5, type: 2}
@@ -37671,7 +37681,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &2130972803
 MonoBehaviour:
   m_ObjectHideFlags: 0

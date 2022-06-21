@@ -16,10 +16,17 @@ public class CodeController : MonoBehaviour
 
     public AudioSource RemoveCodeSound;
 
+    public string One, Two, Three, Four;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
+        One = textDisplays[0].text;
+        Two = textDisplays[1].text;
+        Three = textDisplays[2].text;
+        Four = textDisplays[3].text;
+
     }
 
     // Update is called once per frame
@@ -30,6 +37,11 @@ public class CodeController : MonoBehaviour
         //    StartCoroutine(UpdateCodes());
         //    Counter++;
         //}
+
+        One = textDisplays[0].text;
+        Two = textDisplays[1].text;
+        Three = textDisplays[2].text;
+        Four = textDisplays[3].text;
 
     }
 
@@ -59,7 +71,7 @@ public class CodeController : MonoBehaviour
     {
         foreach (TextMeshProUGUI Code in textDisplays)
         {
-            if (Code.text.Contains("    ") || Code.text.Contains("display"))
+            if (Code.text.Contains("    ") || Code.text.Contains("####"))
             {
                    Code.text = addingCode;
                    break;
