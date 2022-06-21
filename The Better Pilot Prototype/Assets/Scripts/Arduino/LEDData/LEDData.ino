@@ -44,9 +44,7 @@ void loop()
 
     //Para ser 1 byte (que vai controlar o servo)
     //byte servo = Serial.read();   
-
-    servo = Serial.read();   
-      
+    servo = Serial.read();       
     myservo.write(servo);  
 
     //Para ler 32 bytes (16x2) para o LCD
