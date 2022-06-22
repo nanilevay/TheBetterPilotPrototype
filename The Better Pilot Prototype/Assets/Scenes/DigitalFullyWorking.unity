@@ -667,7 +667,12 @@ MonoBehaviour:
   ExtraCode: {fileID: 1686905365}
   Manager: {fileID: 1603273736}
   GameOver: {fileID: 917405604}
+  PauseMenu: {fileID: 1213838219}
   Watch: {fileID: 1859257644}
+  InfoPanel: {fileID: 543505692}
+  Settings: {fileID: 1436429697}
+  MainMenu: 0
+  LoadingMenu: 0
 --- !u!114 &12907670
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37681,7 +37686,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2130972803
 MonoBehaviour:
   m_ObjectHideFlags: 0

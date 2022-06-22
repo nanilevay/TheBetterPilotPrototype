@@ -31,7 +31,17 @@ public class SensorSender : MonoBehaviour
 
     public GameObject GameOver;
 
+    public GameObject PauseMenu;
+
     public StopWatch Watch;
+
+    public GameObject InfoPanel;
+
+    public GameObject Settings;
+
+    public bool MainMenu;
+
+    public bool LoadingMenu;
 
 
     void Awake()
@@ -54,134 +64,209 @@ public class SensorSender : MonoBehaviour
 
     }
 
+
+    void Update()
+    {
+        if (!MainMenu && !LoadingMenu)
+        {
+            if (PauseMenu.activeSelf)
+            {
+                int indexi = 0;
+
+                foreach (char C in "PAUSED")
+                {
+                    ScreenText[indexi] = (byte)C;
+
+                    indexi++;
+                }
+            }
+
+            if (InfoPanel.activeSelf)
+            {
+                int indexi = 0;
+
+                foreach (char C in "INFO")
+                {
+                    ScreenText[indexi] = (byte)C;
+
+                    indexi++;
+                }
+            }
+
+
+            if (Settings.activeSelf)
+            {
+                int indexi = 0;
+
+                foreach (char C in "SETTINGS")
+                {
+                    ScreenText[indexi] = (byte)C;
+
+                    indexi++;
+                }
+            }
+        }
+    }
     
 
     void FixedUpdate()
     {
-        if (!GameOver.activeSelf)
+        Debug.Log(ScreenText[0]);
+
+        if (MainMenu)
         {
-            ServoNum[0] = (byte)ServoObject.value;
-
-            int index = 0;
-            for (int i = 0; i < 10; i++)
-            {
-                Color c = colorList[i];
-                //byte r = (byte)Mathf.Round(c.r * 255);
-                //byte g = (byte)Mathf.Round(c.g * 255);
-                //byte b = (byte)Mathf.Round(c.b * 255);
-
-                byte r = (byte)Mathf.Round(LEDList[i].LedMaterial.color.r * 255);
-                byte g = (byte)Mathf.Round(LEDList[i].LedMaterial.color.g * 255);
-                byte b = (byte)Mathf.Round(LEDList[i].LedMaterial.color.b * 255);
-
-                colorList[i] = LEDList[i].LedMaterial.color;
-
-                byteArray[index++] = r;
-                byteArray[index++] = g;
-                byteArray[index++] = b;
-
-            }
-
             int index2 = 0;
 
-            foreach (char C in Display.One)
+            foreach (char C in "WELCOME TO THEBETTER PILOT !!")
             {
                 ScreenText[index2] = (byte)C;
 
                 index2++;
             }
+        }
 
+        if (LoadingMenu)
+        {
+            int index2 = 0;
 
-            int index3 = 4;
-
-            foreach (char C in Display.Two)
+            foreach (char C in "PLANEINITIALIZING...")
             {
-                ScreenText[index3] = (byte)C;
+                ScreenText[index2] = (byte)C;
 
-                index3++;
-            }
-
-            int index4 = 8;
-
-            foreach (char C in Display.Three)
-            {
-                ScreenText[index4] = (byte)C;
-
-                index4++;
-            }
-
-            int index5 = 12;
-
-            foreach (char C in Display.Four)
-            {
-                ScreenText[index5] = (byte)C;
-
-                index5++;
-            }
-
-
-            if (ExtraCode.currentCodes.Contains("5790"))
-            {
-                int index6 = 16;
-
-                foreach (char C in "5790")
-                {
-                    ScreenText[index6] = (byte)C;
-
-                    index6++;
-                }
-            }
-
-            int index7 = 20;
-
-            foreach (char C in Manager.SerialNumberDisplay.text)
-            {
-                ScreenText[index7] = (byte)C;
-
-                index7++;
+                index2++;
             }
         }
 
         else
         {
-            ServoNum[0] = 0;
-
-            int index1 = 0;
-
-            foreach (char C in "GAMEOVER")
+            if (!GameOver.activeSelf)
             {
-                ScreenText[index1] = (byte)C;
+                ServoNum[0] = (byte)ServoObject.value;
 
-                index1++;
+                int index = 0;
+                for (int i = 0; i < 10; i++)
+                {
+                    Color c = colorList[i];
+                    //byte r = (byte)Mathf.Round(c.r * 255);
+                    //byte g = (byte)Mathf.Round(c.g * 255);
+                    //byte b = (byte)Mathf.Round(c.b * 255);
+
+                    byte r = (byte)Mathf.Round(LEDList[i].LedMaterial.color.r * 255);
+                    byte g = (byte)Mathf.Round(LEDList[i].LedMaterial.color.g * 255);
+                    byte b = (byte)Mathf.Round(LEDList[i].LedMaterial.color.b * 255);
+
+                    colorList[i] = LEDList[i].LedMaterial.color;
+
+                    byteArray[index++] = r;
+                    byteArray[index++] = g;
+                    byteArray[index++] = b;
+
+                }
+
+                if (!PauseMenu.activeSelf && !InfoPanel.activeSelf && !Settings.activeSelf)
+                {
+                    int index2 = 0;
+
+                    foreach (char C in Display.One)
+                    {
+                        ScreenText[index2] = (byte)C;
+
+                        index2++;
+                    }
+
+
+                    int index3 = 4;
+
+                    foreach (char C in Display.Two)
+                    {
+                        ScreenText[index3] = (byte)C;
+
+                        index3++;
+                    }
+
+                    int index4 = 8;
+
+                    foreach (char C in Display.Three)
+                    {
+                        ScreenText[index4] = (byte)C;
+
+                        index4++;
+                    }
+
+                    int index5 = 12;
+
+                    foreach (char C in Display.Four)
+                    {
+                        ScreenText[index5] = (byte)C;
+
+                        index5++;
+                    }
+
+
+                    if (ExtraCode.currentCodes.Contains("5790"))
+                    {
+                        int index6 = 16;
+
+                        foreach (char C in "5790")
+                        {
+                            ScreenText[index6] = (byte)C;
+
+                            index6++;
+                        }
+                    }
+
+                    int index7 = 20;
+
+                    foreach (char C in Manager.SerialNumberDisplay.text)
+                    {
+                        ScreenText[index7] = (byte)C;
+
+                        index7++;
+                    }
+                }
             }
 
-            int index2 = 9;
-            foreach (char C in Watch.FinalScore.text)
+            else
             {
-                ScreenText[index2] = (byte)C;
+                ServoNum[0] = 0;
 
-                index2++;
+                int index1 = 0;
+
+                foreach (char C in "GAMEOVER")
+                {
+                    ScreenText[index1] = (byte)C;
+
+                    index1++;
+                }
+
+                int index2 = 9;
+                foreach (char C in Watch.FinalScore.text)
+                {
+                    ScreenText[index2] = (byte)C;
+
+                    index2++;
+                }
+
+
+                int index = 0;
+                for (int i = 0; i < 10; i++)
+                {
+                    Color c = colorList[i];
+
+                    byte r = (byte)Mathf.Round(1 * 255);
+                    byte g = (byte)Mathf.Round(0 * 255);
+                    byte b = (byte)Mathf.Round(0 * 255);
+
+                    colorList[i] = LEDList[i].LedMaterial.color;
+
+                    byteArray[index++] = r;
+                    byteArray[index++] = g;
+                    byteArray[index++] = b;
+
+                }
             }
 
-
-            int index = 0;
-            for (int i = 0; i < 10; i++)
-            {
-                Color c = colorList[i];
-
-                byte r = (byte)Mathf.Round(1 * 255);
-                byte g = (byte)Mathf.Round(0 * 255);
-                byte b = (byte)Mathf.Round(0 * 255);
-
-                colorList[i] = LEDList[i].LedMaterial.color;
-
-                byteArray[index++] = r;
-                byteArray[index++] = g;
-                byteArray[index++] = b;
-
-            }
         }
-            
 
         if (sendData)
         {

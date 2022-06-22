@@ -47,6 +47,24 @@ void setup()
 
 // https://www.arduino.cc/reference/en/language/functions/communication/serial/
 
+
+void DisplayUpdater(int startingPos, int startingIndex, int endingPos, int endingIndex, int row = 0)
+{
+  
+  
+  int startIndx = startingIndex;
+  
+  for(int i = startingPos; i <= endingPos; i++)
+  {
+      lcd.setCursor(i,row);
+      lcd.print(bufferLCD[startIndx]);
+
+      startIndx++;
+  }
+}
+
+
+
 void loop()
 {  
 
@@ -62,111 +80,112 @@ void loop()
     
     Serial.readBytes(bufferLCD, 32);
 
-    if(bufferLCD[0] != 'G' && bufferLCD[1] != 'G')
+    if(bufferLCD[0] != 'P' && bufferLCD[1] != 'P' && bufferLCD[0] != 'W' && bufferLCD[1] != 'W' && bufferLCD[0] && bufferLCD[0] != 'G' && bufferLCD[1] != 'G' && bufferLCD[0] != 'P' && bufferLCD[1] != 'P' && bufferLCD[0] != 'S' && bufferLCD[1] != 'S' && bufferLCD[0] != 'I' && bufferLCD[1] != 'I')
     {
+      lcd.clear();
       // display first code
-      lcd.setCursor(0,0);
-      lcd.print(bufferLCD[0]);
-      lcd.setCursor(1,0);
-      lcd.print(bufferLCD[1]);
-      lcd.setCursor(2,0);
-      lcd.print(bufferLCD[2]);
-      lcd.setCursor(3,0);
-      lcd.print(bufferLCD[3]);
+
+      DisplayUpdater(0,0,3,3);
 
       // display second code
-      lcd.setCursor(5,0);
-      lcd.print(bufferLCD[4]);
-      lcd.setCursor(6,0);
-      lcd.print(bufferLCD[5]);
-      lcd.setCursor(7,0);
-      lcd.print(bufferLCD[6]);
-      lcd.setCursor(8,0);
-      lcd.print(bufferLCD[7]);
+ 
+
+      DisplayUpdater(5,4,8,7);
   
       // display third code
-      lcd.setCursor(0,1);
-      lcd.print(bufferLCD[8]);
-      lcd.setCursor(1,1);
-      lcd.print(bufferLCD[9]);
-      lcd.setCursor(2,1);
-      lcd.print(bufferLCD[10]);
-      lcd.setCursor(3,1);
-      lcd.print(bufferLCD[11]);
+
+
+      DisplayUpdater(0,8,3,11,1);
 
     
       // display fourth code
-      lcd.setCursor(5,1);
-      lcd.print(bufferLCD[12]);
-      lcd.setCursor(6,1);
-      lcd.print(bufferLCD[13]);
-      lcd.setCursor(7,1);
-      lcd.print(bufferLCD[14]);
-      lcd.setCursor(8,1);
-      lcd.print(bufferLCD[15]);
+
+
+      DisplayUpdater(5,12,8,15,1);
   
       // display too many codes code
-      lcd.setCursor(10,0);
-      lcd.print(bufferLCD[16]);
-      lcd.setCursor(11,0);
-      lcd.print(bufferLCD[17]);
-      lcd.setCursor(12,0);
-      lcd.print(bufferLCD[18]);
-      lcd.setCursor(13,0);
-      lcd.print(bufferLCD[19]);
+ 
+
+      DisplayUpdater(10,16,13,19);
 
       // display srl num
-      lcd.setCursor(10,1);
-      lcd.print(bufferLCD[20]);
-      lcd.setCursor(11,1);
-      lcd.print(bufferLCD[21]);
-      lcd.setCursor(12,1);
-      lcd.print(bufferLCD[22]);
-      lcd.setCursor(13,1);
-      lcd.print(bufferLCD[23]);
-      lcd.setCursor(14,1);
-      lcd.print(bufferLCD[24]);
-      lcd.setCursor(15,1);
-      lcd.print(bufferLCD[25]);
+
+
+      DisplayUpdater(10,20,15,25,1);
 
     }
 
-    else
+    else if(bufferLCD[0] == 'P' || bufferLCD[1] == 'P')
     {
+      // Game Paused
 
+      lcd.clear();
+
+      DisplayUpdater(4,0,9,5);
+      
+    }
+
+     else if(bufferLCD[0] == 'I' || bufferLCD[1] == 'I')
+    {
+      // Game Info
+
+      lcd.clear();
+
+
+      DisplayUpdater(4,0,7,3);
+
+      
+    }
+
+     else if(bufferLCD[0] == 'S' || bufferLCD[1] == 'S')
+    {
+      // Game Settings
+
+      lcd.clear();
+
+
+      DisplayUpdater(4,0,11,11);
+
+      
+    }
+
+    else if(bufferLCD[0] == 'G' || bufferLCD[1] == 'G')
+    {
       // Game Over
       lcd.clear();
-      lcd.setCursor(2,0);
-      lcd.print(bufferLCD[0]);
-      lcd.setCursor(3,0);
-      lcd.print(bufferLCD[1]);
-      lcd.setCursor(4,0);
-      lcd.print(bufferLCD[2]);
-      lcd.setCursor(5,0);
-      lcd.print(bufferLCD[3]);
 
-      lcd.setCursor(2,1);
-      lcd.print(bufferLCD[4]);
-      lcd.setCursor(3,1);
-      lcd.print(bufferLCD[5]);
-      lcd.setCursor(4,1);
-      lcd.print(bufferLCD[6]);
-      lcd.setCursor(5,1);
-      lcd.print(bufferLCD[7]);
+
+      DisplayUpdater(2,0,5,3);
+
+
+      DisplayUpdater(2,4,5,7,1);
 
       // stopwatch
-      lcd.setCursor(7,0);
-      lcd.print(bufferLCD[8]);
-      lcd.setCursor(8,0);
-      lcd.print(bufferLCD[9]);
-      lcd.setCursor(9,0);
-      lcd.print(bufferLCD[10]);
-      lcd.setCursor(10,0);
-      lcd.print(bufferLCD[11]);   
-      lcd.setCursor(11,0);
-      lcd.print(bufferLCD[12]);  
-      lcd.setCursor(12,0);
-      lcd.print(bufferLCD[13]);   
+
+
+       DisplayUpdater(7,8,12,13);
+    }
+
+
+    else if(bufferLCD[0] == 'W' || bufferLCD[1] == 'W')
+    {
+      // Main Menu Text
+      lcd.clear();
+
+      DisplayUpdater(0,0,13,13);
+
+      DisplayUpdater(0,14,14,27,1);
+    }
+
+
+    else if(bufferLCD[0] == 'P' || bufferLCD[1] == 'P')
+    {
+      // Main Menu Text
+      lcd.clear();
+
+      DisplayUpdater(0,0,4,5);
+
+      DisplayUpdater(0,6,15,21,1);
     }
     
     //Para ler 3 bytes por LED
