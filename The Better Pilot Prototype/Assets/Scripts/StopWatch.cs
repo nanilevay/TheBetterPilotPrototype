@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class StopWatch : MonoBehaviour
 {
@@ -32,7 +33,9 @@ public class StopWatch : MonoBehaviour
 
         if(GameOver.activeSelf)
         {
-            FinalScore.text = time.ToString(@"mm\:ss");
+            //FinalScore.text = time.ToString(@"mm\:ss");
+            GamePrefs.LastTimer = time.ToString(@"mm\:ss");
+            SceneManager.LoadScene(3);
         }
 
     }

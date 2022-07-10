@@ -1,6 +1,7 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -132,7 +133,8 @@ public class GameManager : MonoBehaviour
     {
         if (!EndlessMode && CodeReceiver.Texts.Count <= 0)
         {
-            Debug.Log("VICTORY");
+            GamePrefs.LastTimer = stopwatch.currentTimeText.text;
+            SceneManager.LoadScene(5);
         }
 
         ResetCounter = GamePrefs.ResetCounter;

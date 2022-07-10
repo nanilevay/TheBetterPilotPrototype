@@ -105,7 +105,6 @@ public class ServoRotation : MonoBehaviour
 
             else
             {
-
                 if (Mathf.Round(value) >= 90 && toggles[0].isOn && toggles[1].isOn)
                 {
                     ManualUp = true;

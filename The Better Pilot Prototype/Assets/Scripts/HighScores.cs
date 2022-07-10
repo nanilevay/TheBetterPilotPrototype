@@ -3,17 +3,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
 using TMPro;
-using System;
 using System.Text;
 using System.IO;
 using System.Linq;
-using System.Runtime.Serialization.Formatters.Binary;
 
 public class HighScores : MonoBehaviour
 {
-    public List<HighScore> HighScoresList = new List<HighScore>();
+    public List<HighScore> EndlessHighScoresList = new List<HighScore>();
 
-    public Transform Box;
+    public List<HighScore> NormalHighScoresList = new List<HighScore>();
+
+    public Transform NormalBox;
+
+    public Transform EndlessBox;
 
     public TextMeshProUGUI TextPrefab;
 
@@ -29,39 +31,42 @@ public class HighScores : MonoBehaviour
         CreateFile();
 
         ArrangeScores();
-        DisplayScores();
 
         yield break;
     }
 
     public void CreateFile()
     {
-        // Get a string with the correct path to the saves 
-        // folder with the user-given file name
-        string FilePath = Application.persistentDataPath + "/save.dat";
-
-        // Replace all text in file with an empty string
-        //File.WriteAllText(FilePath, String.Empty);
-
-        SaveLastScore(FilePath);
+        SaveLastScore();
     }
 
-    public void SaveLastScore(string FilePath)
+    public void SaveLastScore()
     {
-        // ADD THIS BACKJ!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        string FilePath;
+            
+            if(GamePrefs.EndlessMode)  
+                FilePath = Application.persistentDataPath + "/saveEndless.dat";
 
-        //StringBuilder FileContent = new StringBuilder();
+            else
+                FilePath = Application.persistentDataPath + "/saveNotEndless.dat";
 
-        //FileContent.AppendLine(GamePrefs.LastName + "\t" + 
-        //    GamePrefs.LastTimer.ToString() + "\n");
+        if (GamePrefs.LastTimer != null)
+        {
+            StringBuilder FileContent = new StringBuilder();
 
-        //File.AppendAllText(FilePath, FileContent.ToString());
+            FileContent.AppendLine(GamePrefs.LastName + "\t" +
+                GamePrefs.LastTimer.ToString());
 
-        LoadScores(FilePath);
+            File.AppendAllText(FilePath, FileContent.ToString());
+        }
+
+        LoadScores();
     }
 
-    public void LoadScores(string FilePath)
+    public void LoadScores()
     {
+        string FilePath = Application.persistentDataPath + "/saveEndless.dat";
+        
         FileStream file;
 
         if (File.Exists(FilePath)) file = File.OpenRead(FilePath);
@@ -71,47 +76,94 @@ public class HighScores : MonoBehaviour
             return;
         }
 
-        //using (StreamReader streamReader = File.OpenText(FilePath))
-        //{
-        //    //LastPlayerName.text = streamReader.ReadToEnd();
-
-        //    LastPlayerName.text = streamReader.ReadLine();
-        //    streamReader.
-        //}
-
         foreach (string line in System.IO.File.ReadLines(FilePath))
         {
             string[] lines = line.Split('\t');
 
-            Debug.Log(lines[0] + " + " + lines[1]);
-
-            HighScoresList.Add(new HighScore(lines[0], lines[1]));
+            EndlessHighScoresList.Add(new HighScore(lines[0], lines[1]));
         }
 
+        file.Close();
+
+        string FilePath2 = Application.persistentDataPath + "/saveNotEndless.dat";
+
+        FileStream file2;
+
+        if (File.Exists(FilePath2)) file2 = File.OpenRead(FilePath2);
+        else
+        {
+            Debug.Log("File not found");
+            return;
+        }
+
+        foreach (string line in System.IO.File.ReadLines(FilePath2))
+        {
+            string[] lines = line.Split('\t');
+
+            NormalHighScoresList.Add(new HighScore(lines[0], lines[1]));
+        }
 
         file.Close();
+
     }
     public void ArrangeScores()
     {
-        // fix
-        //HighScoresList.Sort();
+        List<HighScore> SortedList =
+            EndlessHighScoresList.OrderBy(o => o.Time).ToList();
 
-        List<HighScore> SortedList = HighScoresList.OrderBy(o => o.Time).ToList();
+        SortedList.Reverse();
 
-        HighScoresList = SortedList;
+        EndlessHighScoresList.Clear();
+
+        EndlessHighScoresList.Add(SortedList[0]);
+        EndlessHighScoresList.Add(SortedList[1]);
+        EndlessHighScoresList.Add(SortedList[2]);
+        EndlessHighScoresList.Add(SortedList[3]);
+        EndlessHighScoresList.Add(SortedList[4]);
+
+        DisplayScores(EndlessHighScoresList, EndlessBox);
+
+        List<HighScore> SortedList1 =
+            NormalHighScoresList.OrderBy(o => o.Time).ToList();
+
+        NormalHighScoresList.Clear();
+
+        NormalHighScoresList.Add(SortedList1[0]);
+        NormalHighScoresList.Add(SortedList1[1]);
+        NormalHighScoresList.Add(SortedList1[2]);
+        NormalHighScoresList.Add(SortedList1[3]);
+        NormalHighScoresList.Add(SortedList1[4]);
+
+        DisplayScores(NormalHighScoresList, NormalBox);
     }
 
-    public void DisplayScores()
+    public void DisplayScores(List<HighScore> Scores, Transform Obj)
     {
         // fix w diff layout unity
 
-        foreach(HighScore s in HighScoresList)
+        int Counter = 1;
+
+        foreach(HighScore s in Scores)
         {
-            TextMeshProUGUI newText = Instantiate(TextPrefab, Box);
+            TextMeshProUGUI RankNum = Instantiate(TextPrefab, Obj);
 
-            newText.transform.parent = Box;
+            TextMeshProUGUI newTextName = Instantiate(TextPrefab, Obj);
 
-            newText.text += s.Name + ": " + s.Time + "\n";
+            TextMeshProUGUI newTextScore = Instantiate(TextPrefab, Obj);
+
+            RankNum.transform.parent = Obj; 
+
+            newTextName.transform.parent = Obj;
+
+            newTextScore.transform.parent = Obj;
+
+            RankNum.text = Counter.ToString();
+
+            newTextName.text += s.Name;
+
+            newTextScore.text += s.Time;
+
+            Counter++;
         }
       
     }

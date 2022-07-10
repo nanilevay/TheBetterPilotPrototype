@@ -19,6 +19,7 @@ public class rotatingArduino : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     void DataReceived(string data, UduinoDevice board)

@@ -18,7 +18,7 @@ public static class GamePrefs
 
     public static bool EndlessMode = true;
 
-    public static TimeSpan LastTimer = TimeSpan.FromSeconds(Time.deltaTime);
+    public static string LastTimer;
 
     public static string LastName = "Player";
 
