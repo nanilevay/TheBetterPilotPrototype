@@ -1,7 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
-using System.Collections;
 using UnityEngine.UI;
 
 public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
@@ -48,7 +47,6 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
         {
 			DoubleTap = false;
 		}
-
 	}
 
 	public void OnPointerDown(PointerEventData eventData)
@@ -56,7 +54,6 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 		if (puzzle.active)
 		{
 			pointerDown = true;
-			//Debug.Log("OnPointerDown");
 
 			if (Input.GetKey(KeyCode.LeftControl))
 			{
@@ -70,7 +67,6 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 		if (puzzle.active)
 		{
 			Reset();
-			//Debug.Log("OnPointerUp");
 		}
 	}
 

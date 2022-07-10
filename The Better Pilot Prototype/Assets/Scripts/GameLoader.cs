@@ -1,16 +1,8 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using TMPro;
 
 public class GameLoader : MonoBehaviour
 {
-
     public Animator anim;
 
     public GameObject FadeObj;
@@ -29,7 +21,7 @@ public class GameLoader : MonoBehaviour
 
     void Update()
     {
-        if(!GamePrefs.GameStart)
+        if (!GamePrefs.GameStart)
         {
             FadeObj.SetActive(false);
         }
@@ -54,7 +46,7 @@ public class GameLoader : MonoBehaviour
     {
         FadeOutObj.SetActive(true);
         FadeOutAnim.SetBool("start", true);
-        yield return new WaitForSeconds(2);   
+        yield return new WaitForSeconds(2);
         LoadGame();
         yield break;
     }
@@ -88,10 +80,9 @@ public class GameLoader : MonoBehaviour
 
     public void ToggleInstructions()
     {
-        if(!Instructions.activeSelf)
+        if (!Instructions.activeSelf)
             Instructions.SetActive(true);
         else
             Instructions.SetActive(false);
     }
 }
-

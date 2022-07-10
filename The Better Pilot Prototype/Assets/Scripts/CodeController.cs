@@ -1,10 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
-using System.Linq;
 
 public class CodeController : MonoBehaviour
 {
@@ -32,17 +28,10 @@ public class CodeController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if (Counter < ScreenCodes.currentCodes.Count)
-        //{
-        //    StartCoroutine(UpdateCodes());
-        //    Counter++;
-        //}
-
         One = textDisplays[0].text;
         Two = textDisplays[1].text;
         Three = textDisplays[2].text;
         Four = textDisplays[3].text;
-
     }
 
     public void CodeUpdate(string addingCode)
@@ -61,9 +50,9 @@ public class CodeController : MonoBehaviour
         {
             
             Code.text = "    ";
-            
+           
         }
-
+       
         yield break;
     }
 
@@ -87,7 +76,6 @@ public class CodeController : MonoBehaviour
         StartCoroutine(RemoveCode(removingCode));
     }
 
-
     IEnumerator RemoveCode(string removingCode)
     {
         Counter--;
@@ -106,5 +94,3 @@ public class CodeController : MonoBehaviour
         yield break;
     }
 }
-
-

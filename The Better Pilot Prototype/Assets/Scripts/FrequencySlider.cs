@@ -1,9 +1,7 @@
 using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class FrequencySlider : MonoBehaviour
 {
@@ -34,16 +32,6 @@ public class FrequencySlider : MonoBehaviour
         // PitchGenerator();
 
         audioSource.Stop();
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        //Fetch the AudioSource from the GameObject
-       // audioSource = GetComponent<AudioSource>();
-
-        //Initialize the pitch
-       // audioSource.pitch = startingPitch;
     }
 
     // Update is called once per frame
@@ -124,15 +112,8 @@ public class FrequencySlider : MonoBehaviour
 
         startingPitch = pitch;
 
-        //Debug.Log(startingPitch.ToString());
-
         switcher = false;
     }
-
-    //void OnSliderWasChanged()
-    //{
-    //    audioToMatch.Play();
-    //}
 
     public static float map(float value, float leftMin, float leftMax, float rightMin, float rightMax)
     {

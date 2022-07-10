@@ -27,11 +27,15 @@ using UnityEngine.UI;
 public class SensorListener : MonoBehaviour
 {
     public bool logArrivingMessages = true;
-    public int /*a0, a1, */ a2, a3;
+    public int d0, d1, d2, d3, sliderVal, distanceVal;
 
     public LongClickButton button;
 
+    public Slider sldr;
+
     EventSystem eventSystem = EventSystem.current;
+
+    public DisplaySettings settings;
 
     // Invoked when a line of data is received from the serial device.
     void OnMessageArrived(string msg)
@@ -39,10 +43,12 @@ public class SensorListener : MonoBehaviour
         string log = "Message arrived: " + msg;
         string[] dataArray = msg.Split(' ');
         
-       // a0 = int.Parse(dataArray[0]);
-       // a1 = int.Parse(dataArray[1]);
-        a2 = int.Parse(dataArray[0]);
-        a3 = int.Parse(dataArray[1]);
+        d0 = int.Parse(dataArray[0]); // rotator button
+        d1 = int.Parse(dataArray[1]); // rotator encoder
+        d2 = int.Parse(dataArray[2]); // button 1
+        d3 = int.Parse(dataArray[3]); // button 2
+        sliderVal = int.Parse(dataArray[4]);
+        distanceVal = int.Parse(dataArray[5]);
 
         if (logArrivingMessages)
             Debug.Log(log);
@@ -61,11 +67,15 @@ public class SensorListener : MonoBehaviour
 
     void Update()
     {
-        //if (a1 == 0)
-        //{
-        //    button.pointerDown = true;
+        sldr.value = map(sliderVal,0, 1023, 0, 1);
 
-        //    ExecuteEvents.Execute(button.gameObject, new BaseEventData(eventSystem), ExecuteEvents.submitHandler);
-        //}
+        settings.SliderVal = sliderVal;
+        //settings.Button1.Value = d2;
+        //settings.Button2.Value = d3;
+    }
+
+    public static float map(float value, float leftMin, float leftMax, float rightMin, float rightMax)
+    {
+        return rightMin + (value - leftMin) * (rightMax - rightMin) / (leftMax - leftMin);
     }
 }

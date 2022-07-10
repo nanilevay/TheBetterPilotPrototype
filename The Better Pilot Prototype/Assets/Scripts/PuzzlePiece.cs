@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,22 +11,6 @@ public class PuzzlePiece : MonoBehaviour
 
     //public AudioSource SuccessSound;
 
-    void Update()
-    {
-        //if(solved)
-        //{
-        //    StartCoroutine(Success());
-        //}
-    }
-
-    //IEnumerator Success()
-    //{
-    //    SuccessSound.Play();
-    //    yield return new WaitForSeconds(2);
-    //    SuccessSound.Stop();
-    //    yield break;
-    //}
-
     public void ToggleOn()
     {
         if(this.gameObject.tag == "Slider")
@@ -41,7 +23,7 @@ public class PuzzlePiece : MonoBehaviour
 
         if (this.gameObject.tag == "Display")
         {
-            //this.gameObject.transform.Find("Screen").transform.Find("Screen Text").gameObject.active = true;
+            
         }
 
 

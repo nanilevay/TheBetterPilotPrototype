@@ -1,15 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
 public class ColourButtonPuzzle : MonoBehaviour
 {
     public Button[] buttons;
-
-    //public TextMeshProUGUI textArea;
 
     public bool PressingGreen = false;
 
@@ -32,18 +27,12 @@ public class ColourButtonPuzzle : MonoBehaviour
 
         buttons[1].GetComponent<Button>().onClick.AddListener(BlackClick);
 
-        //buttons[0].GetComponent<Button>().OnPointerUp.AddListener(GreenRelease);
-
-        //buttons[1].GetComponent<Button>().OnPointerUp.AddListener(BlackRelease);
-
-
         buttons[2].GetComponent<Button>().onClick.AddListener(YellowClick);
 
         buttons[3].GetComponent<Button>().onClick.AddListener(BlueClick);
 
         buttons[4].GetComponent<Button>().onClick.AddListener(RedClick);
     }
-
 
     void GreenClick()
     {
@@ -187,6 +176,4 @@ public class ColourButtonPuzzle : MonoBehaviour
             code = "";
         }
     }
-
-
 }

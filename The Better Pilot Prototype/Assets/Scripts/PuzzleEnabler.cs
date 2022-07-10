@@ -1,11 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using TMPro;
 
 public class PuzzleEnabler : MonoBehaviour
 {
@@ -52,11 +47,6 @@ public class PuzzleEnabler : MonoBehaviour
 
     public CodeController codeController;
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -85,7 +75,6 @@ public class PuzzleEnabler : MonoBehaviour
         }
     }
 
-
     public void PuzzleConfirmation()
     {
         if(YellowOption1)
@@ -100,7 +89,6 @@ public class PuzzleEnabler : MonoBehaviour
                 PuzzleList[5].ToggleOn();
 
                 StartCoroutine(FinishPuzzle());
-
             }
         }
 
@@ -124,7 +112,6 @@ public class PuzzleEnabler : MonoBehaviour
                 PuzzleList[2].ToggleOn();
 
                 StartCoroutine(FinishPuzzle());
-
             }
         }
 
@@ -156,7 +143,6 @@ public class PuzzleEnabler : MonoBehaviour
                 PuzzleList[2].ToggleOn();
 
                 StartCoroutine(FinishPuzzle());
-
             }
         }
 
@@ -169,7 +155,6 @@ public class PuzzleEnabler : MonoBehaviour
                 PuzzleList[2].ToggleOn();
 
                 StartCoroutine(FinishPuzzle());
-
             }
         }
 
@@ -196,14 +181,11 @@ public class PuzzleEnabler : MonoBehaviour
                 PuzzleList[0].ToggleOn();
 
                 StartCoroutine(FinishPuzzle());
-
             }
         }
 
         if (RedOption4)
-        {
-           
-
+        {       
             if (BlueButton.GetComponent<LongClickButton>().hold && Mathf.Round(Servo.value) == 60)
             {
                 BlueButton.GetComponent<LongClickButton>().hold = false;
@@ -213,7 +195,6 @@ public class PuzzleEnabler : MonoBehaviour
                 PuzzleList[1].ToggleOn();
 
                 StartCoroutine(FinishPuzzle());
-
             }
         }
 
@@ -255,7 +236,6 @@ public class PuzzleEnabler : MonoBehaviour
             }
         }
     }
-
     IEnumerator FinishPuzzle()
     {
         codeController.RemoveCodes("6430");
@@ -379,8 +359,6 @@ public class PuzzleEnabler : MonoBehaviour
 
             Debug.Log(decider + "," + component);
         }
-
-        
 
         switcher = false;
     }

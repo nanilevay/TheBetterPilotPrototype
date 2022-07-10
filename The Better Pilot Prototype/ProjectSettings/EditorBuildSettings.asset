@@ -14,4 +14,13 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/DigitalFullyWorking.unity
     guid: e8be7a9e6079f314ba33e5dfdbe9fb00
+  - enabled: 1
+    path: Assets/Scenes/GameOver.unity
+    guid: de5cb4d50058cd74097c3f2702e1c4d6
+  - enabled: 1
+    path: Assets/Scenes/ScoreBoard.unity
+    guid: d3676e707ea6c9b46a5315c032156504
+  - enabled: 1
+    path: Assets/Scenes/Victory.unity
+    guid: 9645959415e9d7e4e9e32c0b0b6be908
   m_configObjects: {}

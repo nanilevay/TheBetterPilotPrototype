@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class ParallaxScript : MonoBehaviour
@@ -15,7 +13,6 @@ public class ParallaxScript : MonoBehaviour
     {
          myRectTransform = ObjToMove.GetComponent<RectTransform>();
          InitialPos = myRectTransform.localPosition;
-
     }
 
     // Update is called once per frame
@@ -24,10 +21,8 @@ public class ParallaxScript : MonoBehaviour
         if (-myRectTransform.offsetMax.x >= 951)
             myRectTransform.localPosition = InitialPos;
 
-            myRectTransform.localPosition -= Vector3.right;
+        myRectTransform.localPosition -= Vector3.right;
 
         Debug.Log(myRectTransform.offsetMax.x);
     }
-
-
 }

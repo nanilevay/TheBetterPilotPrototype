@@ -1,7 +1,9 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-
+using System;
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+using System.Collections;
+using UnityEngine.UI;
 public static class GamePrefs
 {
     public static bool ServoOn = true;
@@ -14,4 +16,11 @@ public static class GamePrefs
     public static int NewCodeSpeed = 20;
     public static float MusicVol = 0.35f;
 
+    public static bool EndlessMode = true;
+
+    public static TimeSpan LastTimer = TimeSpan.FromSeconds(Time.deltaTime);
+
+    public static string LastName = "Player";
+
+    // Add led n screen values
 }

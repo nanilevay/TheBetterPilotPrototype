@@ -1,8 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using TMPro;
 
 public class LoadingTips : MonoBehaviour
@@ -31,20 +29,13 @@ public class LoadingTips : MonoBehaviour
         t += Time.deltaTime;
 
         if (t >= 3)
-        {
-
-            
+        {  
             anim.SetBool("switching", true);
 
             StartCoroutine(ToggleFalse());
             
-
-            t = 0;
-
-            
-        }
-
-        
+            t = 0;          
+        }     
     }
 
     IEnumerator ToggleFalse()
@@ -57,6 +48,5 @@ public class LoadingTips : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         anim.SetBool("back", false);
         yield break;
-    }
-        
+    }       
 }

@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
@@ -20,7 +18,6 @@ public class MorseCodeReceived : MonoBehaviour
     public bool switcher;
 
     public Coroutine coroutine;
-
 
     /// puzzles
     public Button YellowButton;
@@ -66,7 +63,6 @@ public class MorseCodeReceived : MonoBehaviour
             switcher = true;
         }
     }
-
     IEnumerator MorseDisplay()
     {
         while (true)
@@ -106,11 +102,6 @@ public class MorseCodeReceived : MonoBehaviour
             Lighter.GetComponent<Image>().color = Color.black;
             yield return new WaitForSeconds(2);
         }
-    }
-
-    void Start()
-    {
-       // StartCoroutine(MorseDisplay());
     }
 
     void PuzzleConfirmation()
@@ -256,5 +247,4 @@ public class MorseCodeReceived : MonoBehaviour
 
         coroutine = StartCoroutine(MorseDisplay());
     }
-
 }

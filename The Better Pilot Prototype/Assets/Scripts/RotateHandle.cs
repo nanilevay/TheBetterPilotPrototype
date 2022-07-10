@@ -1,8 +1,6 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.UI;
 using TMPro;
 
 public class RotateHandle : MonoBehaviour, IDragHandler
@@ -23,10 +21,9 @@ public class RotateHandle : MonoBehaviour, IDragHandler
 
     public SensorListener SensorValues;
 
-
     void Start()
     {
-        transform.rotation = Quaternion.Euler(0, 0, SensorValues.a2);
+        transform.rotation = Quaternion.Euler(0, 0, SensorValues.d1);
     }
     IEnumerator PlaySound()
     {
@@ -61,6 +58,7 @@ public class RotateHandle : MonoBehaviour, IDragHandler
             //Calculate the position of the current object from the lower left corner of the canvas
             Vector3? curScreenPos = CalculateWorldToScreenPos(transform.position);
             if (curScreenPos == null) return;
+
             //Mouse position offset
             Vector2 offset = eventData.position - (Vector2)curScreenPos.Value;
            
@@ -76,16 +74,11 @@ public class RotateHandle : MonoBehaviour, IDragHandler
                 else
                     SendValue = false;
             }
-        }
-
-        
+        }   
     }
-
 
     public void Update()
     {
-        // transform.rotation = Quaternion.Euler(0, 0, SensorValues.a2 * 4);
-
         if (IsMoving && !AudioToPlay.isPlaying)
         {
             StartCoroutine(PlaySound());
@@ -101,9 +94,7 @@ public class RotateHandle : MonoBehaviour, IDragHandler
         if (Input.GetMouseButtonUp(0))
         {
             IsMoving = false;
-
         }
-
 
         if (active)
             textDisplay.text = Mathf.Round(gameObject.transform.localEulerAngles.z).ToString() + "º";
@@ -112,27 +103,17 @@ public class RotateHandle : MonoBehaviour, IDragHandler
         {
             textDisplay.text = "Component OFF";
         }
-
-
-        // SendValue = Mathf.Round(gameObject.transform.localEulerAngles.z);
     }
 
     public void RotateObject(float valueToRotate)
     {
-        // gameObject.transform.localRotation = Quaternion.Euler(0, 0, valueToRotate);
-
         transform.rotation = Quaternion.Euler(0, 0, valueToRotate * 360 * 2);
         Debug.Log(valueToRotate);
     }
 
 
     public void PhysicalRotator()
-    {
-        // gameObject.transform.localRotation = Quaternion.Euler(0, 0, valueToRotate);
-
-        transform.rotation = Quaternion.Euler(0, 0, SensorValues.a2); // * 2);
+    { 
+        transform.rotation = Quaternion.Euler(0, 0, SensorValues.d1);
     }
-
-    
-
 }

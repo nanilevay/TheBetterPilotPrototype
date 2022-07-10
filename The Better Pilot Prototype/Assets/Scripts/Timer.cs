@@ -1,9 +1,5 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
 
 public class Timer : MonoBehaviour
@@ -48,7 +44,6 @@ public class Timer : MonoBehaviour
 
         TimeSpan time = TimeSpan.FromSeconds(currentTime);
 
-       // Debug.Log(time.Minutes.ToString() + ":" + time.Seconds.ToString());
         currentTimeText.text = time.ToString(@"mm\:ss");
         
 
@@ -64,4 +59,3 @@ public class Timer : MonoBehaviour
         timerActive = false;
     }
 }
-

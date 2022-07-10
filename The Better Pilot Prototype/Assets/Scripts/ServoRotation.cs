@@ -1,7 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 
@@ -147,33 +145,9 @@ public class ServoRotation : MonoBehaviour
                 }
 
                 RotateObject(value);
-
-                //if (rotator.SendValue)
-                //{
-                //    manualvalue += 1;
-                //}
-
-                //if (value >= 90 && manualvalue >= 90 && toggles[0].isOn && !toggles[1].isOn)
-                //{
-                //    valid = true;
-                //}
-
-                //if (value < 90 && manualvalue < 90 && toggles[1].isOn && !toggles[0].isOn)
-                //{
-                //    valid = true;
-                //}
-
-                //if (valid)
-                //{
-                //    RotateObject(manualvalue);
-                //}
             }
-
-
-
             textDisplay.text = Mathf.Round(value).ToString();
         }
-
     }
 
     IEnumerator WarningSoundToggle()
@@ -185,8 +159,6 @@ public class ServoRotation : MonoBehaviour
     }
     public void RotateObject(float valueToRotate)
     {
-        // gameObject.transform.localRotation = Quaternion.Euler(0, 0, valueToRotate);
-
         transform.rotation = Quaternion.Euler(0, 0, valueToRotate);
         
         if(rotator.IsMoving)

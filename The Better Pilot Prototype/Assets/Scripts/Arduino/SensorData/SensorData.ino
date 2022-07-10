@@ -16,12 +16,10 @@ const unsigned int TRIG_PIN=13;
 const unsigned int ECHO_PIN=12;
 const unsigned int BAUD_RATE=9600;
 
-
-
 void setup()
 {
  
-  
+   
   // Sensor Inputs
 
   pinMode(TRIG_PIN, OUTPUT);
@@ -34,13 +32,18 @@ void setup()
   pinMode(DT,INPUT);
   pinMode(SW, INPUT_PULLUP);
 
+
+  pinMode(4, INPUT_PULLUP);
+  pinMode(5, INPUT_PULLUP);
+  pinMode(6, INPUT_PULLUP);
+
+  pinMode(A2, INPUT);
+
     Serial.begin(115200);
 
   // Read the initial state of CLK
   lastStateCLK = digitalRead(CLK);
   
-
-
   //Enviar sensor data a 30 FPS
   sendTime = floor(1000 / 30);
 }
@@ -113,14 +116,18 @@ void loop()
   if(elapsedTime > sendTime)
   {
     lastSend = millis();
-    
-    Serial.print(digitalRead(8));
+
+    Serial.print(digitalRead(4)); // reset button input
     Serial.print(" ");
-    Serial.print(digitalRead(6));
+    Serial.print(counter); // rotator value
     Serial.print(" ");
-    Serial.print(counter);
+    Serial.print(digitalRead(5)); // black button
     Serial.print(" ");
-    Serial.println(distance);
+    Serial.print(digitalRead(6)); // red button
+    Serial.print(" ");
+    Serial.print(analogRead(A2)); // slider
+    Serial.print(" ");
+    Serial.println(distance); // distance sensor
 
     
 

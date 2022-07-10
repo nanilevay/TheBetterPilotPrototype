@@ -1,8 +1,5 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Uduino;
-
 public class ProximityDetectorArduinoo : MonoBehaviour
 {
     public Transform distancePlane;
@@ -16,7 +13,6 @@ public class ProximityDetectorArduinoo : MonoBehaviour
 
     void Update()
     {
-       // Debug.Log(distance);
         if (distance > 260)
             panel.SetActive(true);
         else
@@ -25,11 +21,8 @@ public class ProximityDetectorArduinoo : MonoBehaviour
         Debug.Log(distance);
 
     }
-
     void DataReceived(string data, UduinoDevice board)
     {
         bool ok = float.TryParse(data, out distance);
-
-      //  Debug.Log(data);
     }
 }

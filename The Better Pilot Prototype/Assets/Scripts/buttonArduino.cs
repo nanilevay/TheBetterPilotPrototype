@@ -1,13 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
-using TMPro;
 using Uduino;
-
 
 public class buttonArduino : MonoBehaviour
 {
@@ -52,9 +46,7 @@ public class buttonArduino : MonoBehaviour
 
 
     public void ButtonClicked()
-    {
-        //button.onClick.Invoke();
-
+    { 
         ExecuteEvents.Execute(button.gameObject, new BaseEventData(eventSystem), ExecuteEvents.submitHandler);
 
         //  button.Select();

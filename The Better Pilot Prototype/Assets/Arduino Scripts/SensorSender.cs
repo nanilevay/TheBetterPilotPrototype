@@ -1,5 +1,3 @@
-using System.Linq;
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,19 +7,18 @@ public class SensorSender : MonoBehaviour
     public ByteSerialController serialController;
     
     public bool sendData = false;
+
     public byte[] byteArray;
 
     public byte[] ServoNum;
 
     public byte[] ScreenText;
 
-
     public List<Color> colorList = new List<Color>();
 
     public ServoRotation ServoObject;
 
     public List<LEDs> LEDList;
-
 
     public CodeController Display;
 
@@ -42,7 +39,6 @@ public class SensorSender : MonoBehaviour
     public bool MainMenu;
 
     public bool LoadingMenu;
-
 
     void Awake()
     {
@@ -73,7 +69,7 @@ public class SensorSender : MonoBehaviour
             {
                 int indexi = 0;
 
-                foreach (char C in "PAUSED")
+                foreach (char C in "     PAUSED                     ")
                 {
                     ScreenText[indexi] = (byte)C;
 
@@ -85,7 +81,7 @@ public class SensorSender : MonoBehaviour
             {
                 int indexi = 0;
 
-                foreach (char C in "INFO")
+                foreach (char C in "      INFO                      ")
                 {
                     ScreenText[indexi] = (byte)C;
 
@@ -98,7 +94,7 @@ public class SensorSender : MonoBehaviour
             {
                 int indexi = 0;
 
-                foreach (char C in "SETTINGS")
+                foreach (char C in "    SETTINGS                    ")
                 {
                     ScreenText[indexi] = (byte)C;
 
@@ -111,13 +107,13 @@ public class SensorSender : MonoBehaviour
 
     void FixedUpdate()
     {
-        Debug.Log(ScreenText[0]);
+        //Debug.Log(ScreenText[0]);
 
         if (MainMenu)
         {
             int index2 = 0;
 
-            foreach (char C in "WELCOME TO THEBETTER PILOT !!")
+            foreach (char C in " WELCOME TO THE  BETTER PILOT !!")
             {
                 ScreenText[index2] = (byte)C;
 
@@ -129,7 +125,7 @@ public class SensorSender : MonoBehaviour
         {
             int index2 = 0;
 
-            foreach (char C in "PLANEINITIALIZING...")
+            foreach (char C in "     PLANE       INITIALIZING...")
             {
                 ScreenText[index2] = (byte)C;
 
@@ -165,63 +161,46 @@ public class SensorSender : MonoBehaviour
 
                 if (!PauseMenu.activeSelf && !InfoPanel.activeSelf && !Settings.activeSelf)
                 {
-                    int index2 = 0;
+                    string temp = new string("");
 
-                    foreach (char C in Display.One)
-                    {
-                        ScreenText[index2] = (byte)C;
+                    temp += Display.One;
 
-                        index2++;
-                    }
+                    temp += " ";
 
+                    temp += Display.Two;
 
-                    int index3 = 4;
-
-                    foreach (char C in Display.Two)
-                    {
-                        ScreenText[index3] = (byte)C;
-
-                        index3++;
-                    }
-
-                    int index4 = 8;
-
-                    foreach (char C in Display.Three)
-                    {
-                        ScreenText[index4] = (byte)C;
-
-                        index4++;
-                    }
-
-                    int index5 = 12;
-
-                    foreach (char C in Display.Four)
-                    {
-                        ScreenText[index5] = (byte)C;
-
-                        index5++;
-                    }
-
+                    temp += "|  ";
 
                     if (ExtraCode.currentCodes.Contains("5790"))
                     {
-                        int index6 = 16;
-
-                        foreach (char C in "5790")
-                        {
-                            ScreenText[index6] = (byte)C;
-
-                            index6++;
-                        }
+                        temp += "5790";
                     }
 
-                    int index7 = 20;
-
-                    foreach (char C in Manager.SerialNumberDisplay.text)
+                    else
                     {
-                        ScreenText[index7] = (byte)C;
+                        temp += "####";
+                    }
 
-                        index7++;
+                    temp += Display.Three;
+
+                    temp += " ";
+
+                    temp += Display.Four;
+
+                    temp += "|";
+
+                    if (Manager.SerialNumberDisplay.text.Length > 3)
+                        temp += "" + Manager.SerialNumberDisplay.text;
+
+                    else
+                        temp += "   " + Manager.SerialNumberDisplay.text;
+
+                    int count = 0;
+
+                    foreach(char C in temp)
+                    {
+                        ScreenText[count] = (byte)C;
+                        count++;
                     }
                 }
             }
@@ -232,15 +211,16 @@ public class SensorSender : MonoBehaviour
 
                 int index1 = 0;
 
-                foreach (char C in "GAMEOVER")
+                foreach (char C in "    GAME OVER    ")
                 {
                     ScreenText[index1] = (byte)C;
 
                     index1++;
                 }
 
-                int index2 = 9;
-                foreach (char C in Watch.FinalScore.text)
+                int index2 = 16;
+
+                foreach (char C in "     " + Watch.FinalScore.text + "      ")
                 {
                     ScreenText[index2] = (byte)C;
 

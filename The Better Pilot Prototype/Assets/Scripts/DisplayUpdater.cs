@@ -1,8 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using TMPro;
 
 public class DisplayUpdater : MonoBehaviour
@@ -45,7 +42,6 @@ public class DisplayUpdater : MonoBehaviour
         }
     }
 
-
     public void CodeRemover()
     {
         if (CodeInput.text.Length == 4)
@@ -55,6 +51,8 @@ public class DisplayUpdater : MonoBehaviour
             {
                 if (puzzle.name == CodeInput.text)
                 {
+                    if (!GamePrefs.EndlessMode)
+                        Texts.Remove(CodeInput.text);
                     puzzle.active = false;
                     puzzle.solved = false;
                     currentCodes.Remove(CodeInput.text);
@@ -86,7 +84,6 @@ public class DisplayUpdater : MonoBehaviour
         {
             string addingCode;
 
-            //Debug.Log("in");
             t = 0;
 
             addingCode = Texts[Random.Range(0, Texts.Count)];
@@ -99,8 +96,6 @@ public class DisplayUpdater : MonoBehaviour
                 PuzzleActivator(addingCode);
                 codeController.CodeUpdate(addingCode);
                 CodeSound.Play();
-
-               // i++;
             }
         }
 
@@ -116,12 +111,7 @@ public class DisplayUpdater : MonoBehaviour
                 timer.StartTimer();
 
         }
-
-        //if (i >= maxNumber)
-        //{
          i = currentCodes.Count;
-
-        //}
     }
 
     void PuzzleActivator(string checker)

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,13 +5,6 @@ public class PuzzleActivator : MonoBehaviour
 {
     public PuzzlePiece[] AssociatedPuzzle;
     public LEDs led;
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-
-    }
 
     public void TakeAction()
     {
@@ -37,7 +28,6 @@ public class PuzzleActivator : MonoBehaviour
 
          led.GetComponent<Toggle>().isOn = true;
     }
-
 
     public void ToggleOff()
     {

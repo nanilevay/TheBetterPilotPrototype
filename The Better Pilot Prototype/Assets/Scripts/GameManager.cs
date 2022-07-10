@@ -1,14 +1,11 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Collections;
-using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
-using TMPro;
 
 public class GameManager : MonoBehaviour
 {
+    public bool EndlessMode = true;
+
     public PuzzlePiece[] PuzzleComponents;
 
     public TextMeshProUGUI textDisplay;
@@ -30,7 +27,7 @@ public class GameManager : MonoBehaviour
     public Toggle[] togglers;
 
     public bool PlaneOn = false;
-    
+
     public bool checker = true;
 
     public GameObject ScreenFader;
@@ -59,7 +56,7 @@ public class GameManager : MonoBehaviour
 
         Restart = true;
 
-        int ThreeOrSix = UnityEngine.Random.Range(0, 2); 
+        int ThreeOrSix = UnityEngine.Random.Range(0, 2);
 
         int srlNum;
 
@@ -90,12 +87,12 @@ public class GameManager : MonoBehaviour
         else
         {
             SerialEven = false;
-       }
+        }
     }
 
     public void RestartGame()
     {
-        if(Restart)
+        if (Restart)
         {
             togglers[0].GetComponent<Toggle>().isOn = false;
             togglers[1].GetComponent<Toggle>().isOn = false;
@@ -127,11 +124,17 @@ public class GameManager : MonoBehaviour
     {
         SerialNumberDisplay.text = SrlNum.ToString();
         SettingsObj.SetActive(false);
+        GamePrefs.EndlessMode = EndlessMode;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (!EndlessMode && CodeReceiver.Texts.Count <= 0)
+        {
+            Debug.Log("VICTORY");
+        }
+
         ResetCounter = GamePrefs.ResetCounter;
         if (togglers[0].GetComponent<Toggle>().isOn && togglers[1].GetComponent<Toggle>().isOn && ButtonOn && checker)
         {
@@ -156,17 +159,6 @@ public class GameManager : MonoBehaviour
 
             ResetNumberDisplay.text = ResetCounter.ToString();
         }
-
-
-        //if(CodeReceiver.CurrentCode == "")
-        //    PuzzlesToToggle.AssociatedPuzzle[0].ToggleOn();
-
-        //foreach (PuzzlePiece piece in PuzzlesToToggle.AssociatedPuzzle)
-        //{
-        //    if (piece.solved)
-        //        piece.ToggleOff();
-        //}
-
     }
 
     public void UpdateList()
@@ -175,11 +167,11 @@ public class GameManager : MonoBehaviour
 
         int i = 0;
 
-        foreach(string code in CodeDisplayer.currentCodes)
+        foreach (string code in CodeDisplayer.currentCodes)
         {
             tempText += " " + CodeDisplayer.currentCodes[i];
 
-            i++; 
+            i++;
         }
 
         textDisplay.text = tempText;
@@ -207,36 +199,11 @@ public class GameManager : MonoBehaviour
 
             codeController.ResetCodes();
 
-}
+        }
     }
 
     public void TurnOnPlane()
     {
         ButtonOn = true;
     }
-
-    //void Start()
-    //{
-    //    StartCoroutine(coroutineA());
-    //}
-
-    //IEnumerator coroutineA()
-    //{
-    //    // wait for 1 second
-    //    yield return new WaitForSeconds(1.0f);
-    //    Debug.Log("coroutineA() started: " + Time.time);
-
-    //    // wait for another 1 second and then create b
-    //    yield return new WaitForSeconds(1.0f);
-    //    Coroutine b = StartCoroutine(coroutineB());
-
-    //    yield return new WaitForSeconds(2.0f);
-    //    Debug.Log("coroutineA() finished " + Time.time);
-
-    //    // B() was expected to run for 10 seconds
-    //    // but was shut down here after 3.0f
-    //    StopCoroutine(b);
-    //    yield return null;
-    //}
 }
-
