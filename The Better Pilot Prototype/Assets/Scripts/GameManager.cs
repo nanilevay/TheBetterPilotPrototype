@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
@@ -51,6 +52,8 @@ public class GameManager : MonoBehaviour
 
     public GameObject SettingsObj;
 
+    public SensorListener Encoder;
+ 
     void Awake()
     {
         ResetCounter = GamePrefs.ResetCounter;
@@ -89,6 +92,8 @@ public class GameManager : MonoBehaviour
         {
             SerialEven = false;
         }
+
+        StartCoroutine(StartPlaneCheck());
     }
 
     public void RestartGame()
@@ -99,7 +104,7 @@ public class GameManager : MonoBehaviour
             togglers[1].GetComponent<Toggle>().isOn = false;
             stopwatch.StopStopWatch();
             Restart = false;
-            checker = true;
+            checker = false;
             ButtonOn = false;
             Awake();
             Start();
@@ -131,14 +136,23 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if(Encoder.swEncoder == 0)
+        //{
+        //    ButtonOn = true;
+        //}
+
+        GamePrefs.EndlessMode = EndlessMode;
+
         if (!EndlessMode && CodeReceiver.Texts.Count <= 0)
         {
+            GamePrefs.EndlessMode = EndlessMode;
             GamePrefs.LastTimer = stopwatch.currentTimeText.text;
             SceneManager.LoadScene(5);
         }
 
         ResetCounter = GamePrefs.ResetCounter;
-        if (togglers[0].GetComponent<Toggle>().isOn && togglers[1].GetComponent<Toggle>().isOn && ButtonOn && checker)
+
+        if (togglers[0].GetComponent<Toggle>().isOn && togglers[1].GetComponent<Toggle>().isOn && Encoder.swEncoder == 0 && checker)
         {
             stopwatch.StartStopWatch();
             PlaneOn = true;
@@ -202,6 +216,13 @@ public class GameManager : MonoBehaviour
             codeController.ResetCodes();
 
         }
+    }
+
+    public IEnumerator StartPlaneCheck()
+    {
+        yield return new WaitForSeconds(3);
+        checker = true;
+        yield break;
     }
 
     public void TurnOnPlane()

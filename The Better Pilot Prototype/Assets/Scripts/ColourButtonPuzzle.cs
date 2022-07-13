@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 using UnityEngine.UI;
 using TMPro;
 
@@ -20,6 +21,8 @@ public class ColourButtonPuzzle : MonoBehaviour
 
     public TextMeshProUGUI TextToUpdate;
 
+    public bool Once = true;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +39,7 @@ public class ColourButtonPuzzle : MonoBehaviour
 
     void GreenClick()
     {
-        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649") && Once)
         {
             if (!PressingGreen && !PressingBlack)
             {
@@ -45,12 +48,15 @@ public class ColourButtonPuzzle : MonoBehaviour
 
             if (PressingBlack)
                 code += "g";
+
+            Once = false;
+            StartCoroutine(Release());
         }
     }
 
     void BlackClick()
     {
-        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649") && Once)
         {
             if (!PressingBlack && !PressingGreen)
             {
@@ -59,46 +65,60 @@ public class ColourButtonPuzzle : MonoBehaviour
 
             if (PressingGreen)
                 code += "z";
+
+            Once = false;
+
+            StartCoroutine(Release());
         }
     }
 
     public void GreenRelease()
     {
-        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649") && Once)
         {
             PressingGreen = false;
+            Once = false;
+            StartCoroutine(Release());
         }
     }
 
     public void BlackRelease()
     {
-        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649") && Once)
         {
             PressingBlack = false;
+            Once = false;
+            StartCoroutine(Release());
         }
     }
 
     void YellowClick()
     {
-        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649") && Once)
         {
             code += "y";
+            Once = false;
+            StartCoroutine(Release());
         }
     }
 
     void BlueClick()
     {
-        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649") && Once)
         {
             code += "b";
+            Once = false;
+            StartCoroutine(Release());
         }
     }
 
     void RedClick()
     {
-        if (Manager.CodeDisplayer.currentCodes.Contains("9649"))
+        if (Manager.CodeDisplayer.currentCodes.Contains("9649") && Once)
         {
             code += "r";
+            Once = false;
+            StartCoroutine(Release());
         }
     }
 
@@ -140,6 +160,13 @@ public class ColourButtonPuzzle : MonoBehaviour
         {
             PuzzleToSolve.solved = false;
         }
+    }
+
+    public IEnumerator Release()
+    {
+        yield return new WaitForSeconds(1);
+        Once = true;
+        yield break;
     }
 
     public void CheckAnswer()

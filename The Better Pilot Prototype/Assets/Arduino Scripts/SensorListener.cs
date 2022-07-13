@@ -27,7 +27,11 @@ using UnityEngine.UI;
 public class SensorListener : MonoBehaviour
 {
     public bool logArrivingMessages = true;
-    public int d0, d1, d2, d3, sliderVal, distanceVal;
+    public int redMorse, blckMorse, clkEncoder, /*dtEncoder,*/ swEncoder, greenButton,
+        blckButton, yellowButton, redButton, blueButton, rotation, toggle1, toggle2, sensor,
+        sliderVal;
+
+    public string dtEncoder;
 
     public LongClickButton button;
 
@@ -43,12 +47,26 @@ public class SensorListener : MonoBehaviour
         string log = "Message arrived: " + msg;
         string[] dataArray = msg.Split(' ');
         
-        d0 = int.Parse(dataArray[0]); // rotator button
-        d1 = int.Parse(dataArray[1]); // rotator encoder
-        d2 = int.Parse(dataArray[2]); // button 1
-        d3 = int.Parse(dataArray[3]); // button 2
-        sliderVal = int.Parse(dataArray[4]);
-        distanceVal = int.Parse(dataArray[5]);
+        redMorse = int.Parse(dataArray[0]); // red morse button
+        blckMorse = int.Parse(dataArray[1]); // black morse button
+        clkEncoder = int.Parse(dataArray[2]); // clk encoder
+        dtEncoder = /*int.Parse(*/dataArray[3]/*)*/; // dtw encoder (button)
+       
+        swEncoder = int.Parse(dataArray[4]); // dtw encoder (button)
+
+
+        greenButton = int.Parse(dataArray[5]); // green button
+        blckButton = int.Parse(dataArray[6]); // black button
+        yellowButton = int.Parse(dataArray[7]); // yellow button
+        redButton = int.Parse(dataArray[8]); // red button
+
+        blueButton = int.Parse(dataArray[9]); // blue button
+        rotation = int.Parse(dataArray[10]); // rotator value
+        toggle1 = int.Parse(dataArray[11]); // toggle 1
+        toggle2 = int.Parse(dataArray[12]); // toggle 2
+        sliderVal = int.Parse(dataArray[13]); // slider
+
+        sensor = int.Parse(dataArray[14]); // distance sensor  
 
         if (logArrivingMessages)
             Debug.Log(log);
@@ -67,7 +85,8 @@ public class SensorListener : MonoBehaviour
 
     void Update()
     {
-        sldr.value = map(sliderVal,0, 1023, 0, 1);
+        // fix value 1023
+        sldr.value = map(sliderVal,0, 664, 0, 1);
 
         settings.SliderVal = sliderVal;
         //settings.Button1.Value = d2;

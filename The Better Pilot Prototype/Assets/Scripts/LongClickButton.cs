@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System.Collections;
 
 public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHandler, IPointerClickHandler
 {
@@ -28,9 +29,18 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public Color ImgColor;
 
+    public SensorListener ButtonColour;
+
+    public bool Once = true;
+
+    public string ID;
+
+    public int ArduinoPress = 1;
+
     void Start()
     {
         ImgColor = HoldImg.color;
+        Once = true;
     }
 
 	public void OnPointerClick(PointerEventData eventData)
@@ -72,6 +82,70 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
 	private void Update()
 	{
+        if(tap == 1)
+        {
+            StartCoroutine(DoubleTapChecker());
+        }
+
+        if (ID == "rm")
+        {
+            ArduinoPress = ButtonColour.redMorse;
+        }
+
+        if (ID == "bm")
+        {
+            ArduinoPress = ButtonColour.blckMorse;
+        }
+
+        if (ID == "g")
+        {
+            ArduinoPress = ButtonColour.greenButton;
+        }
+
+        if (ID == "z")
+        {
+            ArduinoPress = ButtonColour.blckButton;
+        }
+
+        if (ID == "b")
+        {
+            ArduinoPress = ButtonColour.blueButton;
+        }
+
+        if (ID == "y")
+        {
+            ArduinoPress = ButtonColour.yellowButton;
+        }
+
+        if (ID == "r")
+        {
+            ArduinoPress = ButtonColour.redButton;
+        }
+
+
+        if (ArduinoPress == 0 && Once)
+        {
+            var go = this.gameObject;
+            var ped = new PointerEventData(EventSystem.current);
+            ExecuteEvents.Execute(go, ped, ExecuteEvents.pointerClickHandler);
+            ExecuteEvents.Execute(go, ped, ExecuteEvents.submitHandler);
+            Once = false;
+            tap += 1;
+
+            StartCoroutine(CheckLongPress());
+
+        }
+
+        else if (ArduinoPress == 1 && !Once)
+        {
+            var go = this.gameObject;
+            var ped = new PointerEventData(EventSystem.current);
+            ExecuteEvents.Execute(go, ped, ExecuteEvents.pointerUpHandler);
+            ExecuteEvents.Execute(go, ped, ExecuteEvents.submitHandler);
+            Once = true;
+            tap -= 1;
+            hold = false;
+        }
 
         if (hold)
         {
@@ -109,4 +183,17 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 		fillImage.fillAmount = pointerDownTimer / requiredHoldTime;
 	}
 
+    public IEnumerator DoubleTapChecker()
+    {
+        yield return new WaitForSeconds(1);
+        if (tap == 1)
+            tap += 1;
+    }
+
+    public IEnumerator CheckLongPress()
+    {
+        yield return new WaitForSeconds(1);
+        if (ArduinoPress == 0)
+            hold = true;
+    }
 }

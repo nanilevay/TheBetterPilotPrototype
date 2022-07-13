@@ -42,6 +42,7 @@ public class HighScores : MonoBehaviour
 
     public void SaveLastScore()
     {
+        Debug.Log(GamePrefs.EndlessMode);
         string FilePath;
             
             if(GamePrefs.EndlessMode)  

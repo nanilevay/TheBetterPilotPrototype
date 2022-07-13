@@ -17,8 +17,6 @@ public class GameOver : MonoBehaviour
 
     public GameObject ScoreSaver;
 
-    public bool EndlessMode;
-
     // Update is called once per frame
     void Start()
     {
@@ -48,7 +46,6 @@ public class GameOver : MonoBehaviour
 
     public void SaveScore()
     {
-        GamePrefs.EndlessMode = EndlessMode;
         GamePrefs.LastTimer = TimerDisplay.text;
         GamePrefs.LastName = PlayerName.text;
     }

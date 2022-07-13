@@ -32,10 +32,19 @@ void setup()
   pinMode(DT,INPUT);
   pinMode(SW, INPUT_PULLUP);
 
-
-  pinMode(4, INPUT_PULLUP);
+  pinMode(0, INPUT_PULLUP);
+  pinMode(A3, INPUT_PULLUP);
+  //pinMode(1, INPUT_PULLUP);
+  //pinMode(2, INPUT_PULLUP);
+  //pinMode(3, INPUT_PULLUP);
+  //pinMode(4, INPUT_PULLUP);
   pinMode(5, INPUT_PULLUP);
   pinMode(6, INPUT_PULLUP);
+  pinMode(7, INPUT_PULLUP);
+  pinMode(8, INPUT_PULLUP);
+  pinMode(9, INPUT_PULLUP);
+  pinMode(10, INPUT_PULLUP);
+  pinMode(11, INPUT_PULLUP);
 
   pinMode(A2, INPUT);
 
@@ -49,27 +58,16 @@ void setup()
 }
 
 void loop()
-{  // Sensor Readings
+{  
+  
+  // Sensor Readings
 
   digitalWrite(TRIG_PIN, LOW);
-  //delayMicroseconds(2);
   digitalWrite(TRIG_PIN, HIGH);
-  //delayMicroseconds(10);
   digitalWrite(TRIG_PIN, LOW);
 
   const unsigned long duration= pulseIn(ECHO_PIN, HIGH);
- int distance= duration/29/2;
-// if(duration==0){
-  // Serial.println("Warning: no pulse from sensor");
-//   } 
-//  else{
-     // Serial.print("distance to nearest object:");
-     // Serial.println(distance);
-     // Serial.println(" cm");
- // }
-
-  
-
+  int distance= duration/29/2;
   
    // Read the current state of CLK
   currentStateCLK = digitalRead(CLK);
@@ -82,11 +80,11 @@ void loop()
     // the encoder is rotating CCW so decrement
     if (digitalRead(DT) != currentStateCLK) {
       counter --;
-      currentDir ="CCW";
+      currentDir = "CCW";
     } else {
       // Encoder is rotating CW so increment
       counter ++;
-      currentDir ="CW";
+      currentDir = "CW";
     }
 
     }
@@ -117,20 +115,37 @@ void loop()
   {
     lastSend = millis();
 
-    Serial.print(digitalRead(4)); // reset button input
+    Serial.print(digitalRead(0)); // red morse button
+    Serial.print(" ");
+    Serial.print(digitalRead(1)); // black morse button
+    Serial.print(" ");
+    Serial.print(counter); // CLK TEST
+    //Serial.print(digitalRead(2)); // clk encoder
+    Serial.print(" ");
+    Serial.print(currentDir); // DT TEST
+    // Serial.print(digitalRead(3)); // dt encoder
+    Serial.print(" ");
+    Serial.print(digitalRead(4)); // sw encoder (button)
+    Serial.print(" ");
+    Serial.print(digitalRead(5)); // green button
+    Serial.print(" ");
+    Serial.print(digitalRead(6)); // black button
+    Serial.print(" ");
+    Serial.print(digitalRead(7)); // yellow button
+    Serial.print(" ");
+    Serial.print(digitalRead(8)); // red button
+    Serial.print(" ");
+    Serial.print(digitalRead(9)); // blue button
     Serial.print(" ");
     Serial.print(counter); // rotator value
     Serial.print(" ");
-    Serial.print(digitalRead(5)); // black button
+    Serial.print(digitalRead(10)); // toggle 1
     Serial.print(" ");
-    Serial.print(digitalRead(6)); // red button
+    Serial.print(digitalRead(11)); // toggle 2
     Serial.print(" ");
     Serial.print(analogRead(A2)); // slider
     Serial.print(" ");
-    Serial.println(distance); // distance sensor
-
-    
-
+    Serial.println(distance); // distance sensor  
     
   }
   delay(20);

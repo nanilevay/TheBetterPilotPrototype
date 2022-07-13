@@ -30,12 +30,12 @@ public class ProximityPuzzle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DebugText.text = SensorValue.distanceVal.ToString();
+        DebugText.text = SensorValue.sensor.ToString();
 
         if (Manager.CodeDisplayer.currentCodes.Contains("2922"))
         {
 
-            if (SensorValue.distanceVal <= rnd + 2 && SensorValue.distanceVal >= rnd - 2)
+            if (SensorValue.sensor <= rnd + 2 && SensorValue.sensor >= rnd - 2)
             {
                 StartCoroutine(SoundPlayer());
             }
@@ -65,7 +65,7 @@ public class ProximityPuzzle : MonoBehaviour
             AssociatedPuzzle.solved = false;
         }
 
-        if (SensorValue.distanceVal >= rnd + 2 || SensorValue.distanceVal <= rnd - 2)
+        if (SensorValue.sensor >= rnd + 2 || SensorValue.sensor <= rnd - 2)
         {
             StartCoroutine(SoundStopper());
         }
@@ -114,7 +114,7 @@ public class ProximityPuzzle : MonoBehaviour
             yield return new WaitForSeconds(1f);
             Led.color = Color.black;
 
-            if (SensorValue.distanceVal <= rnd + 2 && SensorValue.distanceVal >= rnd - 2)
+            if (SensorValue.sensor <= rnd + 2 && SensorValue.sensor >= rnd - 2)
             {
                 codeController.RemoveCodes("2922");
                 Manager.CodeDisplayer.currentCodes.Remove("2922");
