@@ -53,7 +53,11 @@ public class GameManager : MonoBehaviour
     public GameObject SettingsObj;
 
     public SensorListener Encoder;
- 
+
+    public SensorListener Listener;
+
+    public int timer1 = 0;
+
     void Awake()
     {
         ResetCounter = GamePrefs.ResetCounter;
@@ -136,12 +140,19 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer1 += 1;
+
+        //if (Listener.blckMorse == 0  && Listener.blckButton == 0 && timer1 > 10)
+        //{
+        //    RestartGame();
+        //}
         //if(Encoder.swEncoder == 0)
         //{
         //    ButtonOn = true;
         //}
 
-        GamePrefs.EndlessMode = EndlessMode;
+       // GamePrefs.EndlessMode = EndlessMode;
+        EndlessMode = GamePrefs.EndlessMode;
 
         if (!EndlessMode && CodeReceiver.Texts.Count <= 0)
         {

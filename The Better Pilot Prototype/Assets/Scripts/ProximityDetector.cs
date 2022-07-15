@@ -19,6 +19,8 @@ public class ProximityDetector : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     public GameObject SoundWaves;
 
+    public SensorListener Sensor;
+
     public void OnPointerEnter(PointerEventData eventData)
     {
         OnSensor();
@@ -43,6 +45,17 @@ public class ProximityDetector : MonoBehaviour, IPointerEnterHandler, IPointerEx
 
     void Update()
     {
+        if(Sensor.sensor <= 20)
+        {
+            ProximityDetected = true;
+        }
+
+        else
+        {
+            ProximityDetected = false;
+        }
+
+
         if (Input.GetKey(KeyCode.LeftControl) && Detecting == "Detected")
         {
             if (!AudioToPlay.isPlaying)

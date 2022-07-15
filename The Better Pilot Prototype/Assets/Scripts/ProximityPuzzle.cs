@@ -35,18 +35,18 @@ public class ProximityPuzzle : MonoBehaviour
         if (Manager.CodeDisplayer.currentCodes.Contains("2922"))
         {
 
-            if (SensorValue.sensor <= rnd + 2 && SensorValue.sensor >= rnd - 2)
-            {
-                StartCoroutine(SoundPlayer());
-            }
+            //if (SensorValue.sensor <= rnd + 2 && SensorValue.sensor >= rnd - 2)
+            //{
+            //    //StartCoroutine(SoundPlayer());
+            //}
 
-            else
-            {
-                StartCoroutine(SoundStopper());
-            }
+            //else
+            //{
+            //    StartCoroutine(SoundStopper());
+            //}
 
 
-            if (Sensor.ProximityDetected && Once && !AssociatedPuzzle.solved)
+            if (/*Sensor.ProximityDetected &&*/ Once && Manager.CodeDisplayer.currentCodes.Contains("2922"))
             {
                 Once = false;
                 StartCoroutine(DistanceMaker());
@@ -65,15 +65,15 @@ public class ProximityPuzzle : MonoBehaviour
             AssociatedPuzzle.solved = false;
         }
 
-        if (SensorValue.sensor >= rnd + 2 || SensorValue.sensor <= rnd - 2)
-        {
-            StartCoroutine(SoundStopper());
-        }
+        //if (SensorValue.sensor >= rnd + 4 || SensorValue.sensor <= rnd - 4)
+        //{
+        //    //StartCoroutine(SoundStopper());
+        //}
     }
 
     IEnumerator DistanceMaker()
     {
-        rnd = UnityEngine.Random.Range(0,15);
+        rnd = UnityEngine.Random.Range(5, 15);
 
         Debug.Log(rnd);
 
@@ -100,21 +100,20 @@ public class ProximityPuzzle : MonoBehaviour
 
     IEnumerator FinishPuzzle()
     {
-        while (Sensor.ProximityDetected)
-        {
-            Led.color = Color.blue;
-            yield return new WaitForSeconds(1f);
-            Led.color = Color.black;
-            yield return new WaitForSeconds(1f);
-            Led.color = Color.blue;
-            yield return new WaitForSeconds(1f);
-            Led.color = Color.black;
-            yield return new WaitForSeconds(1f);
-            Led.color = Color.blue;
-            yield return new WaitForSeconds(1f);
-            Led.color = Color.black;
+        //while (SensorValue.sensor > rnd + 4 || SensorValue.sensor < rnd - 4)
+        //{
+        //Led.color = Color.blue;
+        //yield return new WaitForSeconds(1f);
+        //Led.color = Color.black;
+        //yield return new WaitForSeconds(1f);
+        //Led.color = Color.blue;
+        //yield return new WaitForSeconds(1f);
 
-            if (SensorValue.sensor <= rnd + 2 && SensorValue.sensor >= rnd - 2)
+        var tempColor = Led.color;
+        tempColor.a = map(SensorValue.sensor, 0, 20, 0, 1);
+        Led.color = tempColor;
+
+        if (SensorValue.sensor <= rnd + 4 && SensorValue.sensor >= rnd - 4)
             {
                 codeController.RemoveCodes("2922");
                 Manager.CodeDisplayer.currentCodes.Remove("2922");
@@ -124,11 +123,16 @@ public class ProximityPuzzle : MonoBehaviour
                 StartCoroutine(SoundStopper());
                 yield break;
             }
-        }
+        //}
 
         Led.color = Color.green;
         Once = true;
         yield break;
        
+    }
+
+    public static float map(float value, float leftMin, float leftMax, float rightMin, float rightMax)
+    {
+        return rightMin + (value - leftMin) * (rightMax - rightMin) / (leftMax - leftMin);
     }
 }

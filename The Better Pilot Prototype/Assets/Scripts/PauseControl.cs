@@ -5,9 +5,17 @@ public class PauseControl : MonoBehaviour
     public static bool gameIsPaused = false;
 
     public GameObject PauseMenu;
-    void Update()
+
+    public SensorListener Listener;
+
+    public int timer = 0;
+
+    void FixedUpdate()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        timer += 1;
+
+        if (Input.GetKeyDown(KeyCode.Escape)) // || (Listener.redMorse == 0 && 
+           // Listener.redButton == 0) && timer > 10)
         {
             gameIsPaused = !gameIsPaused;
             PauseGame();

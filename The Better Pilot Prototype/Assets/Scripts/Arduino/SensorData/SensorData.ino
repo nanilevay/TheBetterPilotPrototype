@@ -17,9 +17,7 @@ const unsigned int ECHO_PIN=12;
 const unsigned int BAUD_RATE=9600;
 
 void setup()
-{
- 
-   
+{ 
   // Sensor Inputs
 
   pinMode(TRIG_PIN, OUTPUT);
@@ -32,7 +30,8 @@ void setup()
   pinMode(DT,INPUT);
   pinMode(SW, INPUT_PULLUP);
 
-  pinMode(0, INPUT_PULLUP);
+ // pinMode(0, INPUT_PULLUP);
+ pinMode(A4, INPUT_PULLUP);
   pinMode(A3, INPUT_PULLUP);
   //pinMode(1, INPUT_PULLUP);
   //pinMode(2, INPUT_PULLUP);
@@ -41,12 +40,13 @@ void setup()
   pinMode(5, INPUT_PULLUP);
   pinMode(6, INPUT_PULLUP);
   pinMode(7, INPUT_PULLUP);
-  pinMode(8, INPUT_PULLUP);
+  pinMode(A5, INPUT_PULLUP);
+  //pinMode(8, INPUT_PULLUP);
   pinMode(9, INPUT_PULLUP);
   pinMode(10, INPUT_PULLUP);
   pinMode(11, INPUT_PULLUP);
 
-  pinMode(A2, INPUT);
+  pinMode(A1, INPUT);
 
     Serial.begin(115200);
 
@@ -81,7 +81,7 @@ void loop()
     if (digitalRead(DT) != currentStateCLK) {
       counter --;
       currentDir = "CCW";
-    } else {
+    } else if (digitalRead(DT) == currentStateCLK){
       // Encoder is rotating CW so increment
       counter ++;
       currentDir = "CW";
@@ -115,9 +115,9 @@ void loop()
   {
     lastSend = millis();
 
-    Serial.print(digitalRead(0)); // red morse button
+    Serial.print(digitalRead(A4)); // red morse button
     Serial.print(" ");
-    Serial.print(digitalRead(1)); // black morse button
+    Serial.print(digitalRead(A3)); // black morse button
     Serial.print(" ");
     Serial.print(counter); // CLK TEST
     //Serial.print(digitalRead(2)); // clk encoder
@@ -133,7 +133,8 @@ void loop()
     Serial.print(" ");
     Serial.print(digitalRead(7)); // yellow button
     Serial.print(" ");
-    Serial.print(digitalRead(8)); // red button
+    Serial.print(digitalRead(A5));
+    // Serial.print(digitalRead(8)); // red button
     Serial.print(" ");
     Serial.print(digitalRead(9)); // blue button
     Serial.print(" ");
@@ -143,7 +144,7 @@ void loop()
     Serial.print(" ");
     Serial.print(digitalRead(11)); // toggle 2
     Serial.print(" ");
-    Serial.print(analogRead(A2)); // slider
+    Serial.print(analogRead(A1)); // slider
     Serial.print(" ");
     Serial.println(distance); // distance sensor  
     

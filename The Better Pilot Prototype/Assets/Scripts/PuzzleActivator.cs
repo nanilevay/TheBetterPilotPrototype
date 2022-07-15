@@ -5,7 +5,14 @@ public class PuzzleActivator : MonoBehaviour
 {
     public PuzzlePiece[] AssociatedPuzzle;
     public LEDs led;
+    public Image LEDColour;
 
+    public Color InitialColor;
+
+    public void Start()
+    {
+        InitialColor = led.LedMaterial.color;
+    }
     public void TakeAction()
     {
         if (this.GetComponent<Toggle>().isOn)
@@ -25,8 +32,9 @@ public class PuzzleActivator : MonoBehaviour
         {
             Piece.ToggleOn();
         }
-
-         led.GetComponent<Toggle>().isOn = true;
+        LEDColour.color = InitialColor;
+        led.GetComponent<Toggle>().isOn = true;
+        
     }
 
     public void ToggleOff()
@@ -35,7 +43,8 @@ public class PuzzleActivator : MonoBehaviour
         {
             Piece.ToggleOff();
         }
-
+        LEDColour.color = Color.black;
         led.GetComponent<Toggle>().isOn = false;
+        
     }
 }

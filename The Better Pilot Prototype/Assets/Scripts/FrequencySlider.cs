@@ -27,6 +27,8 @@ public class FrequencySlider : MonoBehaviour
 
     public CodeController codeController;
 
+    public SensorListener Sensor;
+
     void Awake()
     {
         // PitchGenerator();
@@ -61,6 +63,8 @@ public class FrequencySlider : MonoBehaviour
                 SliderValue = map(mainSlider.value, 0f, 1f, 0f, 3f);
 
                 audioToMatch.pitch = SliderValue;
+
+                audioToMatch.volume = map(Sensor.sensor, 0, 20, 0,1);
 
                 if (ProximityCheck && !audioToMatch.isPlaying && !AssociatedPuzzle.solved)
                     audioToMatch.Play();

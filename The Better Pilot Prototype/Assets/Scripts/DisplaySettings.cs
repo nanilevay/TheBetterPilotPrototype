@@ -24,26 +24,6 @@ public class DisplaySettings : MonoBehaviour
             Counter = 6;
         }
 
-        //if(Button1.Pressed)
-        //{
-        //    StartCoroutine(ButtonClicker(0));
-        //}
-
-        //if (Button2.Pressed)
-        //{
-        //    StartCoroutine(ButtonClicker(1));
-        //}
-
-        //if (Button1.Pressed)
-        //{
-        //    StopCoroutine(ButtonClicker(0));
-        //}
-
-        //if (Button2.Pressed)
-        //{
-        //    StopCoroutine(ButtonClicker(1));
-        //}
-
         if (SettingsValues.IsOn)
         {
             SettingsValues.CodeSpeed.value = map(SliderVal, 0, 1023, 10, 30);

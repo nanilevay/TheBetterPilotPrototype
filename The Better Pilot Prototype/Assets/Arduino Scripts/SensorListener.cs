@@ -41,6 +41,12 @@ public class SensorListener : MonoBehaviour
 
     public DisplaySettings settings;
 
+    public bool Rotating;
+
+    public int lastval;
+
+    public bool Once;
+
     // Invoked when a line of data is received from the serial device.
     void OnMessageArrived(string msg)
     {
@@ -83,18 +89,34 @@ public class SensorListener : MonoBehaviour
             Debug.Log("Connection attempt failed or disconnection detected");
     }
 
+    void Start()
+    {
+        lastval = rotation;
+    }
     void Update()
     {
-        // fix value 1023
-        sldr.value = map(sliderVal,0, 664, 0, 1);
+        sldr.value = map(sliderVal, 0, 1023, 0, 1);
 
         settings.SliderVal = sliderVal;
-        //settings.Button1.Value = d2;
-        //settings.Button2.Value = d3;
+
+        if (rotation > lastval)// && Once)
+        {
+            Rotating = true;
+            lastval = rotation;
+            Once = false;
+            StartCoroutine(TurnOff());
+        }
     }
 
     public static float map(float value, float leftMin, float leftMax, float rightMin, float rightMax)
     {
         return rightMin + (value - leftMin) * (rightMax - rightMin) / (leftMax - leftMin);
+    }
+
+    public IEnumerator TurnOff()
+    {
+        yield return new WaitForSeconds(0.5f);
+        Rotating = false;
+        Once = true;
     }
 }

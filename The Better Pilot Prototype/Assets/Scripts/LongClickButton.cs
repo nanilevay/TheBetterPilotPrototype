@@ -185,7 +185,7 @@ public class LongClickButton : MonoBehaviour, IPointerDownHandler, IPointerUpHan
 
     public IEnumerator DoubleTapChecker()
     {
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         if (tap == 1)
             tap += 1;
     }

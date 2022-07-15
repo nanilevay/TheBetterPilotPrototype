@@ -35,6 +35,8 @@ public class ServoRotation : MonoBehaviour
 
     public bool once = true;
 
+    public SensorListener SensorValues;
+
     public void ToggleOnOff()
     {
         if (GamePrefs.ServoOn)
@@ -103,7 +105,7 @@ public class ServoRotation : MonoBehaviour
                 RotateObject(value);
             }
 
-            else
+            else //if(SensorValues.Rotating)
             {
                 if (Mathf.Round(value) >= 90 && toggles[0].isOn && toggles[1].isOn)
                 {

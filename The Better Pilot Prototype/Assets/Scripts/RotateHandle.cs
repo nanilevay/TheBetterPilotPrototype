@@ -23,7 +23,7 @@ public class RotateHandle : MonoBehaviour, IDragHandler
 
     void Start()
     {
-        transform.rotation = Quaternion.Euler(0, 0, SensorValues.swEncoder);
+        //transform.rotation = Quaternion.Euler(0, 0, SensorValues.swEncoder);
     }
     IEnumerator PlaySound()
     {
@@ -79,6 +79,16 @@ public class RotateHandle : MonoBehaviour, IDragHandler
 
     public void Update()
     {
+        if(SensorValues.Rotating)
+        {
+            IsMoving = true;
+        }
+
+        else
+        {
+            IsMoving = false;
+        }
+
         if (IsMoving && !AudioToPlay.isPlaying)
         {
             StartCoroutine(PlaySound());

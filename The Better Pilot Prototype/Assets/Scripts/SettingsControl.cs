@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
 
 /// <summary>
 /// This script allows for different game values to be read across scenes by 
@@ -22,6 +23,9 @@ public class SettingsControl : MonoBehaviour
 
     // Controlling whether the servo is on or off in a game, for debug purposes
     public Toggle ServoOnOff;
+
+    // Digital prototype fullscreen option for easier viewing of instructions
+    public Toggle EndlessMode;
 
     // Digital prototype fullscreen option for easier viewing of instructions
     public Toggle FullScreen;
@@ -61,6 +65,8 @@ public class SettingsControl : MonoBehaviour
 
         // Set the settings menu sounds on toggle to default/chosen value
         SoundsOnOff.isOn = GamePrefs.SoundOn;
+
+        EndlessMode.isOn = GamePrefs.EndlessMode;
 
         // Cycle through all the audiosources in the scene
         foreach (AudioSource Sound in Sounds)
@@ -151,6 +157,8 @@ public class SettingsControl : MonoBehaviour
         }
     }
 
+  
+
     /// <summary>
     /// This method allows us to toggle on/off the fullscreen option of the
     /// digital part of the game according to player input on the menu.
@@ -197,6 +205,11 @@ public class SettingsControl : MonoBehaviour
 
         // Change the static sound on/off to the current toggle value
         GamePrefs.SoundOn = SoundsOnOff.isOn;
+
+        // Change the static sound on/off to the current toggle value
+        GamePrefs.EndlessMode = EndlessMode.isOn;
+
+
     }
 
     /// <summary>
@@ -224,6 +237,9 @@ public class SettingsControl : MonoBehaviour
 
         // Change the sound on/off toggle value to the chosen preferences
         SoundsOnOff.isOn = GamePrefs.SoundOn;
+
+
+        EndlessMode.isOn = GamePrefs.EndlessMode;
 
         // Go through all the audiosources in the scene
         foreach (AudioSource Sound in Sounds)

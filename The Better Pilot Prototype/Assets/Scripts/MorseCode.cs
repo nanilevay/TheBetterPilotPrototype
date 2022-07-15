@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Collections;
 
 public class MorseCode : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class MorseCode : MonoBehaviour
 
     bool BothPressed;
 
+    public Image Led;
+
     public GameManager Manager;
 
     public PuzzlePiece AssociatedPuzzle;
@@ -19,6 +22,8 @@ public class MorseCode : MonoBehaviour
     public CodeController codeController;
 
     public TextMeshProUGUI DisplayText;
+
+    public bool Once = true;
 
     // Start is called before the first frame update
     void Start()
@@ -70,22 +75,24 @@ public class MorseCode : MonoBehaviour
         {
             DecodingText = "";
             textArea.text = "";
+            Translate();
         }
 
-        if(buttons[1].GetComponent<LongClickButton>().tap == 1)
+        
+        if(buttons[1].GetComponent<LongClickButton>().tap == 1) // && buttons[0].GetComponent<LongClickButton>().tap == 0
         {
             DecodingText += ".";
             buttons[1].GetComponent<LongClickButton>().tap = 0;
         }
 
-        if (buttons[0].GetComponent<LongClickButton>().tap == 1)
+        if (buttons[0].GetComponent<LongClickButton>().tap == 1) // && buttons[1].GetComponent<LongClickButton>
         {
             DecodingText += "-";
             buttons[0].GetComponent<LongClickButton>().tap = 0;
         }
 
-
-        if (buttons[0].GetComponent<LongClickButton>().DoubleTap && buttons[1].GetComponent<LongClickButton>().DoubleTap)
+        if (buttons[0].GetComponent<LongClickButton>().DoubleTap 
+            && buttons[1].GetComponent<LongClickButton>().DoubleTap)
         {
             Translate();
 
@@ -115,6 +122,14 @@ public class MorseCode : MonoBehaviour
 
     void Update()
     {
+    
+
+        if(!AssociatedPuzzle.solved && Once)
+        {
+            StartCoroutine(StartPuzzle());
+            Once = false;
+        }
+
         if (Manager.CodeDisplayer.currentCodes.Contains("2197"))
         {
             Confirm();
@@ -126,7 +141,8 @@ public class MorseCode : MonoBehaviour
 
     public void CheckAnswer()
     {
-        if (Manager.SerialEven && Manager.SerialThree && textArea.text.Contains("SOS"))
+        if (Manager.SerialEven && Manager.SerialThree && 
+            textArea.text.Equals("... --- ..."))
         {
             codeController.RemoveCodes("2197");
             AssociatedPuzzle.solved = true;
@@ -135,7 +151,8 @@ public class MorseCode : MonoBehaviour
             textArea.text = "";
         }
             
-        if (!Manager.SerialEven && Manager.SerialThree && textArea.text.Contains("HELP"))
+        if (!Manager.SerialEven && Manager.SerialThree &&
+            textArea.text.Equals(".... . .-.. .--."))
         {
             codeController.RemoveCodes("2197");
             AssociatedPuzzle.solved = true;
@@ -144,7 +161,8 @@ public class MorseCode : MonoBehaviour
             textArea.text = "";
         }
 
-        if (!Manager.SerialThree && textArea.text.Contains(Manager.SerialNumberDisplay.text))
+        if (!Manager.SerialThree && textArea.text.Equals
+            ("-- .- -.-- -.. .- -.--"))
         {
             codeController.RemoveCodes("2197");
             AssociatedPuzzle.solved = true;
@@ -152,6 +170,30 @@ public class MorseCode : MonoBehaviour
             DecodingText = "";
             textArea.text = "";
         }
+    }
+
+    public IEnumerator StartPuzzle()
+    {
+        Debug.Log("in");
+
+        while (Manager.CodeDisplayer.currentCodes.Contains("2197"))
+        {
+            Led.color = Color.red;
+            yield return new WaitForSeconds(1f);
+            Led.color = Color.black;
+            yield return new WaitForSeconds(1f);
+            Led.color = Color.red;
+            yield return new WaitForSeconds(1f);
+            Led.color = Color.black;
+            yield return new WaitForSeconds(1f);
+
+       }
+
+    Once = true;
+        //DecodingText = "";
+        //textArea.text = "";
+
+        yield break;
     }
 
     public void Translate()
