@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class SensorSender : MonoBehaviour
 {
@@ -40,6 +41,8 @@ public class SensorSender : MonoBehaviour
 
     public bool LoadingMenu;
 
+    public GameObject[] ScreenColours;
+
     void Awake()
     {
         instance = this;
@@ -63,6 +66,26 @@ public class SensorSender : MonoBehaviour
 
     void Update()
     {
+        if(Manager.CodeDisplayer.currentCodes.Contains("6430"))
+        {
+            foreach(GameObject mat in ScreenColours)
+            { 
+                if(mat.activeSelf)
+                {
+                    LEDList[7].LedMaterial.color = 
+                        mat.GetComponent<Image>().color;
+                }
+                    
+             }
+            
+        }
+
+        else
+        {
+            LEDList[7].LedMaterial.color = Color.green;
+        }
+
+
         if (!MainMenu && !LoadingMenu)
         {
             if (PauseMenu.activeSelf)

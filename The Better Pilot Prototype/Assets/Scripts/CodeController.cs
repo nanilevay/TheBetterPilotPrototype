@@ -14,6 +14,8 @@ public class CodeController : MonoBehaviour
 
     public string One, Two, Three, Four;
 
+    public SensorListener Sensor;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +34,11 @@ public class CodeController : MonoBehaviour
         Two = textDisplays[1].text;
         Three = textDisplays[2].text;
         Four = textDisplays[3].text;
+
+        if (Sensor.swEncoder == 0)
+        {
+            ResetCodes();
+        }
     }
 
     public void CodeUpdate(string addingCode)

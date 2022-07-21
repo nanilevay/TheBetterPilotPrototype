@@ -14,8 +14,8 @@ public class PauseControl : MonoBehaviour
     {
         timer += 1;
 
-        if (Input.GetKeyDown(KeyCode.Escape)) // || (Listener.redMorse == 0 && 
-           // Listener.redButton == 0) && timer > 10)
+        if ((Input.GetKeyDown(KeyCode.Escape)) || (Listener.redMorse == 0 && 
+                Listener.redButton == 0 && timer > 3))
         {
             gameIsPaused = !gameIsPaused;
             PauseGame();

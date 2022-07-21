@@ -64,7 +64,7 @@ public class FrequencySlider : MonoBehaviour
 
                 audioToMatch.pitch = SliderValue;
 
-                audioToMatch.volume = map(Sensor.sensor, 0, 20, 0,1);
+                audioToMatch.volume = map(Sensor.sensor, 20, 0, 0,1);
 
                 if (ProximityCheck && !audioToMatch.isPlaying && !AssociatedPuzzle.solved)
                     audioToMatch.Play();

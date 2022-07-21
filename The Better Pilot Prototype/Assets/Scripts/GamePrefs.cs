@@ -12,7 +12,7 @@ public static class GamePrefs
     public static bool GameStart = true;
 
     public static int ResetCounter = 4;
-    public static int ServoSpeed = 2;
+    public static int ServoSpeed = 1;
     public static int NewCodeSpeed = 30;
     public static float MusicVol = 0.35f;
 

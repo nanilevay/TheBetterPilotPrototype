@@ -102,12 +102,16 @@ public class ProximityPuzzle : MonoBehaviour
     {
         //while (SensorValue.sensor > rnd + 4 || SensorValue.sensor < rnd - 4)
         //{
-        //Led.color = Color.blue;
-        //yield return new WaitForSeconds(1f);
-        //Led.color = Color.black;
-        //yield return new WaitForSeconds(1f);
-        //Led.color = Color.blue;
-        //yield return new WaitForSeconds(1f);
+        Led.color = Color.blue;
+        yield return new WaitForSeconds(1f);
+        Led.color = Color.black;
+        yield return new WaitForSeconds(1f);
+        Led.color = Color.blue;
+        yield return new WaitForSeconds(1f);
+        Led.color = Color.black;
+        yield return new WaitForSeconds(1f);
+        Led.color = Color.blue;
+        yield return new WaitForSeconds(1f);
 
         var tempColor = Led.color;
         tempColor.a = map(SensorValue.sensor, 0, 20, 0, 1);

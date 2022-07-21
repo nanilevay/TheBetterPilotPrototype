@@ -38,6 +38,10 @@ public class MorseCodeReceived : MonoBehaviour
 
     public TextMeshProUGUI TextOfMorse;
 
+    public AudioSource DotSound;
+
+    public AudioSource DashSound;
+
     void Update()
     {
         if (Manager.CodeDisplayer.currentCodes.Contains("6595"))
@@ -72,18 +76,21 @@ public class MorseCodeReceived : MonoBehaviour
                 if (character == '.')
                 {
                     // activate() method
+                    
                     Lighter.GetComponent<Image>().color = Color.blue;
+                    DotSound.Play();
                     yield return new WaitForSeconds(0.5f);
                     Lighter.GetComponent<Image>().color = Color.black;
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.25f);
                 }
 
                 if (character == '-')
                 {
                     Lighter.GetComponent<Image>().color = Color.blue;
-                    yield return new WaitForSeconds(1.5f);
+                    DashSound.Play();
+                    yield return new WaitForSeconds(1f);
                     Lighter.GetComponent<Image>().color = Color.black;
-                    yield return new WaitForSeconds(0.5f);
+                    yield return new WaitForSeconds(0.25f);
                 }
 
                 if (character == ' ')
@@ -95,12 +102,14 @@ public class MorseCodeReceived : MonoBehaviour
                 if (character == '/')
                 {
                     Lighter.GetComponent<Image>().color = Color.black;
-                    yield return new WaitForSeconds(2.5f);
+                    yield return new WaitForSeconds(2f);
                 }
             }
 
             Lighter.GetComponent<Image>().color = Color.black;
             yield return new WaitForSeconds(2);
+            Lighter.GetComponent<Image>().color = Color.green;
+            yield return new WaitForSeconds(1);
         }
     }
 

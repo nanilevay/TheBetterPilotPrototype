@@ -52,7 +52,7 @@ public class DisplayUpdater : MonoBehaviour
                 if (puzzle.name == CodeInput.text)
                 {
                     if (!GamePrefs.EndlessMode)
-                        Texts.Remove(CodeInput.text);
+                        Texts.Remove(CurrentCode);
                     puzzle.active = false;
                     puzzle.solved = false;
                     currentCodes.Remove(CodeInput.text);

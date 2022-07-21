@@ -3,6 +3,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using UnityEngine.EventSystems;
 
 public class GameManager : MonoBehaviour
 {
@@ -55,6 +56,8 @@ public class GameManager : MonoBehaviour
     public SensorListener Encoder;
 
     public SensorListener Listener;
+
+    public AudioSource ResetSound;
 
     public int timer1 = 0;
 
@@ -142,16 +145,18 @@ public class GameManager : MonoBehaviour
     {
         timer1 += 1;
 
-        //if (Listener.blckMorse == 0  && Listener.blckButton == 0 && timer1 > 10)
-        //{
-        //    RestartGame();
-        //}
-        //if(Encoder.swEncoder == 0)
-        //{
-        //    ButtonOn = true;
-        //}
+        if (Listener.blckMorse == 0 && Listener.blckButton == 0 && timer1 > 3)
+        {
+            RestartGame();
+        }
 
-       // GamePrefs.EndlessMode = EndlessMode;
+        if (Encoder.swEncoder == 0)
+        {
+            ResetList();
+            ResetSound.Play();
+        }
+
+        // GamePrefs.EndlessMode = EndlessMode;
         EndlessMode = GamePrefs.EndlessMode;
 
         if (!EndlessMode && CodeReceiver.Texts.Count <= 0)
